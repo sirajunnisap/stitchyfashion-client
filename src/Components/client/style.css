@@ -1,0 +1,12 @@
+.box-section {
+    width: 100vh;
+}
+.box {
+    border: 2px solid #ccc;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 500px;
+   height: 550px;
+}
