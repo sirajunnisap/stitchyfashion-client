@@ -21,7 +21,7 @@ const UserRegister:React.FC = ()=> {
       console.log(res,"responseaftersign");
       console.log(res.data.status,"responsedata");
       
-      if(res.data.status){
+      if(res.data){
         navigate("/login")
       }else{
         setErrMsg("something went wrong")
@@ -51,11 +51,11 @@ const UserRegister:React.FC = ()=> {
         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
         <input type="password" name="password" id="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
       </div>
-
-      {/* <a onClick={()=>{
-        navigate("/login");
-      }}>I'm already member</a>
-      */}
+      <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
+          I'm already member <a onClick={()=>{navigate('/login')}} className="text-blue-700 hover:underline dark:text-blue-500">Sign in</a>
+        </div>
+        
+      
          
          <button
           type="submit"

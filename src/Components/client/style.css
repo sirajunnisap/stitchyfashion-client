@@ -10,3 +10,14 @@
     width: 500px;
    height: 550px;
 }
+
+.button-style {
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-large {
+    font-size: 30px; 
+  }

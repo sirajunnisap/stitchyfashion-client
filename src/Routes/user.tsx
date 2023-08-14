@@ -12,7 +12,7 @@ const UserRoute:React.FC = () => {
         <Route path='/' element={<Home/> } />
         <Route path='/signup' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/loginWithGoogle' element={<LoginWithGoogle/>}/>
+        
       </Routes>
     </div>
   )

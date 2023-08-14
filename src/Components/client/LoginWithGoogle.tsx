@@ -2,17 +2,22 @@ import { GoogleLogin } from '@react-oauth/google';
 import React, { useState, useEffect } from 'react';
 import {  useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-
 import {FcGoogle} from 'react-icons/fc'
+import { loginWithGoogle } from '../../Services/client/userLogin';
+import { updateUserCredentials } from '../../Redux/client/userSlice';
+import { useAppDispatch } from '../../Redux/hooks';
+import { useNavigate } from 'react-router-dom';
+
 const UserLoginWithGoogle:React.FC =()=> {
 
+  const dispatch=useAppDispatch()
+  const navigate=useNavigate()
 
   const [ googleUser, setGoogleUser ] = useState<{access_token: string}>();
 
   const [ googleProfile, setGoogleProfile ] = useState<{
     name: string;
     email: string;
-    picture: string;
   } | null>();
 
   const LoginWithGooleHelper = useGoogleLogin({
@@ -20,8 +25,7 @@ const UserLoginWithGoogle:React.FC =()=> {
     onError: (error) => console.log('Login Failed:', error)
   });
 
-  useEffect(()=>{
-
+  useEffect(() => {
     const fetchGoogleProfile = async () => {
       if (googleUser) {
         try {
@@ -31,10 +35,14 @@ const UserLoginWithGoogle:React.FC =()=> {
               Accept: 'application/json',
             },
           });
-
           setGoogleProfile(res.data);
-            
-       
+          const User = await loginWithGoogle(res?.data?.email, res?.data?.name);
+          if(User){
+            const {accessToken,user}=User
+               
+            dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
+            navigate('/')
+          }
         } catch (error:any){
           console.log(error?.response);
         }
@@ -42,31 +50,22 @@ const UserLoginWithGoogle:React.FC =()=> {
     };
   
     fetchGoogleProfile();
-  },[googleProfile])
-
-  console.log('googleProfile : ',googleProfile);
+  }, [googleUser]);
   
-    // const responseMessage = (response:any) => {
-    //     console.log(response);
-    // };
-    // const errorMessage = (error:any) => {
-    //     console.log(error);
-    // };
-    return (
-        <button
-              type="button"
-              data-te-ripple-init
-              data-te-ripple-color="light"
-              className="mx-1 them h-9 w-9 rounded-full bg-primary uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-              onClick={()=>{ LoginWithGooleHelper()}}
-            >
-              
-              
-              <FcGoogle className="text-xl" />
-              
-               
 
-        </button>
+
+    return(
+
+            
+      <button
+      type="button"
+      className="button-style mx-1 them h-9 bg-primary leading-normal  transition duration-150 ease-in-out  dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+      onClick={() => { LoginWithGooleHelper(); }}
+    >
+      <FcGoogle className="icon-large" /> 
+    </button>
+
+         
     )
 }
 
