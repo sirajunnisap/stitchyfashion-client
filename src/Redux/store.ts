@@ -2,18 +2,26 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer,persistStore } from "redux-persist";
 import storage  from "redux-persist/lib/storage";
 import userReducer from "./client/userSlice";
-
+import adminReducer from "./admin/adminSlice";
 
 const userPersistConfig = {
     key : 'user',
     storage ,
 }
 
-const persistedUserReducer = persistReducer(userPersistConfig,userReducer)
+const adminPersistConfig = {
+    key: 'admin',
+    storage,
+}
+
+const persistedUserReducer = persistReducer(userPersistConfig,userReducer);
+
+const persistedAdminReducer = persistReducer(adminPersistConfig,adminReducer);
 
 export const store = configureStore({
     reducer:{
-        user:persistedUserReducer
+        user:persistedUserReducer,
+        admin:persistedAdminReducer
     }
 })
 

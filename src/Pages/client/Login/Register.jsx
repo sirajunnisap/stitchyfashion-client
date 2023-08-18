@@ -3,7 +3,7 @@ import UserRegister from '../../../Components/client/Register'
 
 function Register() {
   return (
-    <div>
+    <div className='w-screen flex item-center justify-center'>
       <UserRegister/>
     </div>
   )
