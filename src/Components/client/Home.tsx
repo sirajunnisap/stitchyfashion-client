@@ -18,6 +18,7 @@ function LandingPage() {
     Welcome to our fashion design course
       
       </motion.h1>  */}
+      
 </div>
 )}
 
