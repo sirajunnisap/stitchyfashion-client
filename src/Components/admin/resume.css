@@ -1,0 +1,48 @@
+body {
+    background-color:#FFFFFF;
+  }
+
+  .cv-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-header {
+    background-color: #001f3f;
+    color: #FFFFFF;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .btn-generate {
+    background-color: #0074D9;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .dynamic-field {
+    border: 1px solid #AAAAAA;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .remove-field-btn {
+    background-color: #FF4136;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

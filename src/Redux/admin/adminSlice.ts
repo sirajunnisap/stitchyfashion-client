@@ -12,7 +12,7 @@ const initialState:InitialStateType = {
 }
 
 const adminSlice = createSlice({
-    name:'admin',
+    name:'Admin',
     initialState,
     reducers:{
         updateAdminCredentials:(state,action)=>{

@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Sofia');
 @import url('https://fonts.googleapis.com/css2?family=Barlow&family=Neucha&family=Open+Sans:wght@300&family=PT+Sans&family=Play&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Barlow+Condensed:wght@700&family=Berkshire+Swash&family=Neucha&family=Open+Sans:wght@300&family=PT+Sans&family=Play&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Barlow+Condensed:wght@700&family=Berkshire+Swash&family=Gluten:wght@500&family=Neucha&family=Open+Sans:wght@300&family=PT+Sans&family=Play&display=swap');
+
 .box-section {
     width: 100vh;
 }
@@ -34,3 +37,118 @@
     font-size: 25px;
     text-shadow: 1px 1px 1px #ababab;
   }
+
+
+
+.modal-dialog {
+  max-width: 80%; /* Adjust the width as needed */
+}
+
+.success-icon {
+  font-size: 2rem;
+  color: #28a745; /* Green color */
+}
+
+.fonts {
+  font-family: Arial, sans-serif;
+}
+
+/* Other existing styles */
+
+
+.textStyle {
+  
+font-family: 'Berkshire Swash', cursive;
+font-size: 30px;
+}
+
+
+/* .logostyle {
+  font-family:  'Gluten', cursive;
+  font-size: 35px;
+} */
+
+/* font-family: 'Barlow', sans-serif;
+font-family: 'Barlow Condensed', sans-serif;
+font-family: 'Berkshire Swash', cursive;
+font-family: 'Gluten', cursive;
+font-family: 'Neucha', cursive;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Play', sans-serif;
+font-family: 'PT Sans', sans-serif; */
+.search{
+  position: relative;
+  
+}
+.searchbox:focus{
+  border-color: #07778B;
+  outline: 0;
+  width: 200px;
+  -webkit-transition: width 0.2s ease-in 0.2s;
+          transition: width 0.2s ease-in 0.2s;
+}
+.searchbox{
+  -webkit-transition: width 0.2s ease-in 0.2s;
+          transition: width 0.2s ease-in 0.2s;
+  position: relative;
+  width: 150px;
+  height: 30px;
+  float: right;
+  margin:0;
+  padding: 0 35px 0 20px;
+  border-radius: 20px;
+  border: 1px solid #07778B;
+  background-color: #fff;
+  background-image: none;
+  color:#07778B;
+}
+.search-btn-wrap{
+
+  position: absolute;
+  right: 0;
+}
+
+.search-btn{
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 2px;
+  margin-right: 2px;
+  z-index: 3;
+  height: 26px;
+  width: 30px;
+  border: 0;
+  margin-bottom: 0;
+  color: #07778B;
+  background: transparent;
+}
+
+/* Modal Styles */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: #fff; */
+  /* max-width: 400px; */
+  margin: 0 auto;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+  z-index: 2;
+}
+
+/* Overlay Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.blur {
+  filter: blur(1px); /* Adjust the amount of blur as needed */
+  pointer-events: none; /* Allow clicks to pass through the blurred background */
+  transition: filter 0.3s ease; /* Add a smooth transition effect */
+}

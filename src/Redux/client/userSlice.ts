@@ -2,26 +2,29 @@ import {createSlice} from '@reduxjs/toolkit';
 
 type InitialStateType = {
     accessToken:string
-    userName:string
+
 }
 
 const initialState:InitialStateType = {
-    accessToken:'',
-    userName:''
+    accessToken:''
 }
 
 const userSlice = createSlice({
-    name:'user',
+    name:'User',
     initialState,
     reducers:{
         updateUserCredentials:(state,action)=>{
             state.accessToken = action.payload?.accessToken
-            state.userName = action.payload?.userName
+
+        },
+        logoutUser:(state,action)=>{
+            state.accessToken=''
+          
         }
     }
 
 })
 
 
-export const {updateUserCredentials} = userSlice.actions 
+export const {updateUserCredentials,logoutUser} = userSlice.actions 
 export default userSlice.reducer

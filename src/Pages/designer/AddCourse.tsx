@@ -1,5 +1,5 @@
 import React from 'react'
-import AddCourses from '../../Components/designer/AddCourses'
+import AddCourses from '../../Components/designer/AddCourse/AddCourses'
 
 function AddCourse() {
   return (
