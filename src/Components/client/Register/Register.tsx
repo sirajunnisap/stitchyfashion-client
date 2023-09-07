@@ -39,9 +39,12 @@ const UserRegister: React.FC = () => {
   }
   
   const validationSchema = Yup.object({
-    name: Yup.string().min(3, 'Name must be at least 3 characters').required('Please enter your name'),
+    name: Yup.string()
+    .matches(/^[A-Za-z]+$/, 'Invalid name format')
+    .min(3, 'Name must be at least 3 characters')
+    .required('Please enter your name'),
     email: Yup.string().email('Invalid email format').required('Please enter your email'),
-    phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be exactly 10 digits').required('Please enter your phone number'),
+    phone: Yup.string().matches(/^[1-9][0-9]{9}$/, 'Phone number must have 10 digits and cannot be all zeros').required('Please enter your phone number'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 digits')
       .matches(/^[a-zA-Z0-9]*$/, 'Password can only contain letters and numbers')
@@ -186,6 +189,12 @@ onSubmit={onSubmit}
                       >
                     Sign Up
                    </button>
+
+
+                   <div className="ml-10 mt-10 text-sm font-medium text-gray-500 dark:text-gray-300">
+       I'm already member <Link to={'/login'} className="text-blue-700 hover:underline dark:text-blue-500">Sign in</Link>
+         </div>
+
                     </div>
                 </Form>
 

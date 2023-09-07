@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type InitialStateType = {
-    accessToken:string,
-    designerName:string
+    accessToken:string
+  
 }
 
 
 const initialState:InitialStateType = {
-    accessToken:'',
-    designerName:''
+    accessToken:''
 }
 
 const designerSlice = createSlice({
@@ -17,10 +16,12 @@ const designerSlice = createSlice({
     reducers:{
         updateDesignerCredentials:(state,action)=>{
             state.accessToken= action.payload?.accessToken
-            state.designerName= action.payload?.designerName
+        },
+        logoutDesigner:(state,action)=>{
+            state.accessToken="";
         }
     }
 })
 
-export const {updateDesignerCredentials} = designerSlice.actions
+export const {updateDesignerCredentials,logoutDesigner} = designerSlice.actions
 export default designerSlice.reducer

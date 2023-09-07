@@ -3,26 +3,31 @@ import { courseType } from "../../Models/Models";
 
 export const addCourse = async (
     title: string,
-    description: string, 
-    designer: string,
+    description: string,
     duration: number|null,
     level: string,
     courseFee: number|null,
-    image: string,
-    startDate: Date|null,
-    endDate: Date|null
+    image: string|null
 ):Promise<any> => {
+    
+    const designerCredentials: any = localStorage.getItem('persist:Designer')
+
+    const designerCredentialsObject = JSON.parse(designerCredentials)
+
+    const designerToken = designerCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
+
+    console.log(designerToken,"designerToken");
+
     const res = await designerAxios.post('/addCourse', {
         title,
         description,
-        designer,
         duration,
         level,
         courseFee,
         image,
-        startDate,
-        endDate
-    });
+    },{headers:{
+        Authorization:`Bearer ${designerToken}`
+    }});
     console.log(res,"courseadding res");
     
     const data = res.data;
@@ -32,37 +37,34 @@ export const addCourse = async (
 
 
 export const getAllCourses = async (): Promise<any> => {
-    const res = await designerAxios.get('getCourses')
+
+    const designerCredentials: any = localStorage.getItem('persist:Designer')
+
+    const designerCredentialsObject = JSON.parse(designerCredentials)
+
+    const designerToken = designerCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
+
+    console.log(designerToken,"designerToken");
+
+    const res = await designerAxios.get('getCourses',
+    {headers:{
+        Authorization:`Bearer ${designerToken}`
+    }});
+
     const data = res.data
     return data
 }
 
-export const courseDetails = async (): Promise<courseType> => {
-    const res = await designerAxios.get('courseDetails')
+export const courseDetails = async (courseId:any): Promise<courseType> => {
+    const res = await designerAxios.get(`courseDetails/${courseId}`)
+    
+    console.log(res,"response of the coursedetails");
+    
     const data = res.data
     return data
 }
-
-export const editCourse = async (title: string,
-    descriptioin: string,
-    desiger: string,
-    duration: number,
-    level: string,
-    courseFee: number,
-    image: string,
-    startDate: Date,
-    endDate: Date): Promise<any> => {
-    const res = await designerAxios.put('editCourse', {
-        title,
-        descriptioin,
-        desiger,
-        duration,
-        level,
-        courseFee,
-        image,
-        startDate,
-        endDate
-    })
-    const data = res.data
-    return data
-}
+export const editCourse = async (CourseData: any, courseId: any): Promise<any> => {
+    const res = await designerAxios.put(`editCourse/${courseId}`, CourseData);
+    const data = res.data;
+    return data;
+  };

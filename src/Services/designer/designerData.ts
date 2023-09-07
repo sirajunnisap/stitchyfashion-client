@@ -15,7 +15,20 @@ export const getAllDesignerData = async():Promise<any>=>{
 
 
 export const profile = async():Promise<designerType>=>{
-    const res = await designerAxios.get('profile')
+    
+    const designerCredentials: any = localStorage.getItem('persist:Designer')
+
+    const designerCredentialsObject = JSON.parse(designerCredentials)
+
+    const designerToken = designerCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
+
+    console.log(designerToken,"designerToken");
+
+    const res = await designerAxios.get('profile',{
+        headers:{
+            Authorization:`Bearer ${designerToken}`
+        }
+    })
     console.log(res,"res");
     
     const data = res.data
@@ -23,9 +36,50 @@ export const profile = async():Promise<designerType>=>{
 }
 
 
-export const updateProfile = async(name:string,email:string,phone:number,password:string)=>{
-    const res = await designerAxios.put('updateProfile',{name,email,phone,password})
+
+export const updateProfile = async(designerData:any):Promise<any>=>{
+
+    const designerCredentials: any = localStorage.getItem('persist:Designer')
+
+    const designerCredentialsObject = JSON.parse(designerCredentials)
+
+    const designerToken = designerCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
+
+    console.log(designerToken,"designerToken");
+
+    const res = await designerAxios.put('updateProfile',designerData,{
+        headers:{
+            Authorization:`Bearer ${designerToken}`
+        }
+    } )
 
     const data = res.data
     return data
 }
+
+
+// designerAxios.interceptors.request.use(
+//   (config) => {
+//     const designerCredentials: any = localStorage.getItem("designerData");
+//     const designerCredentialObject = JSON.parse(designerCredentials);
+//     const designerToken = JSON.parse(designerCredentialObject)?.accessToken;
+
+//     if (designerToken) {
+//       config.headers["Designer"] = `Bearer ${designerToken}`;
+//     }
+
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
+// designerAxios.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );

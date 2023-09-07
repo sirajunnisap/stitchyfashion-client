@@ -1,5 +1,5 @@
 import React from 'react'
-import Home from '../../Components/designer/Home'
+import Home from '../../Components/designer/Home/Home'
 
 function DesignerHome() {
   return (

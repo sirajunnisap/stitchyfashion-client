@@ -35,9 +35,10 @@ export const profile = async():Promise<UserType>=>{
             Authorization:`Bearer ${userToken}`
         }
     })
-    console.log(res,"res");
+    console.log(res,"resfrombackend");
     
     const data = res.data
+
     return data
 }
 
@@ -64,3 +65,4 @@ export const updateProfile = async(userData:any):Promise<any>=>{
     const data = res.data
     return data
 }
+

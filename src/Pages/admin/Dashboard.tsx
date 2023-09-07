@@ -1,5 +1,5 @@
 import React from 'react'
-import Home from '../../Components/admin/Home'
+import Home from '../../Components/admin/Home/Home'
 
 function Dashboard() {
   return (

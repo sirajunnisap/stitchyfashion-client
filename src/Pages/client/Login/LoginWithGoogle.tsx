@@ -1,5 +1,5 @@
 import React from 'react'
-import UserLoginWithGoogle from '../../../Components/client/LoginWithGoogle'
+import UserLoginWithGoogle from '../../../Components/client/Register/LoginWithGoogle'
 
 function LoginWithGoogle() {
   return (

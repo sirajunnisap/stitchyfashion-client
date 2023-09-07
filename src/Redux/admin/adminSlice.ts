@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type InitialStateType = {
-    accessToken:string,
-    adminName:string
+    accessToken:string
 }
 
 
 const initialState:InitialStateType = {
-    accessToken:'',
-    adminName:''
+    accessToken:''
 }
 
 const adminSlice = createSlice({
@@ -17,10 +15,13 @@ const adminSlice = createSlice({
     reducers:{
         updateAdminCredentials:(state,action)=>{
             state.accessToken= action.payload?.accessToken
-            state.adminName= action.payload?.adminName
+           
+        },
+        logoutAdmin:(state,action)=>{
+            state.accessToken="";
         }
     }
 })
 
-export const {updateAdminCredentials} = adminSlice.actions
+export const {updateAdminCredentials,logoutAdmin} = adminSlice.actions
 export default adminSlice.reducer
