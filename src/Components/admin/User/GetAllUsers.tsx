@@ -31,7 +31,8 @@ const GetAllUsers = () => {
      
         const userId = user._id;
         const action = user.isBlocked ? 'unblock' : 'block';
-  
+
+        
         try {
           const blockedUser = await blockUser(userId, action);
           if (blockedUser) {
@@ -56,13 +57,13 @@ const GetAllUsers = () => {
       <div className="w-1/5">
         <Home />
       </div>
-      <div className="w-4/5 p-4">
+      <div className="w-4/5 pr-16">
         <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
           <div className="flex items-center justify-between pb-6">
-            <div>
+            {/* <div>
               <p className="font-bold text-[23px] text-teal-800">User Accounts</p>
               <span className="text-xs text-gray-500">View accounts of registered users</span>
-            </div>
+            </div> */}
             <div className="flex items-center justify-between">
               <div className="ml-10 space-x-8 lg:ml-40">
                 {/* <button className="flex items-center gap-2 rounded-md bg-green-700 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700">
@@ -129,10 +130,10 @@ const GetAllUsers = () => {
                         */}
 <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
   <button
-    className={`rounded-full ${user.isBlocked ? 'bg-green-200' : 'bg-red-300'} px-3 py-1 text-xs font-semibold ${user.isBlocked ? 'text-green-900' : 'text-red-900'}`}
+    className={`rounded-full ${user.isBlocked ? 'bg-red-300' :'bg-green-200'} px-3 py-1 text-xs font-semibold ${user.isBlocked ? 'text-red-900' :'text-green-900' }`}
     onClick={() => userBlockingHandle(user)}
   >
-    {user.isBlocked ? 'Unblock' : 'Block'}
+    {user.isBlocked ? 'Block' : 'Unblock'}
   </button>
 </td>
                         </tr>

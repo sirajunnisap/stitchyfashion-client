@@ -60,14 +60,14 @@ function DesignersList() {
                     <i className="fas fa-user mr-2 text-lg text-blueGray-400"></i>
                     {designer?.email}
                   </div>
-                  <div className="mb-2 text-blueGray-600 mt-10">
+                  {/* <div className="mb-2 text-blueGray-600 mt-10">
                     <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
                     {designer?.education.map((educationItem)=>educationItem.major)}
                   </div>
                   <div className="mb-2 text-blueGray-600 mt-10">
                     <i className="fas fa-address-book mr-2 text-lg text-blueGray-400"></i>
                     {designer?.experience} year experience
-                  </div>
+                  </div> */}
                  
                 </div>
                 <div className="mt-10 py-10 border-t border-blueGray-200 text-center">

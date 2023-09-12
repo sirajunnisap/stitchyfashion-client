@@ -34,10 +34,37 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setUser,us
   
 
   const validationSchema = Yup.object({
-    name: Yup.string().min(3, 'Name must be at least 3 characters').required('Please enter your name'),
+    name: Yup.string()
+    .matches(/^[A-Za-z]+(?: [A-Za-z]+)*$/, 'Invalid name format')
+    .min(3, 'Name must be at least 3 characters')
+    .required('Please enter your name'),
     email: Yup.string().email('Invalid email format').required('Please enter your email'),
-    phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be exactly 10 digits').required('Please enter your phone number'),
-   
+    phone:  Yup.string()
+    .test('is-ten-digits', 'Phone number must have 10 digits', (value) => {
+
+      const digits = value?.replace(/\D/g, '');
+  
+      if (digits?.length !== 10) {
+        return false;
+      }
+    
+  
+      return true;
+    })
+    .required('Please enter your phone number')
+    .test('is-valid', 'Invalid phone number', (value) => {
+      const digits = value.replace(/\D/g, '');
+  
+      if (digits.length !== 10) {
+        return true; 
+      }
+  
+      if (/^0+$/.test(digits)) {
+        return false;
+      }
+  
+      return true;
+    }),
   });
 
   

@@ -1,14 +1,7 @@
 import designerAxios from "../../Axios/designerAxios";
-import { courseType } from "../../Models/Models";
+import { classes, courseType } from "../../Models/Models";
 
-export const addCourse = async (
-    title: string,
-    description: string,
-    duration: number|null,
-    level: string,
-    courseFee: number|null,
-    image: string|null
-):Promise<any> => {
+export const addCourse = async (courseData:any):Promise<any> => {
     
     const designerCredentials: any = localStorage.getItem('persist:Designer')
 
@@ -17,15 +10,10 @@ export const addCourse = async (
     const designerToken = designerCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
 
     console.log(designerToken,"designerToken");
+    console.log(courseData,"coursedatawithcategory");
 
-    const res = await designerAxios.post('/addCourse', {
-        title,
-        description,
-        duration,
-        level,
-        courseFee,
-        image,
-    },{headers:{
+    const res = await designerAxios.post('/addCourse',courseData,
+    {headers:{
         Authorization:`Bearer ${designerToken}`
     }});
     console.log(res,"courseadding res");
@@ -33,6 +21,16 @@ export const addCourse = async (
     const data = res.data;
     return data;
 };
+
+
+
+export const addClass = async(classData:classes):Promise<any>=>{
+    console.log(classData,"class data for adding");
+    
+    const res = await designerAxios.post('/addClass',classData)
+    const data = res.data
+    return data
+}
 
 
 

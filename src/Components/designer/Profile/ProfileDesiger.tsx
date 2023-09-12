@@ -1,13 +1,30 @@
 import React ,{useEffect, useState}from 'react'
 import Home from '../Home/Home'
+import { ErrorMessage, Field, Formik, Form } from 'formik'
 import { designerType } from '../../../Models/Models'
-import { profile } from '../../../Services/designer/designerData'
+import { profile, updateProfile } from '../../../Services/designer/designerData'
 import EditProfile from './EditProfile'
+import * as Yup from 'yup';
+
+
 
 function DesignerProfile() {
 
   const [designer,setDesigner] = useState<designerType|undefined>()
   const [isModalOpen,setIsModalOpen] = useState(false)
+  
+
+
+
+  function openModal (){
+    setIsModalOpen(true)
+  }
+
+  function closeModal (){
+    setIsModalOpen(false)
+  }
+  
+
 
   useEffect(()=>{
     const DesignerProfile = async ()=>{
@@ -23,72 +40,75 @@ function DesignerProfile() {
 
   },[])
 
-  function openModal(){
-    setIsModalOpen(true)
-  }
-  function closeModal(){
-    setIsModalOpen(false)
-  }
-
+  
   console.log(designer?.name,"designerData");
   
   return (
     <>
     <div className={isModalOpen ? 'blur' : ''}>
+
     <div className='flex'>
       <div className='w-1/5'>
         <Home />
       </div>
       <div className='w-4/5 '>
-      <section className="pt-20 bg-blueGray-50">
-        <div className="w-full lg:w-4/12 px-12 ml-28">
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-40">
-            <div className="px-6">
-              <div className=" relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
-                <div className="w-full px-4 flex justify-center">
-                  <div className="flex justify-center">
-                    <img alt="..." src="/profileimage.jpg" className="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+      <section className="signUp ml-0">
+  <div className="container_login" style={{ marginTop: "30px" }}>
+    <div className="signUp-content">
+    <div className="signUp-image">
+        <figure>
+          <img className='rounded-xl' src="https://i.pinimg.com/474x/a7/80/80/a7808059330f062de8a90e844d0558d1.jpg" alt="profile image" />
+        </figure>
+      </div>
+
+      <div className="signUp-form">
+        <h2 className="form-title text-lavender">PROFILE</h2>
+        <div className="form-group">
+          <label htmlFor="name">
+            <i className="zmdi zmdi-account material-icons-name"></i>
+          </label>
+          <p className="profile-field">Name :  { designer?.name}</p>
+        </div>
+        <div className="form-group">
+          <label htmlFor="name">
+            <i className="zmdi zmdi-account material-icons-name"></i>
+          </label>
+          <p className="profile-field">Email :  { designer?.email}</p>
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">
+            <i className="zmdi zmdi-email"></i>
+          </label>
+          <p className="profile-field">Phone :  { designer?.phone}</p>
+        </div>
+        {/* <button data-modal-target="authentication-modal" onClick={toggleModal} data-modal-toggle="authentication-modal" className="block text-white bg-azelea hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+  Toggle modal
+</button> */} 
+        </div>
+      </div>
+      <div className="mx-28 text-center">
+                <div className="flex flex-wrap justify-center">
+                  <h1 className='text-2xl font-extrabold mb-7'>About Me</h1>
+                  <p>
+                    {/* {designer?.aboutMe} */}
+                    My passion is to inspire and empower you to live your best version.  Using fashion as a vehicle to educate, inspire and transform your life -- ultimately, strive for excellence.
+
+~~ A fashion industry expert --  from concept to completion: from Vision Boards to Pattern Drafting, to Tech Packs, to Social Media. 
+
+~~ An FIT (Fashion Institute of Technology, NYC) graduate, and as a former Instructor and Curriculum Development Coordinator of the Fashion Design program at FIDM (Fashion Institute of Design & Merchandising, LA) all my fashion design skills and experience are put into practice and into my Courses. 
+
+~~ As a Consultant for SAMSUNG C&T America, I have the opportunity to introduce new Brands to Samsung's infinite available resources to elevate Brands to global visibility.
+
+~~ Born and raised in ROME (Italy), speaking Italian was an asset while working at RALPH LAUREN, when responsibilities included supervising samples manufactured in Italy.
+
+
+                  </p>
+                  </div>
 
                   </div>
-                </div>
-                {/* {/* jnkloik * */}
-              </div>
-              <div className="text-center mt-16">
-                <h3 className="text-xl font-bold uppercase leading-normal text-blueGray-700 mb-2">
-                  {designer?.name}
-                </h3>
-                <div className="mb-2 text-blueGray-600 mt-10 ">
-                <i className="fas fa-user mr-2 text-lg text-blueGray-400"></i>
-                  {designer?.email}
-                </div>
-                <div className="mb-2 text-blueGray-600 mt-10">
-                <i className="fas fa-address-book mr-2 text-lg text-blueGray-400"></i>
-                  {designer?.phone}
-                </div>
-                <div className="mb-2 text-blueGray-600 mt-10">
-  <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-  {designer?.education.map((edu, index) => (
-    <div key={index}>
-      {edu.university}, {edu.major},
-    </div>
-  ))}
-</div>
-<div className="mb-2 text-blueGray-600 mt-10">
-  <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-  {designer?.experience}
-</div>
-<div className="mb-2 text-blueGray-600 mt-10">
-  <i className="fas fa-cogs mr-2 text-lg text-blueGray-400"></i>
-  {designer?.skill}
-</div>
-                {/* <div className="mb-2 text-blueGray-600 mt-10">
-                  
-                  {designer?.}
-                </div> */}
-              </div>
-              <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+      <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
                 <div className="flex flex-wrap justify-center">
-                  <div className="w-full lg:w-9/12 px-4 font-normal text-pink-500 cursor-pointer" onClick={
+                  <div className="w-full lg:w-9/12 px-4 font-normal text-pink-500 cursor-pointer"  onClick={
                     openModal
                   }>
                   
@@ -99,14 +119,13 @@ function DesignerProfile() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        {/* jjjkk */}
-      </section>
+    </div>
+  
+</section>
+      
       </div>
     </div>
-    </div>
+   </div>
     <EditProfile isOpen={isModalOpen} closeModal={closeModal} setDesigner={setDesigner} designerData={designer}/>
     </>
   )

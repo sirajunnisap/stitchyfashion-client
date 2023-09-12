@@ -21,6 +21,7 @@ type initialValueType = {
   email: string
   phone: number|undefined
   password: string
+  
 }
 
 
@@ -40,11 +41,36 @@ const UserRegister: React.FC = () => {
   
   const validationSchema = Yup.object({
     name: Yup.string()
-    .matches(/^[A-Za-z]+$/, 'Invalid name format')
+    .matches(/^[A-Za-z]+(?: [A-Za-z]+)*$/, 'Invalid name format')
     .min(3, 'Name must be at least 3 characters')
     .required('Please enter your name'),
     email: Yup.string().email('Invalid email format').required('Please enter your email'),
-    phone: Yup.string().matches(/^[1-9][0-9]{9}$/, 'Phone number must have 10 digits and cannot be all zeros').required('Please enter your phone number'),
+    phone:  Yup.string()
+    .test('is-ten-digits', 'Phone number must have 10 digits', (value) => {
+
+      const digits = value?.replace(/\D/g, '');
+  
+      if (digits?.length !== 10) {
+        return false;
+      }
+    
+  
+      return true;
+    })
+    .required('Please enter your phone number')
+    .test('is-valid', 'Invalid phone number', (value) => {
+      const digits = value.replace(/\D/g, '');
+  
+      if (digits.length !== 10) {
+        return true; 
+      }
+  
+      if (/^0+$/.test(digits)) {
+        return false;
+      }
+  
+      return true;
+    }),
     password: Yup.string()
       .min(6, 'Password must be at least 6 digits')
       .matches(/^[a-zA-Z0-9]*$/, 'Password can only contain letters and numbers')

@@ -41,29 +41,19 @@ function CourseList() {
 
 
       </div> */}
-      <div className=' m-36'>
-      <div className=' w-full mt-20 mr-14 flex'>
-                <div className='w-1/2'>
-                    <img src="https://img.freepik.com/premium-vector/fashion-designer-illustration-concept-white-background_701961-3410.jpg?w=2000" alt="" />
-                </div>
-                <div className='ml-10 mb-4 mt-14 mr-32'>
-                    <h2 className=" text-3xl tracking-tight font-bold text-[#07778B] dark:text-white">Fashion design !</h2>
-                    <p className="mt-10 font-light text-gray-500 sm:text-xl dark:text-gray-400">Flowbite helps you connect with friends, family and communities of people who share your interests. .</p>
-                </div>
-            </div>
-      </div>
+      
                   
 
-            <div className='flex flex-wrap W-4/5 '>
+            <div className='flex flex-wrap W-4/5 ml-40 '>
             <div className='flex flex-col items-center'>
-                    <div className=''>
+                    <div className='ml-40 mt-20'>
                         <h2 className="mb-4  text-4xl tracking-tight font-extrabold text-[#07778B] dark:text-white relative">
                             Our Syllabus
                             {/* <span className="absolute bottom-0 left-1 transform  w-full h-0.5 bg-gray-400"></span> */}
                         </h2>
                     </div>
                     <div>
-                        <p>"To cultivate exceptionally talented fashion designers through comprehensive <br />creative training and personalized mentorship."</p>
+                        <p className='ml-40'>"To cultivate exceptionally talented fashion designers through comprehensive <br />creative training and personalized mentorship."</p>
                     </div>
                     <div className='flex flex-wrap items-center mt-10 ml-48'>
                 {

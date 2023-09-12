@@ -21,18 +21,18 @@ export type designerType = {
     image: string;
     isBlocked:boolean;
     isMailVerified: boolean;
-    education: Education[]; 
-    experience: string; 
-    skill: string[];
+    field:string;
     aboutMe:string;
 };
 
 
-export type Education = {
-    university: string;
-    major: string;
-};
-
+// export type Education = {
+//     university: string;
+//     major: string;
+// };
+// education: Education[]; 
+// experience: string; 
+// skill: string[];
 
 
 export type adminType = {
@@ -59,8 +59,16 @@ export type courseType = {
 }
 
 export type classes = {
-    _id:string,
+    _id?:string,
     title:string,
     description:string,
-    video:string
+    video:string | null
+}
+
+
+export type categoryType = {
+    _id : string,
+    name:string,
+    description:string,
+    image:string
 }

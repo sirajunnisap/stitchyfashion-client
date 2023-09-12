@@ -55,6 +55,12 @@ const Home = () => {
           <span className="title">Designers</span>
         </a>
       </li> */}
+      <li>
+        <a href="/designer/categoryList">
+          <span className="icon"><i className="fa-solid fa-book-open"></i></span>
+          <span className="title">Categories</span>
+        </a>
+      </li>
        <li>
         <a href="/designer/courseList">
           <span className="icon"><i className="fa-solid fa-book-open"></i></span>

@@ -10,11 +10,13 @@ type initialValueType = {
     email: string;
     phone: number | null;
     image: string;
-    education: {
-        university: string;
-        major: string;
-    }[];
-    experience: string;
+    field: string;
+    aboutMe: string;
+    // education: {
+    //     university: string;
+    //     major: string;
+    // }[];
+    // experience: string;
     // skill: string;
 };
 
@@ -23,21 +25,21 @@ type EditProfileProps = {
     isOpen: boolean;
     closeModal: () => void;
     setDesigner: React.Dispatch<React.SetStateAction<designerType | undefined>>;
-    designerData:designerType|undefined
+    designerData: designerType | undefined
     // user:UserType|undefined
 };
 
-const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesigner,designerData }) => {
+const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesigner, designerData }) => {
 
     const initialValues: initialValueType = {
         name: designerData?.name || '',
         email: designerData?.email || '',
         phone: designerData?.phone || null,
         image: designerData?.image || '',
-        education: designerData?.education || [],
-        experience: designerData?.experience || '',
-        // skill: designerData?.skill || '',
-      };
+        aboutMe: designerData?.aboutMe || '',
+        field: designerData?.field || '',
+       
+    };
 
 
 
@@ -64,6 +66,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
         // setUser({...user,name:values.name,email:values.email,phone:values.phone})
     }
 
+    
 
     return (
 
@@ -137,119 +140,157 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
                                         </div>
                                     </div>
                                     <div className="flex -mx-3">
-                                        <div className="w-full px-3 mb-2">
-                                            <h2 className="section-header bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white">
-                                                Education
-                                            </h2>
-                                            <div className="dynamic-field flex items-center justify-center">
-                                                <div className="form-group">
-                                                    <Field
-                                                        type="text"
-                                                        name="education[0].university"
-                                                        id="education-university"
-                                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                                        placeholder="University:"
-                                                    />
-                                                </div>
-                                                <div className="form-group">
-                                                    <Field
-                                                        type="text"
-                                                        name="education[0].major"
-                                                        id="education-major"
-                                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                                        placeholder="Major:"
-                                                    />
-                                                </div>
-                                                <div className="form-group">
-                                                    <Field
-                                                        type="text"
-                                                        name="education[0].graduationYear"
-                                                        id="education-graduation-year"
-                                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                                        placeholder="Graduation Year:"
-                                                    />
-                                                </div>
+                                        <div className="w-full px-3 mb-5">
+
+                                            <div className="flex">
+                                                <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
+                                                <Field type="text" name="field"
+                                                    id="field" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="specialization" />
+                                                <ErrorMessage name='field'>
+                                                    {
+                                                        (errorMsg) => <div className='error text-red'>{errorMsg}</div>
+                                                    }
+                                                </ErrorMessage>
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* Experience Section */}
                                     <div className="flex -mx-3">
-                                        <div className="w-full px-3 mb-2">
-                                            <h2 className="section-header bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white">
-                                                Work Experience
-                                            </h2>
-                                            <div className="dynamic-field flex items-center justify-center">
-                                                <div className="form-group">
-                                                    <Field
-                                                        type="text"
-                                                        name="experience[0].company"
-                                                        id="experience-company"
-                                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                                        placeholder="Company:"
-                                                    />
+                                        <div className="w-full px-3 mb-5">
+                                            <div className="flex">
+                                                <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                    <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
                                                 </div>
-                                                <div className="form-group">
+                                                
+                                                
+                                                
                                                     <Field
-                                                        type="text"
-                                                        name="experience[0].year"
-                                                        id="experience-year"
-                                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                                        placeholder="Employment Year:"
+                                                        as="textarea" 
+                                                        name="aboutMe" 
+                                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="About Me"
                                                     />
-                                                </div>
+                                             
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="flex -mx-3">
                                         <div className="w-full px-3 mb-2">
-
-                                            <div id="education-section">
-                                                <h2 className="section-header  bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white ">Skill</h2>
-                                                <div className="dynamic-field flex items-center justify-center">
-                                                    <div className="form-group  ">
-                                                        {/* <label htmlFor="university">University:</label> */}
-                                                        <Field type="text" name="skill"
-                                                            id="skill" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Skill:" />
-                                                    </div>
-
-                                                    {/* <button className="remove-field-btn" onClick={() =>removeField(this)}>Remove</button> */}
-                                                </div>
-                                            </div>
-
-                                            {/* <ErrorMessage name='skill'>
-                                                {
-                                                    (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-                                                }
-                                            </ErrorMessage> */}
+                                            <button type='submit' className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold">Save Changes</button>
                                         </div>
                                     </div>
-
-                                    {/* <ErrorMessage name='phone'>
-                                                {
-                                                    (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-                                                }
-                                            </ErrorMessage> */}
-                           
-
-                        <div className="flex -mx-3">
-                            <div className="w-full px-3 mb-2">
-                                <button type='submit' className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold">Save Changes</button>
+                                </Form>
                             </div>
                         </div>
-                    </Form>
-                </div>
-            </div>
-        </div>
-        </div >
+                    </div>
+                </div >
 
 
-    {/* </div> */ }
+                {/* </div> */}
 
-</Formik >
-</Modal >
-  )
+            </Formik >
+        </Modal >
+    )
 }
 
 export default EditProfile
+
+
+
+
+
+// <div className="flex -mx-3">
+// <div className="w-full px-3 mb-2">
+//     <h2 className="section-header bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white">
+//         Education
+//     </h2>
+//     <div className="dynamic-field flex items-center justify-center">
+//         <div className="form-group">
+//             <Field
+//                 type="text"
+//                 name="education[0].university"
+//                 id="education-university"
+//                 className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+//                 placeholder="University:"
+//             />
+//         </div>
+//         <div className="form-group">
+//             <Field
+//                 type="text"
+//                 name="education[0].major"
+//                 id="education-major"
+//                 className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+//                 placeholder="Major:"
+//             />
+//         </div>
+//         <div className="form-group">
+//             <Field
+//                 type="text"
+//                 name="education[0].graduationYear"
+//                 id="education-graduation-year"
+//                 className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+//                 placeholder="Graduation Year:"
+//             />
+//         </div>
+//     </div>
+// </div>
+// </div>
+
+{/* Experience Section */ }
+{/* <div className="flex -mx-3">
+<div className="w-full px-3 mb-2">
+    <h2 className="section-header bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white">
+        Work Experience
+    </h2>
+    <div className="dynamic-field flex items-center justify-center">
+        <div className="form-group">
+            <Field
+                type="text"
+                name="experience[0].company"
+                id="experience-company"
+                className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                placeholder="Company:"
+            />
+        </div>
+        <div className="form-group">
+            <Field
+                type="text"
+                name="experience[0].year"
+                id="experience-year"
+                className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                placeholder="Employment Year:"
+            />
+        </div>
+    </div>
+</div>
+</div> */}
+
+{/* <div className="flex -mx-3">
+<div className="w-full px-3 mb-2">
+
+    <div id="education-section">
+        <h2 className="section-header  bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white ">Skill</h2>
+        <div className="dynamic-field flex items-center justify-center">
+            <div className="form-group  "> */}
+{/* <label htmlFor="university">University:</label> */ }
+{/* <Field type="text" name="skill"
+                    id="skill" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Skill:" />
+            </div> */}
+
+{/* <button className="remove-field-btn" onClick={() =>removeField(this)}>Remove</button> */ }
+{/* </div>
+    </div> */}
+
+{/* <ErrorMessage name='skill'>
+        {
+            (errorMsg) => <div className='error text-red'>{errorMsg}</div>
+        }
+    </ErrorMessage> */}
+{/* </div>
+</div> */}
+
+{/* <ErrorMessage name='phone'>
+        {
+            (errorMsg) => <div className='error text-red'>{errorMsg}</div>
+        }
+    </ErrorMessage> */}
+

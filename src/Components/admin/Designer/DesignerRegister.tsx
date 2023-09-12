@@ -14,11 +14,7 @@ type initialValueType = {
     email: string
     phone: number|undefined
     password: string
-    education: {
-        university: string;
-        major: string;
-    }[];
-    experience:string
+    field:string
   }
 
 const DesignerRegister:React.FC = ()=> {
@@ -32,15 +28,17 @@ const DesignerRegister:React.FC = ()=> {
     email: '',
     phone: undefined,
     password: '',
-    education: [], 
-    experience: '',
+    field:''
   }
 
   
   const validationSchema = Yup.object({
-    name: Yup.string().min(3, 'Name must be at least 3 characters').required('Please enter your name'),
+    name: Yup.string()
+    .matches(/^[A-Za-z]+(?: [A-Za-z]+)*$/, 'Invalid name format')
+    .min(3, 'Name must be at least 3 characters')
+    .required('Please enter your name'),
     email: Yup.string().email('Invalid email format').required('Please enter your email'),
-    phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be exactly 10 digits').required('Please enter your phone number'),
+    phone: Yup.string().matches(/^[1-9][0-9]{9}$/, 'Phone number must have 10 digits and cannot be all zeros').required('Please enter your phone number'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 digits')
       .matches(/^[a-zA-Z0-9]*$/, 'Password can only contain letters and numbers')
@@ -173,7 +171,7 @@ const DesignerRegister:React.FC = ()=> {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex -mx-3">
+                        {/* <div className="flex -mx-3">
                             <div className="w-full px-3 mb-2">
                                 <h2 className="section-header bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white">
                                     Education
@@ -200,34 +198,8 @@ const DesignerRegister:React.FC = ()=> {
                                   
                                 </div>
                             </div>
-                        </div>
-                        <div className="flex -mx-3">
-                            <div className="w-full px-3 mb-2">
-
-                                <div id="education-section">
-                                    <h2 className="section-header  bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white ">Experience</h2>
-                                    <div className="dynamic-field flex items-center justify-center">
-                                        <div className="form-group  ">
-                                            {/* <label htmlFor="university">University:</label> */}
-                                            <Field type="text" name="experience"
-                                                id="experience" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="experience:" />
-                                        </div>
-
-                                        {/* <button className="remove-field-btn" onClick={() =>removeField(this)}>Remove</button> */}
-                                    </div>
-                                </div>
-
-                            
-                            </div>
-                        </div>
-                      
-
-                        {/* <ErrorMessage name='phone'>
-                                    {
-                                        (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-                                    }
-                                </ErrorMessage> */}
-               
+                        </div> */}
+                        
 
             <div className="flex -mx-3">
                 <div className="w-full px-3 mb-2">

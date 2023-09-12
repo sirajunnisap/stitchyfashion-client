@@ -39,13 +39,13 @@ function DesignersList() {
      <div className="w-1/5 p-4">
   <Home/>
 </div>
-<div className="w-4/5 p-4">
+<div className="w-4/5 pr-16">
 <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
   <div className="flex items-center justify-between pb-6">
-    <div>
+    {/* <div>
       <h2 className="font-semibold text-gray-700">Designers Accounts</h2>
       <span className="text-xs text-gray-500">View accounts of registered designers</span>
-    </div>
+    </div> */}
     <div className="flex items-center justify-between">
       <div className="ml-10 space-x-8 lg:ml-40">
         {/* <button className="flex items-center gap-2 rounded-md bg-green-700 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700">
@@ -67,9 +67,9 @@ function DesignersList() {
             <th className="px-1 py-3">Name</th>
             <th className="px-1 py-3">Email</th>
             <th className="px-1 py-3">Phone</th>
-            <th className="px-1 py-3">Education</th>
+            {/* <th className="px-1 py-3">Education</th>
             <th className="px-1 py-3">Experience</th>
-            <th className="px-1 py-3">skill</th>
+            <th className="px-1 py-3">skill</th> */}
             <th className="px-1 py-3">Status</th>
           </tr>
         </thead>
@@ -97,7 +97,7 @@ function DesignersList() {
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
                             <p className="whitespace-no-wrap">{designer.phone}</p>
                           </td>
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+                          {/* <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
                             <p className="whitespace-no-wrap">{designer.education.map((educationItem)=>educationItem.major)}</p>
                           </td>
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
@@ -105,7 +105,7 @@ function DesignersList() {
                           </td>
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
                           <p className="whitespace-no-wrap">{designer.skill}</p>
-                        </td>
+                        </td> */}
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
                             <span className="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">UnBlock</span>
                           </td>

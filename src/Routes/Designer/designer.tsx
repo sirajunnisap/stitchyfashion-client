@@ -8,7 +8,7 @@ import DesignerProtected from "./designerProtected";
 import ListOfCourses from "../../Pages/designer/Course/ListOfCourses";
 import { UseAppSelector } from "../../Redux/hooks";
 import CourseDetails from "../../Components/designer/Course/CourseDetails";
-
+import ListOfCategories from "../../Pages/designer/ListOfCategories";
  const DesignerRoute:React.FC = ()=>{
     const IsAuth = UseAppSelector(state=>state.Designer.accessToken)
 
@@ -23,6 +23,8 @@ import CourseDetails from "../../Components/designer/Course/CourseDetails";
         <Route path="/courseDetails/:id" element={<CourseDetails/>}/>
         <Route path="/editCourse"/>
         <Route path="/unlistCourse"/>
+        <Route path="/categoryList" element={<ListOfCategories/>}/>
+        
     </Routes>
     </div>
     )

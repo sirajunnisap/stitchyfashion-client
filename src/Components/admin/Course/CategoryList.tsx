@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import Home from '../Home'
-import { categoryType, courseType } from '../../../Models/Models'
-
 import { useNavigate } from 'react-router-dom'
-import { getAllCategory, getAllCourses } from '../../../Services/Course/courseData'
-function CourseList() {
+import Home from '../Home/Home'
+import { categoryType } from '../../../Models/Models'
+import { getAllCategory } from '../../../Services/admin/addCategory'
 
-    const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
+function CategoryList() {
+     const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
     const navigate = useNavigate()
     useEffect(() => {
 
@@ -23,27 +22,26 @@ function CourseList() {
         getCategory()
     }, [])
 
+  return (
+    <div className=''>
+    <div className="w-1/5 pr-10">
+        <Home />
+    </div>
+{/*   
+<div className=''>
+<div className=' w-full mt-20 mr-14 flex ml-10'>
+        <div className='w-1/2'>
+            <img src="https://img.freepik.com/premium-vector/fashion-designer-illustration-concept-white-background_701961-3410.jpg?w=2000" alt="" />
+        </div>
+        <div className='ml-10 mb-4 mt-14 mr-32'>
+            <h2 className=" text-3xl tracking-tight font-bold text-[#07778B] dark:text-white">Fashion design !</h2>
+            <p className="mt-10 font-light text-gray-500 sm:text-xl dark:text-gray-400">Flowbite helps you connect with friends, family and communities of people who share your interests. .</p>
+        </div>
+    </div>
+</div> */}
+          
 
-    return (
-        <div className=''>
-            <div className="w-1/5 pr-10">
-                <Home />
-            </div>
-            {/* <div className=''>
-      <div className="search">
-  <form id="searchFormTop" action="" method="get">
-
-    <input type="text" className="searchbox" name="q" id="q" placeholder="Search..."/>
-    <span className="search-btn-wrap">
-    <button className="search-btn" type="submit"><i className="fa fa-search"></i></button>
-      </span>
-  </form>
-</div>
-
-
-      </div> */}
-
-<div className='flex flex-wrap W-4/5 ml-28 mt-28'>
+    <div className='flex flex-wrap W-4/5 ml-28 mt-28'>
     <div className='flex flex-col items-center'>
             <div className=''>
                 <h2 className="mb-4  text-4xl tracking-tight font-extrabold text-[#07778B] dark:text-white relative">
@@ -83,8 +81,8 @@ function CourseList() {
         </div>
             </div>
     </div>
-        </div>
-    )
+</div>
+)
 }
 
-export default CourseList
+export default CategoryList

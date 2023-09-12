@@ -14,8 +14,8 @@ function Home() {
   return (
    
 <div className='flex'>
-  <div className='w-1/5 '>
-  <div className="navigation active ">
+  <div className='w-1/5 ml-5 mt-5 '>
+  <div className="navigation active rounded-2xl">
     <div >
     
           {/* <span className="navHead"><i className=""></i></span> */}
@@ -63,6 +63,18 @@ function Home() {
           <span className="title">Add Designer</span>
         </a>
       </li> 
+      <li>
+        <a href="/admin/addCategory">
+          <span className="icon"><i className="fa-solid fa-user-plus"></i></span>
+          <span className="title">Add Category</span>
+        </a>
+      </li> 
+      <li>
+        <a href="/admin/listOfCategories">
+          <span className="icon"><i className="fa-solid fa-book-open"></i></span>
+          <span className="title">Categories</span>
+        </a>
+      </li>
       <li>
         <a href="#">
           <span className="icon"><i className="fa-solid fa-right-from-bracket"></i></span>
