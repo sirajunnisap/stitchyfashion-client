@@ -1,9 +1,10 @@
 import React from 'react'
-
 function Dashboard() {
   return (
     
     <div>
+
+{/*       
       <div className="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
     <div className="app-header header-shadow">
       <div className="app-header__logo">
@@ -1319,7 +1320,7 @@ function Dashboard() {
         </div>
       </div>
     </div>
-    </div>
+    </div> */}
     </div>
   )
 }

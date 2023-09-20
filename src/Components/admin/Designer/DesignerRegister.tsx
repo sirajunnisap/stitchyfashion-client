@@ -6,6 +6,7 @@ import './register.css'
 import "react-toastify/dist/ReactToastify.css"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Home from '../Home/Home';
+import { Link } from 'react-router-dom';
 
 
 
@@ -14,7 +15,6 @@ type initialValueType = {
     email: string
     phone: number|undefined
     password: string
-    field:string
   }
 
 const DesignerRegister:React.FC = ()=> {
@@ -28,7 +28,6 @@ const DesignerRegister:React.FC = ()=> {
     email: '',
     phone: undefined,
     password: '',
-    field:''
   }
 
   
@@ -36,13 +35,39 @@ const DesignerRegister:React.FC = ()=> {
     name: Yup.string()
     .matches(/^[A-Za-z]+(?: [A-Za-z]+)*$/, 'Invalid name format')
     .min(3, 'Name must be at least 3 characters')
-    .required('Please enter your name'),
-    email: Yup.string().email('Invalid email format').required('Please enter your email'),
-    phone: Yup.string().matches(/^[1-9][0-9]{9}$/, 'Phone number must have 10 digits and cannot be all zeros').required('Please enter your phone number'),
+    .required('Please enter designer name'),
+    email: Yup.string().email('Invalid email format').required('Please enter designer email'),
+    phone:  Yup.string()
+    .test('is-ten-digits', 'Phone number must have 10 digits', (value) => {
+
+      const digits = value?.replace(/\D/g, '');
+  
+      if (digits?.length !== 10) {
+        return false;
+      }
+    
+  
+      return true;
+    })
+    .required('Please enter designer phone number')
+    .test('is-valid', 'Invalid phone number', (value) => {
+      const digits = value.replace(/\D/g, '');
+  
+      if (digits.length !== 10) {
+        return true; 
+      }
+  
+      const firstDigit = digits[0];
+      if (digits.split('').every((digit) => digit === firstDigit)) {
+        return false; 
+      }
+  
+      return true;
+    }),
     password: Yup.string()
       .min(6, 'Password must be at least 6 digits')
       .matches(/^[a-zA-Z0-9]*$/, 'Password can only contain letters and numbers')
-      .required('Please enter your password')
+      .required('Please enter designer password')
   });
 
   
@@ -51,7 +76,7 @@ const DesignerRegister:React.FC = ()=> {
     console.log(values.name, values.email)
   
     adminAxious.post('/addDesigner',values ).then((res) => {
-        console.log("signup response in server side", res.data.message);
+        console.log("designer adding response in server side", res.data.message);
         
         setResSuccess(res.data.message)
         setResError(undefined)
@@ -90,133 +115,121 @@ const DesignerRegister:React.FC = ()=> {
   return (
     <div className='flex'>
 
-    <div className='w-1/5'>
-    <Home/>
-    </div>
+    
    <div className='w-4/5'>
   
     
-    <Formik
-    initialValues={initialValues}
-    validationSchema={validationSchema}
-    onSubmit={onSubmit}
+   <Formik
+initialValues={initialValues}
+validationSchema={validationSchema}
+onSubmit={onSubmit}
 >
-    <div className=" flex items-center justify-center px-5 py-5">
+<div className='h-screen w-fulltop-0 flex items-center justify-center' >
+<section className="signUp "  >
+    <div className="container_login ">
+        <div className="signUp-content  ">
+            <div className="signUp-form ">
+                <h2 className="form-title text-lavender">Add Designer</h2>
+                <Form method="POST" className="register-form" id="register-form">
+                    <div className="form-group">
+                        <label htmlFor="name">
+                            <i className="zmdi zmdi-account material-icons-name"></i>
+                        </label>
+                        <Field
+                            type="text"
+                            name="name"
+                            id="name"
+
+                            placeholder="Name"
+                        />
+                        <ErrorMessage  name='name'>
+                                   {
+                                    (errorMsg)=><div className='error text-red'>{errorMsg}</div>
+                                   }              
+                        </ErrorMessage>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">
+                            <i className="zmdi zmdi-email"></i>
+                        </label>
+                        <Field
+                            type="email"
+                            name="email"
+                            id="email"
+
+                            placeholder="Email"
+                        />
+                        <ErrorMessage name='email'>
+                           {
+                            (errorMsg)=> <div className='error text-red'>{errorMsg}</div>
+                           }    
+                        </ErrorMessage>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="pass">
+                            <i className="fa-sharp fa-solid fa-address-book"></i>
+                        </label>
+                        <Field
+                            type="tel"
+                            name="phone"
+                            id="phone"
+
+                            placeholder="Phone No:"
+                        />
+                        <ErrorMessage name='phone'>
+                           {
+                            (errorMsg)=> <div className='error text-red'>{errorMsg}</div>
+                           }    
+                        </ErrorMessage>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="re-pass">
+                            <i className="zmdi zmdi-lock-outline"></i>
+                        </label>
+                        <Field
+                            type="password"
+                            name="password"
+                            id="password"
+
+                            placeholder="Password"
+                        />
+                        <ErrorMessage name='password'>
+                           {
+                            (errorMsg)=> <div className='error text-red'>{errorMsg}</div>
+                           }    
+                        </ErrorMessage>
+                    </div>
+                    
+                    <div className="form-group form-button">
+                    <button
+                     type="submit"
+                    className="w-full text-white bg-[#22A78C] hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-600 dark:focus:ring-teal-600"
+                      >
+                    Save
+                   </button>
 
 
-    <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl " >
-        <div className="md:flex">
+                   
 
+                    </div>
+                </Form>
 
-            <div className="w-full py-10 px-5 md:px-10">
-                <div className="text-center mb-10">
-                    <h1 className="font-bold text-3xl text-teal-700">Add Designer</h1>
-                    {/* <p>Designer information</p> */}
-                </div>
-                <div>
-                    <Form method="POST" className="register-form" id="register-form">
-                        <div className="flex -mx-3">
-                            <div className="w-1/2 px-3 mb-5">
-
-                                <div className="flex">
-                                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
-                                    <Field type="text" name="name"
-                                        id="name" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Enter Name" /> <ErrorMessage name='name'>
-                                        {
-                                            (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-                                        }
-                                    </ErrorMessage>
-                                </div>
-                            </div>
-                            <div className="w-1/2 px-3 mb-5">
-
-                                <div className="flex">
-                                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
-                                    <Field type="text" name="email"
-                                        id="email"
-                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Email" />
-                                    <ErrorMessage name='email'>
-                                        {
-                                            (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-                                        }
-                                    </ErrorMessage>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex -mx-3">
-                            <div className="w-1/2 px-3 mb-5">
-
-                                <div className="flex">
-                                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
-                                    <Field type="tel" name="phone"
-                                        id="phone" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Phone Number" /> <ErrorMessage name='phone'>
-                                        {
-                                            (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-                                        }
-                                    </ErrorMessage>
-                                </div>
-                            </div>
-                            <div className="w-1/2 px-3 mb-5">
-
-                                <div className="flex">
-                                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
-                                    <Field type="password" name="password"
-                                        id="password"
-                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Password" />
-                                    <ErrorMessage name='password'>
-                                        {
-                                            (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-                                        }
-                                    </ErrorMessage>
-                                </div>
-                            </div>
-                        </div>
-                        {/* <div className="flex -mx-3">
-                            <div className="w-full px-3 mb-2">
-                                <h2 className="section-header bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white">
-                                    Education
-                                </h2>
-                                <div className="dynamic-field flex  items-center justify-center">
-                                    <div className="form-group">
-                                        <Field
-                                            type="text"
-                                            name="education[0].university"
-                                            id="education-university"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                            placeholder="University:"
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <Field
-                                            type="text"
-                                            name="education[0].major"
-                                            id="education-major"
-                                            className="w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                            placeholder="Major:"
-                                        />
-                                    </div>
-                                  
-                                </div>
-                            </div>
-                        </div> */}
-                        
-
-            <div className="flex -mx-3">
-                <div className="w-full px-3 mb-2">
-                    <button type='submit' className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold">Save </button>
-                </div>
             </div>
-        </Form>
-        <ToastContainer/>
+            <div className="signUp-image">
+                <figure>
+                    <img className='h-[200px] w-[600px]' src='https://www.approvedcourse.com/wp-content/uploads/2021/07/Online-Tutor.png' alt="Designer image" />
+                </figure>
+                 <ToastContainer/>
+            </div>
+        </div>
     </div>
+    
+</section>
+
 </div>
-</div>
-</div >
 
 
- </div> 
-
-</Formik >
+</Formik>
 </div>
 </div>
   )

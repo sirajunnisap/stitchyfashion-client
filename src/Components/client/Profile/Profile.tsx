@@ -4,6 +4,7 @@ import LandingPage from '../Home'
 import { UserType } from '../../../Models/Models'
 import { Link } from 'react-router-dom'
 import EditProfile from './EditProfile'
+import FooterHome from '../FooterHome'
 const Profile = () => {
 
   const [user, setUser] = useState<UserType|undefined>()
@@ -46,7 +47,7 @@ const Profile = () => {
               <div className=" relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
                 <div className="w-full px-4 flex justify-center">
                   <div className="flex justify-center">
-                    <img alt="..." src="/profileimage.jpg" className="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+                    <img alt="" src= {(user?.image)? user?.image : "	https://www.shareicon.net/data/128x128/2016/09/15/829452_user_512x512.png"} className="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
 
                   </div>
                 </div>

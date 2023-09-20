@@ -18,6 +18,7 @@ const UserLoginWithGoogle:React.FC =()=> {
   const [ googleProfile, setGoogleProfile ] = useState<{
     name: string;
     email: string;
+    picture:string;
   } | null>();
 
   const LoginWithGooleHelper = useGoogleLogin({
@@ -37,13 +38,16 @@ const UserLoginWithGoogle:React.FC =()=> {
           });
           setGoogleProfile(res.data);
           console.log(res?.data,"userData from res in headers");
+          console.log(res?.data?.email,"email");
           
-          const User = await loginWithGoogle(res?.data?.email, res?.data?.name);
+          const User = await loginWithGoogle(res?.data?.email, res?.data?.name,res?.data?.picture);
+          console.log(User,"res.data User");
+          
           if(User){
-            const {accessToken,user}=User
-               console.log(accessToken,user,"userData from google");
+            const {token,userData}=User
+               console.log(token,userData,"userData from google");
                
-            dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
+            dispatch(updateUserCredentials({accessToken:token,userName:userData?.name}))
             navigate('/')
           }
         } catch (error:any){

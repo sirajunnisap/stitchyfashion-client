@@ -1,7 +1,7 @@
 import React from 'react'
 import AdminLogin from '../../../Components/admin/Profile/Login'
 
-function Login() {
+function AdminLoginPage() {
   return (
     <div>
       <AdminLogin/>
@@ -9,4 +9,4 @@ function Login() {
   )
 }
 
-export default Login
+export default AdminLoginPage

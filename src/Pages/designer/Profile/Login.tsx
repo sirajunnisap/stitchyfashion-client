@@ -1,7 +1,7 @@
 import React from 'react'
 import DesignerLogin from '../../../Components/designer/Profile/login'
 
-function Login() {
+function DesignerLoginPage() {
   return (
     <div className='w-screen flex item-center justify-center'>
       <DesignerLogin/>
@@ -9,4 +9,4 @@ function Login() {
   )
 }
 
-export default Login
+export default DesignerLoginPage

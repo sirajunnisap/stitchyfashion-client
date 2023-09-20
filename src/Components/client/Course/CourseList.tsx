@@ -4,6 +4,7 @@ import { categoryType, courseType } from '../../../Models/Models'
 
 import { useNavigate } from 'react-router-dom'
 import { getAllCategory, getAllCourses } from '../../../Services/Course/courseData'
+import FooterHome from '../FooterHome'
 function CourseList() {
 
     const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
@@ -83,6 +84,7 @@ function CourseList() {
         </div>
             </div>
     </div>
+   
         </div>
     )
 }

@@ -1,11 +1,7 @@
 import React ,{useEffect, useState}from 'react'
-import Home from '../Home/Home'
-import { ErrorMessage, Field, Formik, Form } from 'formik'
 import { designerType } from '../../../Models/Models'
-import { profile, updateProfile } from '../../../Services/designer/designerData'
+import { profile} from '../../../Services/designer/designerData'
 import EditProfile from './EditProfile'
-import * as Yup from 'yup';
-
 
 
 function DesignerProfile() {
@@ -48,16 +44,15 @@ function DesignerProfile() {
     <div className={isModalOpen ? 'blur' : ''}>
 
     <div className='flex'>
-      <div className='w-1/5'>
-        <Home />
-      </div>
-      <div className='w-4/5 '>
+     
+      <div className='ml-80 '>
       <section className="signUp ml-0">
   <div className="container_login" style={{ marginTop: "30px" }}>
     <div className="signUp-content">
-    <div className="signUp-image">
+    <div className="ml-40 w-[400px]">
         <figure>
-          <img className='rounded-xl' src="https://i.pinimg.com/474x/a7/80/80/a7808059330f062de8a90e844d0558d1.jpg" alt="profile image" />
+          {/* <img className='rounded-xl' src="https://i.pinimg.com/474x/a7/80/80/a7808059330f062de8a90e844d0558d1.jpg" alt="profile image" /> */}
+          <img className='rounded-xl' src={(designer?.image)?designer?.image : "	https://www.shareicon.net/data/128x128/2016/09/15/829452_user_512x512.png" } alt="Profile Image" />
         </figure>
       </div>
 
@@ -81,6 +76,12 @@ function DesignerProfile() {
           </label>
           <p className="profile-field">Phone :  { designer?.phone}</p>
         </div>
+        <div className="form-group">
+          <label htmlFor="email">
+            <i className="zmdi zmdi-email"></i>
+          </label>
+          <p className="profile-field">Specialaization :  { designer?.field}</p>
+        </div>
         {/* <button data-modal-target="authentication-modal" onClick={toggleModal} data-modal-toggle="authentication-modal" className="block text-white bg-azelea hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
   Toggle modal
 </button> */} 
@@ -89,9 +90,11 @@ function DesignerProfile() {
       <div className="mx-28 text-center">
                 <div className="flex flex-wrap justify-center">
                   <h1 className='text-2xl font-extrabold mb-7'>About Me</h1>
+                 
+                  {/* <p className='text-xl font-extrabold'>{designer?.field}</p> */}
                   <p>
-                    {/* {designer?.aboutMe} */}
-                    My passion is to inspire and empower you to live your best version.  Using fashion as a vehicle to educate, inspire and transform your life -- ultimately, strive for excellence.
+                    {designer?.aboutMe}
+                    {/* My passion is to inspire and empower you to live your best version.  Using fashion as a vehicle to educate, inspire and transform your life -- ultimately, strive for excellence.
 
 ~~ A fashion industry expert --  from concept to completion: from Vision Boards to Pattern Drafting, to Tech Packs, to Social Media. 
 
@@ -100,7 +103,7 @@ function DesignerProfile() {
 ~~ As a Consultant for SAMSUNG C&T America, I have the opportunity to introduce new Brands to Samsung's infinite available resources to elevate Brands to global visibility.
 
 ~~ Born and raised in ROME (Italy), speaking Italian was an asset while working at RALPH LAUREN, when responsibilities included supervising samples manufactured in Italy.
-
+ */}
 
                   </p>
                   </div>

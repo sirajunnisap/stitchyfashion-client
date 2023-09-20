@@ -6,7 +6,7 @@ import { logoutUser } from '../../Redux/client/userSlice';
 import { Link } from 'react-router-dom';
 import LogoText from '../Logo/LogoText';
 import './style.css'
-function LandingPage() {
+function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -85,20 +85,20 @@ console.log(user,"userDAta in home page");
                     </div>
                     
                     
-                    <div className="fixed justify-between items-center w-full lg:flex lg:w-auto lg:order-1 ml-[580px]">
+                    <div className="fixed justify-between items-center w-full lg:flex lg:w-auto lg:order-1 ml-[480px]">
                         <ul className=" flex flex-col mt-4  font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             {/* <li>
                                 <a href="#" className="block py-2 pr-4 pl-3 text-white rounded bg-blue-700 lg:bg-transparent lg:text-blue-700 lg:p-0 dark:text-white" aria-current="page">Home</a>
                             </li> */}
                             <li>
-                                <Link to={"/"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">HOME</Link>
+                                <Link to={"/"} className="block py-6 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">HOME</Link>
                             </li>
                             <li>
-                                <Link to={"/listOfCourses"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">COURSES</Link>
+                                <Link to={"/listOfCategories"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">CATEGORIES</Link>
                             </li>
-                            <li>
+                            {/* <li>
                             <Link to={"/listOfDesigners"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">DESIGNERS</Link>
-                            </li>
+                            </li> */}
                             <li>
                             <Link to={"/pricing"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">PRICING</Link>
                             </li>
@@ -110,7 +110,7 @@ console.log(user,"userDAta in home page");
                         </div>
                        <div>
 
-                       <div className='ml-[800px]'>
+                       <div className='ml-[700px]'>
       <div className="search">
   <form id="searchFormTop" action="" method="get">
 
@@ -134,7 +134,7 @@ console.log(user,"userDAta in home page");
     );
 }
 
-export default LandingPage;
+export default NavBar;
 
 
 

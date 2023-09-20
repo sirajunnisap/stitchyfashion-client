@@ -6,21 +6,14 @@ import { ToastContainer,toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios';
 import adminAxious from '../../../Axios/adminAxios';
-import Home from '../Home/Home';
-
 
 
 const AddCategoryForm:React.FC = ()=> {
 
-
-    const [respSuccess, setResSuccess] = useState<string | undefined>(undefined);
-    const [resError, setResError] = useState<string | undefined>(undefined);
     const [fileUrl,setUrl]=useState<any>("")
     const [showButton,setShowButton]=useState(false)
-  
-    const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-
+    const [reserror,setError] = useState<string|null>(null)
+console.log(reserror);
 
     const [formData,setFormData] = useState({
       name:"",
@@ -47,8 +40,10 @@ const AddCategoryForm:React.FC = ()=> {
       console.log(res.data, "addcategory");
       toast.success(res.data.message);
     } catch (error:any) {
+    console.log(error,"error from backend");
+   
     
-      toast.error('🦄 category Already exist!', {
+      toast.error(reserror, {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -62,7 +57,14 @@ const AddCategoryForm:React.FC = ()=> {
   };
 
   const handleFileChange=((e:React.ChangeEvent<HTMLInputElement>)=>{
-    const file=e.target.files?.[0]
+    const file:any=e.target.files?.[0]
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (!allowedTypes.includes(file?.type)) {
+      // setIsError(true);
+      setError("Only JPEG, PNG, and GIF images are allowed.");
+      return;
+    }
     if(file){
        generateUrl(file)
     }else{
@@ -115,9 +117,7 @@ const AddCategoryForm:React.FC = ()=> {
 
     
     <div className='flex'>
-      <div className='w-1/5'>
-        <Home />
-      </div>
+     
       <div className='m-32'>
         <div className='h-screen top-0 flex items-center justify-center'>
           <section className='signUp '>
@@ -195,7 +195,9 @@ const AddCategoryForm:React.FC = ()=> {
        
       </div>
 
-               
+      {reserror && (
+                            <p className="text-red-500 text-sm mt-1">{reserror}</p>
+                          )}
                        
                         </div>
                        

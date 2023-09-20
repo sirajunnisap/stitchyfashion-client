@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Home from '../Home/Home'
 import { designerType } from '../../../Models/Models'
 import { getAllDesignerData } from '../../../Services/designer/designerData'
+import { blockDesigner } from '../../../Services/admin/adminData'
 
 function DesignersList() {
   
@@ -22,24 +23,36 @@ function DesignersList() {
     getDesigners()
   }, [])
 
+  const designerBlockingHandle = async (designer:designerType) => {
+    try {
+     
+        const designerId = designer._id;
+        const action = designer.isBlocked ? 'unblock' : 'block';
 
-  // const designerBlockingHandle = (designer:designerType)=>{
-  //     try {
-  //       const designerId = designer._id
-  //       const action = designer
-  //     } catch (error) {
         
-  //     }
-  // }
+        try {
+          const blockedDesigner = await blockDesigner(designerId, action);
+          if (blockedDesigner) {
+            const updatedDesignerData = designersData?.map((u) => (u._id === designerId ? { ...u, isBlocked: !u.isBlocked } : u));
+          setDesignersData(updatedDesignerData);
+          }
+          return blockedDesigner;
+        } catch (error) {
+          console.error(`Error ${action === 'block' ? 'blocking' : 'unblocking'} user with ID ${designerId}:`, error);
+          return null;
+        }
+      
+   } catch (error) {
+      console.error('Error handling blocking/unblocking:', error);
+     }
+  };
 
 
 
   return (
     <div className='flex'>
-     <div className="w-1/5 p-4">
-  <Home/>
-</div>
-<div className="w-4/5 pr-16">
+     
+<div className=" ml-60 w-4/5 pr-16">
 <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
   <div className="flex items-center justify-between pb-6">
     {/* <div>
@@ -60,7 +73,7 @@ function DesignersList() {
   </div>
   <div className="overflow-y-hidden rounded-lg border">
     <div className="overflow-x-auto">
-      <table className="w-full">
+      <table className="w-full ">
         <thead>
           <tr className="bg-green-700 text-left text-xs font-semibold uppercase tracking-widest text-white">
             <th className="px-5 py-3">ID</th>
@@ -107,8 +120,13 @@ function DesignersList() {
                           <p className="whitespace-no-wrap">{designer.skill}</p>
                         </td> */}
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                            <span className="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">UnBlock</span>
-                          </td>
+  <button
+    className={`rounded-full ${designer.isBlocked ? 'bg-red-300' :'bg-green-200'} px-3 py-1 text-xs font-semibold ${designer.isBlocked ? 'text-red-900' :'text-green-900' }`}
+    onClick={() => designerBlockingHandle(designer)}
+  >
+    {designer.isBlocked ? 'Block' : 'Unblock'}
+  </button>
+</td>
                         </tr>
                       )
                     })

@@ -2,22 +2,25 @@ import React, { useEffect, useState } from 'react'
 import Home from '../Home/Home'
 import { adminType } from '../../../Models/Models'
 import { profile } from '../../../Services/admin/adminData'
+import EditProfile from './EditProfile'
 
 function AdminProfile() {
   const [adminData,setAdminData] = useState<adminType|undefined>()
   const [isModalOpen,setIsModalOpen] = useState(false)
 
-  useEffect(()=>{
-    const adminProfile = async()=>{
-      const Admin = await profile()
-      console.log(Admin,"adminDaata");
-      
-      setAdminData(Admin)
+  useEffect(() => {
+    const adminProfile = async () => {
+      try {
+        const Admin = await profile();
+        console.log(Admin, "adminData");
+        setAdminData(Admin);
+      } catch (error) {
+        console.error("Error fetching admin data:", error);
+      }
     }
-    adminProfile()
-   
-
-  },[])
+    adminProfile();
+  }, []);
+  
 
   console.log(adminData?.email,"admin");
 
@@ -34,17 +37,15 @@ function AdminProfile() {
     <div className={isModalOpen ? 'blur' : ''}>
     <div className='flex'>
 
-        <div className='w-1/5'>
-        <Home/>
-        </div>
+        
        <div className=''>
       
-       <section className="signUp ml-0">
+       <section className="signUp ml-80">
   <div className="container_login" style={{ marginTop: "30px" }}>
     <div className="signUp-content">
     <div className="signUp-image">
         <figure>
-          <img className='rounded-xl' src="https://i.pinimg.com/474x/a7/80/80/a7808059330f062de8a90e844d0558d1.jpg" alt="profile image" />
+          <img className='rounded-xl' src={adminData?.image} alt="profile image" />
         </figure>
       </div>
       <div className="signUp-form">
@@ -91,7 +92,7 @@ function AdminProfile() {
 </div>
     </div>
     </div>
-    {/* <EditProfile isOpen={isModalOpen} closeModal={closeModal} setDesigner={setDesigner} designerData={designer}/> */}
+    <EditProfile isOpen={isModalOpen} closeModal={closeModal} setAdmin={setAdminData} adminData={adminData}/>
     </>
   )
 }

@@ -3,12 +3,12 @@ import userAxios from '../../Axios/userAxios';
 
 function MailVerification() {
    const id= useParams()
-   console.log(id);
+   console.log(id.id,'user iiiiiiiiiiiiiiiiiiiiiiiiiiiiid');
    
  const  navigate = useNavigate()
 const login=()=>{
     
-    userAxios.post(`/verifyEmail/${id.id}`)
+    userAxios.patch(`/verifyEmail/${id.id}`)
     navigate('/login')
 }
     

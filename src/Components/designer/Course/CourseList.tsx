@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { courseType } from '../../../Models/Models'
-import { getAllCourses } from '../../../Services/designer/Coureses'
+import { getAllCourses } from '../../../Services/Course/Coureses'
 import { useNavigate } from 'react-router-dom'
-import Home from '../Home/Home'
+import { Link } from 'react-router-dom'
 function CourseList() {
 
     const [courseData, setCourseData] = useState<courseType[] | undefined>(undefined)
@@ -25,9 +25,7 @@ function CourseList() {
 
     return (
         <div className=''>
-        <div className='w-1/5'>
-          <Home />
-        </div>
+        
             {/* <div className=''>
       <div className="search">
   <form id="searchFormTop" action="" method="get">
@@ -59,11 +57,11 @@ function CourseList() {
                 {
                     courseData?.map((course: courseType, index) => {
                         return (
-                            <div className='flex flex-wrap items-center mt-10' onClick={()=> navigate(`/designer/courseDetails/${course._id}`)}>
+                            <div className='flex flex-wrap items-center mt-10' >
                             <div className="max-w-sm m-7 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
-                                <a href="#">
-                                    <img className="rounded-t-lg w-full h-[170px] object-cover" src="/cardImage1.jpg" alt="" />
-                                </a>
+                              <div onClick={()=> navigate(`/designer/courseDetails/${course._id}`)}>
+                              <img className="rounded-t-lg w-full h-[170px] object-cover" src={course.image} alt="" />
+                                
     
                                 <div className="p-4 pt-2 w-[300px] h-[180px]">
                                     <a href="#">
@@ -72,6 +70,20 @@ function CourseList() {
                                     <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">{course?.description}</p>
                                    
                                 </div>
+                              </div>
+                                    
+
+                                {/* <div className="mt-5 py-5 border-t border-blueGray-200 text-center">
+                <div className="flex flex-wrap justify-center">
+                  <div className="w-full lg:w-9/12 px-4 font-normal text-pink-500 cursor-pointer" >
+                  
+                    <Link to={`/designer/addClass` } className="font-normal text-pink-500">
+                      <i className='fas fa-edit mr2 text-lg'></i>
+                      Add Class
+                    </Link>
+                  </div>
+                </div>
+              </div> */}
                             </div>
                           
                             </div>

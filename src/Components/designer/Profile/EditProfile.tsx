@@ -5,19 +5,19 @@ import { designerType } from '../../../Models/Models'
 import * as Yup from 'yup';
 import { updateProfile } from '../../../Services/designer/designerData';
 import { removeField } from '../../admin/Designer/cvFunctions';
+import axios from 'axios';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCamera, faPlus } from '@fortawesome/free-solid-svg-icons'
+
+
 type initialValueType = {
     name: string;
     email: string;
     phone: number | null;
-    image: string;
     field: string;
     aboutMe: string;
-    // education: {
-    //     university: string;
-    //     major: string;
-    // }[];
-    // experience: string;
-    // skill: string;
+    image: string;
 };
 
 
@@ -31,14 +31,67 @@ type EditProfileProps = {
 
 const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesigner, designerData }) => {
 
+
+    
+    const [fileUrl,setUrl]=useState<any>("")
+    
+    const [showButton,setShowButton]=useState(false)
+
+
+    const handleFileChange=((e:React.ChangeEvent<HTMLInputElement>)=>{
+        const file=e.target.files?.[0]
+        if(file){
+           generateUrl(file)
+        }else{
+         console.log("nulll");
+         
+        }
+     })
+        
+    
+    
+        const generateUrl=async(img:File)=>{
+    
+            try{
+              console.log()
+              const datas=new FormData()
+              datas.append('file',img)
+              datas.append('upload_preset','stitchy')
+              datas.append('cloud_name','doottwqrx')
+              console.log("hereeee????");
+              
+              
+              const {data}=await axios.post(
+                "https://api.cloudinary.com/v1_1/doottwqrx/image/upload",datas
+              )
+        
+              setUrl(data.url)
+              
+              console.log("urls:",data);
+              if(data.url){
+                setShowButton(true)
+             }
+              console.log("hahahahahahahahahahahahahahahahahahahahahahahahahahahaha");
+              return data.url
+            
+            }
+          catch(error){
+            console.log(error);
+            
+          }
+           
+           
+         }
+        console.log("urlllll",fileUrl);
+
+
     const initialValues: initialValueType = {
         name: designerData?.name || '',
         email: designerData?.email || '',
         phone: designerData?.phone || null,
-        image: designerData?.image || '',
         aboutMe: designerData?.aboutMe || '',
         field: designerData?.field || '',
-       
+        image: designerData?.image || ''
     };
 
 
@@ -49,15 +102,20 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
         phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be exactly 10 digits').required('Please enter your phone number'),
         // education: Yup.string().required('please enter your Education'),
         // experience: Yup.string().required('please enter your Experience'),
-        // skill: Yup.string().required('please enter your skill'),
+        field: Yup.string().required('please enter your specialaization'),
     });
 
     const onSubmit = async (values: initialValueType) => {
 
         console.log(values, "name updated");
 
-
-        const updatedUser = await updateProfile(values)
+        const valuesWithImg = {
+            ...values,
+            image:fileUrl
+        }
+        console.log(valuesWithImg,"values with image r");
+        
+        const updatedUser = await updateProfile(valuesWithImg)
         console.log(updatedUser, "updated user");
 
 
@@ -89,10 +147,10 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
                     <div className="md:flex">
 
 
-                        <div className="w-full py-10 px-5 md:px-10">
+                        <div className="w-full px-5 md:px-10">
                             <div className="text-center mb-10">
-                                <h1 className="font-bold text-3xl text-teal-700">Edit Profile</h1>
-                                <p>Update your profile information</p>
+                                <h1 className="font-bold text-2xl mt-3 text-teal-700">Edit Profile</h1>
+                                <p className='text-sm'>Update your profile information</p>
                             </div>
                             <div>
                                 <Form method="POST" className="register-form" id="register-form">
@@ -102,7 +160,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
                                             <div className="flex">
                                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
                                                 <Field type="text" name="name"
-                                                    id="name" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Enter Name" /> <ErrorMessage name='name'>
+                                                    id="name" className="w-full text-sm -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Enter Name" /> <ErrorMessage name='name'>
                                                     {
                                                         (errorMsg) => <div className='error text-red'>{errorMsg}</div>
                                                     }
@@ -115,7 +173,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
                                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
                                                 <Field type="text" name="email"
                                                     id="email"
-                                                    className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Email" />
+                                                    className="w-full text-sm -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Email" />
                                                 <ErrorMessage name='email'>
                                                     {
                                                         (errorMsg) => <div className='error text-red'>{errorMsg}</div>
@@ -130,7 +188,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
                                             <div className="flex">
                                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
                                                 <Field type="text" name="phone"
-                                                    id="phone" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Phone" />
+                                                    id="phone" className="w-full text-sm -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Phone" />
                                                 <ErrorMessage name='phone'>
                                                     {
                                                         (errorMsg) => <div className='error text-red'>{errorMsg}</div>
@@ -145,7 +203,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
                                             <div className="flex">
                                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
                                                 <Field type="text" name="field"
-                                                    id="field" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="specialization" />
+                                                    id="field" className="w-full text-sm -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="specialization" />
                                                 <ErrorMessage name='field'>
                                                     {
                                                         (errorMsg) => <div className='error text-red'>{errorMsg}</div>
@@ -166,19 +224,59 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
                                                     <Field
                                                         as="textarea" 
                                                         name="aboutMe" 
-                                                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="About Me"
+                                                        className="w-full text-sm -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="About Me"
                                                     />
                                              
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div className="flex -mx-3">
-                                        <div className="w-full px-3 mb-2">
-                                            <button type='submit' className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold">Save Changes</button>
+                                    <div className='form-group'>
+              {fileUrl?(
+          <div className='w-full h-60 p-5 bg-cover flex justify-end' style={{ backgroundImage: `url(${fileUrl})` }}>
+           <div className='w-9 h-9 lg:w-9 lg:h-9 mr-2 rounded-full bg-white '>
+    <form>
+      <div className='text-center relative'>
+        <label className="cursor-pointer">
+          <input type="file" accept="image/*" name="image" className="hidden" multiple onChange={handleFileChange} />
+          {/* Use absolute positioning to center the camera icon inside the rounded div */}
+          <div className="absolute pt-4 pl-4 inset-0 flex items-center justify-center">
+            <FontAwesomeIcon className='text-black' icon={faCamera} />
+          </div>
+        </label>
+      </div>
+    </form>
+  </div>
+         
+          </div>
+      ):(
+        <div className='w-full h-32 bg-white flex justify-center'>
+        <div>
+       <form>
+       <div className='text-center'>
+       <label>
+       <input  type="file" accept="image/*" name="image" className="hidden" multiple onChange={handleFileChange} />
+       <div className="flex flex-auto p-10 mx-auto mt-14">
+                                    <img className="has-mask p-28 object-center" src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg" alt="image"/>
+                                    </div>
+                                    <p className="ml-20 pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your computer</p>
+         
+       </label>
+        </div>
+        </form>
+          </div>
+       
+        </div>
+      )
+    }
+       
+      </div>
+                                    <div className="flex ">
+                                        <div className="w-full  mb-4">
+                                            <button type='submit' className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg py-1.5 font-semibold">Save Changes</button>
                                         </div>
                                     </div>
                                 </Form>
+                               
                             </div>
                         </div>
                     </div>
@@ -195,102 +293,4 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
 export default EditProfile
 
 
-
-
-
-// <div className="flex -mx-3">
-// <div className="w-full px-3 mb-2">
-//     <h2 className="section-header bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white">
-//         Education
-//     </h2>
-//     <div className="dynamic-field flex items-center justify-center">
-//         <div className="form-group">
-//             <Field
-//                 type="text"
-//                 name="education[0].university"
-//                 id="education-university"
-//                 className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-//                 placeholder="University:"
-//             />
-//         </div>
-//         <div className="form-group">
-//             <Field
-//                 type="text"
-//                 name="education[0].major"
-//                 id="education-major"
-//                 className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-//                 placeholder="Major:"
-//             />
-//         </div>
-//         <div className="form-group">
-//             <Field
-//                 type="text"
-//                 name="education[0].graduationYear"
-//                 id="education-graduation-year"
-//                 className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-//                 placeholder="Graduation Year:"
-//             />
-//         </div>
-//     </div>
-// </div>
-// </div>
-
-{/* Experience Section */ }
-{/* <div className="flex -mx-3">
-<div className="w-full px-3 mb-2">
-    <h2 className="section-header bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white">
-        Work Experience
-    </h2>
-    <div className="dynamic-field flex items-center justify-center">
-        <div className="form-group">
-            <Field
-                type="text"
-                name="experience[0].company"
-                id="experience-company"
-                className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                placeholder="Company:"
-            />
-        </div>
-        <div className="form-group">
-            <Field
-                type="text"
-                name="experience[0].year"
-                id="experience-year"
-                className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                placeholder="Employment Year:"
-            />
-        </div>
-    </div>
-</div>
-</div> */}
-
-{/* <div className="flex -mx-3">
-<div className="w-full px-3 mb-2">
-
-    <div id="education-section">
-        <h2 className="section-header  bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white ">Skill</h2>
-        <div className="dynamic-field flex items-center justify-center">
-            <div className="form-group  "> */}
-{/* <label htmlFor="university">University:</label> */ }
-{/* <Field type="text" name="skill"
-                    id="skill" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Skill:" />
-            </div> */}
-
-{/* <button className="remove-field-btn" onClick={() =>removeField(this)}>Remove</button> */ }
-{/* </div>
-    </div> */}
-
-{/* <ErrorMessage name='skill'>
-        {
-            (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-        }
-    </ErrorMessage> */}
-{/* </div>
-</div> */}
-
-{/* <ErrorMessage name='phone'>
-        {
-            (errorMsg) => <div className='error text-red'>{errorMsg}</div>
-        }
-    </ErrorMessage> */}
 

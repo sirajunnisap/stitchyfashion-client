@@ -1,5 +1,6 @@
 
 import React from 'react'
+import FooterHome from '../FooterHome'
 
 function FormforDesigners() {
   return (
@@ -175,6 +176,7 @@ function FormforDesigners() {
     <div className="flex justify-center">
    <button className="h-14 w-60 sm:w-96 rounded-2xl bg-indigo-500 hover:bg-indigo-600 text-white uppercase font-bold focus:outline-none focus:ring focus:ring-indigo-300 transition-all">s u b m i t</button>
  </div>
+ <FooterHome/>
     </div>
   )
 }

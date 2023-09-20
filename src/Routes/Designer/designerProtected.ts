@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { UseAppSelector } from "../../Redux/hooks";
 
 interface DesignerProtectedProps{
@@ -9,10 +9,13 @@ const DesignerProtected:React.FC<DesignerProtectedProps>=({children})=>{
     const DesignerToken = UseAppSelector(state=>state.Designer.accessToken)
     console.log(DesignerToken,"designer token in reduxstate");
     
+    const navigate = useNavigate();
+
+
     if(DesignerToken){
         return children
     }else{
-        Navigate({to:"/designer/login"})
+        navigate('/designer/login');
         return null
     }
 }

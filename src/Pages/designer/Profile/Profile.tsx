@@ -4,6 +4,7 @@ import DesignerProfile from '../../../Components/designer/Profile/ProfileDesiger
 function Profile() {
   return (
     <div>
+      
       <DesignerProfile/>
     </div>
   )

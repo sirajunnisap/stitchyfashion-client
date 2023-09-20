@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Modal from 'react-modal'
 import { courseType } from '../../../Models/Models';
-import { editCourse } from '../../../Services/designer/Coureses';
+import { editCourse } from '../../../Services/Course/Coureses';
 import { useNavigate } from 'react-router-dom';
 
 type initialValueType = {

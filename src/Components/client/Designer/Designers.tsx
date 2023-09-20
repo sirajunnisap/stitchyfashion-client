@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Home from '../Home'
 import { designerType } from '../../../Models/Models'
 import { getAllDesignerData } from '../../../Services/designer/designerData'
+import FooterHome from '../FooterHome'
 
 function DesignersList() {
   
@@ -91,6 +92,7 @@ function DesignersList() {
                   </div>
         </section>
         </div>
+       
         </div>
         
         

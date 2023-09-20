@@ -8,7 +8,7 @@ export type UserType = {
     password:string,
     isEmailVerified:boolean,
     isBlocked:boolean,
-    
+    image:string
 }
 
 
@@ -41,7 +41,7 @@ export type adminType = {
     email:string,
     phone:number,
     password:string,
-    isEmailVerified:boolean,
+    image:string
 }
 
 export type courseType = {

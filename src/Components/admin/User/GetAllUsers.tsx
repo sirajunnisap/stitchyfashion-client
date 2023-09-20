@@ -54,11 +54,9 @@ const GetAllUsers = () => {
     <div className='flex'>
 
      
-      <div className="w-1/5">
-        <Home />
-      </div>
-      <div className="w-4/5 pr-16">
-        <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+     
+      <div className="ml-60 w-4/5 pr-16">
+        <div className="mx-auto max-w-screen-lg  sm:px-8">
           <div className="flex items-center justify-between pb-6">
             {/* <div>
               <p className="font-bold text-[23px] text-teal-800">User Accounts</p>
@@ -76,18 +74,16 @@ const GetAllUsers = () => {
               </div>
             </div>
           </div>
-          <div className="overflow-y-hidden rounded-lg border">
-            <div className="overflow-x-auto">
-              <table className="w-full">
+          <div className="overflow-y-hidden rounded-lg border  ">
+            <div className="overflow-x-auto ">
+              <table className="w-full ">
                 <thead>
                   <tr className="bg-[#22A78C] text-left text-xs font-semibold uppercase tracking-widest text-white">
                     <th className="px-5 py-3">ID</th>
                     <th className="px-1 py-3">Full Name</th>
                     <th className="px-1 py-3">Email</th>
-                    <th className="px-1 py-3">Phone</th>
-                    <th className="px-1 py-3">User Role</th>
-                    <th className="px-1 py-3">Created at</th>
-                    <th className="px-1 py-3">Status</th>
+                    <th className="px-2 py-3">Phone</th>
+                    <th className="px-2 py-3">Status</th>
 
                   </tr>
                 </thead>
@@ -115,12 +111,7 @@ const GetAllUsers = () => {
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
                             <p className="whitespace-no-wrap">{user.phone}</p>
                           </td>
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                            <p className="whitespace-no-wrap">student</p>
-                          </td>
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                            <p className="whitespace-no-wrap">sep 25,2023</p>
-                          </td>
+                          
 
                           {/* <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">{(user.isBlocked===false)?
                           <button className="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900" onClick={()=>userBlockingHandle()}>UnBlock</button>:

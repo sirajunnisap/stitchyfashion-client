@@ -1,15 +1,25 @@
 import React from 'react'
 import GetAllUsers from '../User/GetAllUsers'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './style.css'
 import { toggleMenu } from '../Designer/cvFunctions';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { UseAppSelector } from '../../../Redux/hooks';
-function Home() {
+import { UseAppSelector, useAppDispatch } from '../../../Redux/hooks';
+import { logoutAdmin } from '../../../Redux/admin/adminSlice';
+function AdminSidbar() {
 
-  const admin = UseAppSelector(state=>state.Admin)
-  console.log(admin,"admindata in dashboard");
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const designer:any = UseAppSelector(state=>state.Admin)
+  console.log(designer,"designer data in dashboard");
+  const handleSignOut = () => {
+    // ...
+    dispatch(logoutAdmin({}))
+
+    navigate('/admin/login');
+  };
   
   return (
    
@@ -27,59 +37,59 @@ function Home() {
     
     <ul>
       <li>
-        <a href="/admin/dashboard">
+        <Link to={"/admin/dashboard"}>
           <span className="icon"><i className="fa-solid fa-house"></i></span>
           <span className="title">Home</span>
-        </a>
+        </Link>
       </li>
     
       <li>
-        <a href="/admin/adminProfile">
+        <Link to={"/admin/adminProfile"}>
           <span className="icon"><i className="fa-solid fa-user"></i></span>
           <span className="title">Profile</span>
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="/admin/getUsers">
+        <Link to={"/admin/getUsers"}>
           <span className="icon"><i className="fa-solid fa-users"></i></span>
           <span className="title">Users</span>
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="/admin/getDesigners">
+        <Link to={"/admin/getDesigners"}>
           <span className="icon"><i className="fa-solid fa-chalkboard-teacher"></i></span>
           <span className="title">Designers</span>
-        </a>
+        </Link>
       </li>
        <li>
-        <a href="#">
+        <Link to={"/admin/getCourses"}>
           <span className="icon"><i className="fa-solid fa-book-open"></i></span>
           <span className="title">Courses</span>
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="/admin/addDesigner">
+        <Link to={"/admin/addDesigner"}>
           <span className="icon"><i className="fa-solid fa-user-plus"></i></span>
           <span className="title">Add Designer</span>
-        </a>
+        </Link>
       </li> 
       <li>
-        <a href="/admin/addCategory">
+        <Link to={"/admin/addCategory"}>
           <span className="icon"><i className="fa-solid fa-user-plus"></i></span>
           <span className="title">Add Category</span>
-        </a>
+        </Link>
       </li> 
       <li>
-        <a href="/admin/listOfCategories">
+        <Link to={"/admin/listOfCategories"}>
           <span className="icon"><i className="fa-solid fa-book-open"></i></span>
           <span className="title">Categories</span>
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="#">
-          <span className="icon"><i className="fa-solid fa-right-from-bracket"></i></span>
+        <Link to={''} onClick={handleSignOut}>
+          <span className="icon"><i className="fa-solid fa-sign-out" aria-hidden="true"></i></span>
           <span className="title">SignOut</span>
-        </a>
+        </Link>
       </li>
     </ul>
   </div>
@@ -94,4 +104,4 @@ function Home() {
   )
 }
 
-export default Home
+export default AdminSidbar

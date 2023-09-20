@@ -1,3 +1,4 @@
+import adminAxious from "../../Axios/adminAxios";
 import designerAxios from "../../Axios/designerAxios";
 import { classes, courseType } from "../../Models/Models";
 
@@ -66,3 +67,14 @@ export const editCourse = async (CourseData: any, courseId: any): Promise<any> =
     const data = res.data;
     return data;
   };
+
+
+
+export const getAllCoursesForAdmin = async():Promise<any>=>{
+
+    const res= adminAxious.get('/getAllCourses')
+    
+    const data = (await res).data
+    return data
+    
+}  

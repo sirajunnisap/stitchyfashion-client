@@ -1,11 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import LandingPage from './Home'
-
+import FooterHome from './FooterHome'
+import { getAllCategory } from '../../Services/Course/courseData'
+import { categoryType } from '../../Models/Models'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAppDispatch, UseAppSelector } from '../../Redux/hooks';
+import NavBar from './Home'
 function UserHome() {
+    const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const user = UseAppSelector(state => state.User)
+    useEffect(() => {
+
+        const getCategory = async () => {
+            try {
+
+                const Category = await getAllCategory()
+                setCategoryData(Category)
+
+            } catch (error: any) {
+                console.log(error);
+            }
+        }
+        getCategory()
+    }, [])
+
     return (
         <div className='w-full mx-14 '>
             <div>
-                <LandingPage />
+                <NavBar />
             </div>
             <div className='flex mt-14 m-16'>
                 <div className=' mt-20 ml- w-1/2'>
@@ -14,10 +38,16 @@ function UserHome() {
                             <div className="max-w-screen-md">
                                 <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Let's find more that brings us together.</h2>
                                 <p className="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Flowbite helps you connect with friends, family and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups, Watch and Marketplace.</p>
-                                <div className="flex flex-col  space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-                                    <a href="#" className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
+                                <div className="flex flex-col  space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">{user?.accessToken?(
+                                    <Link to={'/listOfCategories'} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
+                                    Get started
+                                </Link>
+                                ):(
+                                    <Link to={'/login'} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
                                         Get started
-                                    </a>
+                                    </Link>
+                                )}
+                                    
                                     {/* <a href="#" className="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <svg className="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
                     View more
@@ -55,64 +85,34 @@ function UserHome() {
                 <div>
                     <p>"To cultivate exceptionally talented fashion designers through comprehensive <br />creative training and personalized mentorship."</p>
                 </div>
-                <div className='flex flex-wrap items-center mt-10'>
-                    <div className="max-w-sm m-7 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mr-5 mb-5">
-                        <a href="#">
-                            <img className="rounded-t-lg w-full h-[170px] object-cover" src="/cardImage1.jpg" alt="" />
-                        </a>
+                <div className='flex flex-wrap items-center mt-10 ml-56'>
+                    {
+                        categoryData?.slice(0, 6).map((category: categoryType, index) => {
+                            return (
+                                <div className='flex flex-wrap items-center mt-10' >
+                                    <div className="max-w-sm m-7 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5" onClick={()=> navigate(`/categoryDetails/${category._id}`)}>
+                                      
+                                            <img className="rounded-t-lg w-full h-[170px] object-cover" src={category?.image} alt="" />
+                                        
 
-                        <div className="p-4 pt-2 w-[300px] h-[180px]">
-                            <a href="#">
-                                <h2 className="mb-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h2>
-                            </a>
-                            <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                            {/* <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#22A78C] rounded-lg hover:bg-[#288270] ">
-                            Read more
-                            <svg className="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a> */}
-                        <p>Beginner.  1-3 Months</p>
-                        </div>
-                    </div>
-                    <div className="max-w-sm m-7 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mr-5 mb-5">
-                        <a href="#">
-                            <img className="rounded-t-lg w-full h-[170px] object-cover" src="/cardImage1.jpg" alt="" />
-                        </a>
-                        <div className="p-4 pt-2 w-[300px] h-[180px]">
-                            <a href="#">
-                                <h2 className="mb-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h2>
-                            </a>
-                            <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                            {/* <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#22A78C] rounded-lg hover:bg-[#288270] ">
-                            Read more
-                            <svg className="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a> */}
-                          <p>Intermediate.  1-3 Months</p>
-                        </div>
-                    </div>
-                    <div className="max-w-sm m-7 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mr-5 mb-5">
-                        <a href="#">
-                            <img className="rounded-t-lg w-full h-[170px] object-cover" src="/cardImage1.jpg" alt="" />
-                        </a>
-                        <div className="p-4 pt-2 w-[300px] h-[180px]">
-                            <a href="#">
-                                <h2 className="mb-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h2>
-                            </a>
-                            <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                            {/* <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#22A78C] rounded-lg hover:bg-[#288270] ">
-                            Read more
-                            <svg className="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a> */}
-                          <p>Advance.  1-3 Months</p>
-                        </div>
-                    </div>
+                                        <div className="p-4 pt-2 w-[300px] h-[180px]">
+                                           
+                                                <h2 className="mb-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{category?.name}</h2>
+                                         
+                                            <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">{category?.description}</p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            )
+                        })}
+
+
 
                 </div>
+
 
                 <div className='flex flex-col items-center'>
                     <div className=''>
@@ -159,11 +159,11 @@ function UserHome() {
                     </div>
                 </div>
             </div>
-            
-               
+
+
 
             <div className='flex mt-14 m-44'>
-            <div className='w-[50%] mt-20  m-16 '>
+                <div className='w-[50%] mt-20  m-16 '>
                     <img src="/formdesigner.jpg" alt="" /></div>
 
                 <div className=' mt-20 ml- w-1/2 '>
@@ -171,10 +171,10 @@ function UserHome() {
                         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                             <div className="max-w-screen-md">
                                 <h2 className="mb-4 ml-28 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white">JOIN TO US</h2>
-                                <p className="mb-8 font-light text-gray-500 sm:text-base dark:text-gray-400">STUDY FROM ANYWHERE EITHER WHILE YOU ARE USING YOUR MOBILE PHONE OR DESKTOP OR YOUR 
-LAPTOP  WATCH LESSONS AND CHAT WITH YOUR TUTOR OR MAKE VIDEOCALLS SCHEDULE YOUR TIME 
-AND FIND THE BEST TUTOR FROM THE WEBSITE AND MAKE A GOOD CAREER AND TEACH YOUR SKILLS 
-TO OTHERS SPEARD EDUCATION AND SKILLS EVERYWHERE AROUND WORLD </p>
+                                <p className="mb-8 font-light text-gray-500 sm:text-base dark:text-gray-400">STUDY FROM ANYWHERE EITHER WHILE YOU ARE USING YOUR MOBILE PHONE OR DESKTOP OR YOUR
+                                    LAPTOP  WATCH LESSONS AND CHAT WITH YOUR TUTOR OR MAKE VIDEOCALLS SCHEDULE YOUR TIME
+                                    AND FIND THE BEST TUTOR FROM THE WEBSITE AND MAKE A GOOD CAREER AND TEACH YOUR SKILLS
+                                    TO OTHERS SPEARD EDUCATION AND SKILLS EVERYWHERE AROUND WORLD </p>
                                 <div className="flex flex-col ml-28  space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
                                     <a href="#" className="inline-flex items-center justify-center px-16 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
                                         JOIN
@@ -190,34 +190,15 @@ TO OTHERS SPEARD EDUCATION AND SKILLS EVERYWHERE AROUND WORLD </p>
 
                 </div>
 
-              
+
             </div>
-            
-
-            <footer className="bg-white  rounded-lg shadow m-4 mx-14 dark:bg-gray-800">
-                <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-                    <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="#" className="hover:underline">StitchY</a>. All Rights Reserved.
-                    </span>
-                    <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-                        <li>
-                            <a href="#" className="mr-4 hover:underline md:mr-6 ">About</a>
-                        </li>
-                        <li>
-                            <a href="#" className="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="#" className="mr-4 hover:underline md:mr-6">Licensing</a>
-                        </li>
-                        <li>
-                            <a href="#" className="hover:underline">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
 
 
 
 
+
+
+            <FooterHome />
 
 
 
