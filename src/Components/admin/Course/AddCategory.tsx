@@ -118,12 +118,12 @@ console.log(reserror);
     
     <div className='flex'>
      
-      <div className='m-32'>
-        <div className='h-screen top-0 flex items-center justify-center'>
+      <div className='m-32 ml-96'>
+        <div className=' flex items-center justify-center '>
           <section className='signUp '>
             <div className='container_login '>
               <div className='signUp-content'>
-                <div className='signUp-form '>
+                <div className='signUp-form'>
                   <h2 className='form-title text-lavender'>Add Category</h2>
                   
                  

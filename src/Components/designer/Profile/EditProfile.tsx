@@ -17,7 +17,7 @@ type initialValueType = {
     phone: number | null;
     field: string;
     aboutMe: string;
-    image: string;
+    image: string | undefined;
 };
 
 
@@ -26,7 +26,6 @@ type EditProfileProps = {
     closeModal: () => void;
     setDesigner: React.Dispatch<React.SetStateAction<designerType | undefined>>;
     designerData: designerType | undefined
-    // user:UserType|undefined
 };
 
 const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesigner, designerData }) => {
@@ -34,7 +33,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
 
     
     const [fileUrl,setUrl]=useState<any>("")
-    
+    console.log({designerData})
     const [showButton,setShowButton]=useState(false)
 
 
@@ -91,17 +90,43 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
         phone: designerData?.phone || null,
         aboutMe: designerData?.aboutMe || '',
         field: designerData?.field || '',
-        image: designerData?.image || ''
+        image: designerData?.image
     };
 
 
 
     const validationSchema = Yup.object({
-        name: Yup.string().min(3, 'Name must be at least 3 characters').required('Please enter your name'),
+        name: Yup.string()
+        .matches(/^[A-Za-z]+(?: [A-Za-z]+)*$/, 'Invalid name format')
+        .min(3, 'Name must be at least 3 characters')
+        .required('Please enter your name'),
         email: Yup.string().email('Invalid email format').required('Please enter your email'),
-        phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be exactly 10 digits').required('Please enter your phone number'),
-        // education: Yup.string().required('please enter your Education'),
-        // experience: Yup.string().required('please enter your Experience'),
+        phone:  Yup.string()
+        .test('is-ten-digits', 'Phone number must have 10 digits', (value) => {
+    
+          const digits = value?.replace(/\D/g, '');
+      
+          if (digits?.length !== 10) {
+            return false;
+          }
+        
+      
+          return true;
+        })
+        .required('Please enter your phone number')
+        .test('is-valid', 'Invalid phone number', (value) => {
+          const digits = value.replace(/\D/g, '');
+      
+          if (digits.length !== 10) {
+            return true; 
+          }
+      
+          if (/^0+$/.test(digits)) {
+            return false;
+          }
+      
+          return true;
+        }),
         field: Yup.string().required('please enter your specialaization'),
     });
 
@@ -109,9 +134,10 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
 
         console.log(values, "name updated");
 
+
         const valuesWithImg = {
             ...values,
-            image:fileUrl
+            image:fileUrl?fileUrl:designerData?.image
         }
         console.log(valuesWithImg,"values with image r");
         
@@ -121,7 +147,6 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
 
         closeModal();
         setDesigner(updatedUser)
-        // setUser({...user,name:values.name,email:values.email,phone:values.phone})
     }
 
     
@@ -231,8 +256,8 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal, setDesign
                                         </div>
                                     </div>
                                     <div className='form-group'>
-              {fileUrl?(
-          <div className='w-full h-60 p-5 bg-cover flex justify-end' style={{ backgroundImage: `url(${fileUrl})` }}>
+              {initialValues.image || fileUrl?(
+          <div className='w-full h-60 p-5 bg-cover flex justify-end' style={{ backgroundImage: `url(${fileUrl?fileUrl:initialValues.image})` }}>
            <div className='w-9 h-9 lg:w-9 lg:h-9 mr-2 rounded-full bg-white '>
     <form>
       <div className='text-center relative'>

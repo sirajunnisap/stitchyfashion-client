@@ -15,7 +15,7 @@ type initialValueType = {
     name: string
     email: string
     phone: number|null
-
+    image: string|undefined
   }
 
   type EditProfileProps = {
@@ -83,7 +83,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setUser,us
     name: userData?.name || '',
     email: userData?.email || '',
     phone: userData?.phone || null,
-
+    image: userData?.image 
   }
   
 
@@ -128,7 +128,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setUser,us
 
     const valuesWithImg = {
       ...values,
-      image:fileUrl
+      image:fileUrl?fileUrl:userData?.image
   }
     const updatedUser = await updateProfile(valuesWithImg)
     console.log(updatedUser,"updated user");
@@ -136,8 +136,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setUser,us
 
     closeModal();
         setUser(updatedUser)
-    // setUser({...user,name:values.name,email:values.email,phone:values.phone})
-}
+      }
 
 
   return (
@@ -212,8 +211,8 @@ onSubmit={onSubmit}
                         </div>
                     </div>
                     <div className='form-group'>
-              {fileUrl?(
-          <div className='w-full h-60 p-5 bg-cover flex justify-end' style={{ backgroundImage: `url(${fileUrl})` }}>
+              {initialValues.image || fileUrl?(
+          <div className='w-full h-60 p-5 bg-cover flex justify-end' style={{ backgroundImage: `url(${fileUrl?fileUrl:initialValues.image})` }}>
            <div className='w-9 h-9 lg:w-9 lg:h-9 mr-2 rounded-full bg-white '>
     <form>
       <div className='text-center relative'>

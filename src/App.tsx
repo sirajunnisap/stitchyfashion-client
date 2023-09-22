@@ -17,6 +17,7 @@ import AdminDashboard from './Pages/admin/SideBar';
 import ForgotPassword from './Components/client/ChangePassword/OtpVerification';
 import ChangePassword from './Components/client/ChangePassword/ChangePassword';
 import Register from './Pages/client/Login/Register';
+import VerifyMail from './Pages/designer/VerifyMail';
 
 type RoutesProps = {};
 const App:React.FC<RoutesProps> = () =>  {
@@ -37,6 +38,7 @@ const App:React.FC<RoutesProps> = () =>  {
             <Route path='/otpVerification' element={<ForgotPassword/>}/>
             <Route path='/changePassword/:id' element={<ChangePassword/>}/>
             <Route path='/signup' element={<Register/>}/>
+            <Route path='/designer/verifyEmail/:id' element={<VerifyMail/>}/>
           </Routes>
         </Router>
   );

@@ -14,7 +14,7 @@ type initialValueType = {
     name: string
     email: string
     phone: number|undefined
-    password: string
+    // password: string
   }
 
 const DesignerRegister:React.FC = ()=> {
@@ -27,7 +27,7 @@ const DesignerRegister:React.FC = ()=> {
     name: '',
     email: '',
     phone: undefined,
-    password: '',
+    // password: '',
   }
 
   
@@ -64,16 +64,16 @@ const DesignerRegister:React.FC = ()=> {
   
       return true;
     }),
-    password: Yup.string()
-      .min(6, 'Password must be at least 6 digits')
-      .matches(/^[a-zA-Z0-9]*$/, 'Password can only contain letters and numbers')
-      .required('Please enter designer password')
+    // password: Yup.string()
+    //   .min(6, 'Password must be at least 6 digits')
+    //   .matches(/^[a-zA-Z0-9]*$/, 'Password can only contain letters and numbers')
+    //   .required('Please enter designer password')
   });
 
   
   const onSubmit = (values: initialValueType) => {
 
-    console.log(values.name, values.email)
+    console.log(values,"values for adding designer")
   
     adminAxious.post('/addDesigner',values ).then((res) => {
         console.log("designer adding response in server side", res.data.message);
@@ -116,7 +116,7 @@ const DesignerRegister:React.FC = ()=> {
     <div className='flex'>
 
     
-   <div className='w-4/5'>
+   <div className='ml-96'>
   
     
    <Formik
@@ -124,7 +124,7 @@ initialValues={initialValues}
 validationSchema={validationSchema}
 onSubmit={onSubmit}
 >
-<div className='h-screen w-fulltop-0 flex items-center justify-center' >
+<div className='h-screen w-full  flex items-center justify-center' >
 <section className="signUp "  >
     <div className="container_login ">
         <div className="signUp-content  ">
@@ -182,7 +182,7 @@ onSubmit={onSubmit}
                            }    
                         </ErrorMessage>
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label htmlFor="re-pass">
                             <i className="zmdi zmdi-lock-outline"></i>
                         </label>
@@ -198,7 +198,7 @@ onSubmit={onSubmit}
                             (errorMsg)=> <div className='error text-red'>{errorMsg}</div>
                            }    
                         </ErrorMessage>
-                    </div>
+                    </div> */}
                     
                     <div className="form-group form-button">
                     <button

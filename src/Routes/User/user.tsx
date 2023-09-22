@@ -45,7 +45,7 @@ const UserRoute:React.FC = () => {
         <Route path='/categoryDetails/:id' element={<CategoryDetails/>}/>
         <Route path='/courseDetails/:id' element={<CourseDetails />} />
         <Route path='/getDesignerById/:id' element={<DesignerDetail/>}/>
-        <Route path='/pricing' element={<Pricing/>}/>
+        <Route path='/pricing/:id' element={<Pricing/>}/>
 
       </Routes>
     </div>

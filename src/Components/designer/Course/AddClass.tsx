@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { classes, courseType } from '../../../Models/Models'
 import { addClass, courseDetails } from '../../../Services/Course/Coureses'
 import { ToastContainer, toast } from 'react-toastify'
@@ -10,7 +10,7 @@ function AddClass() {
   const { id } = useParams()
   const [courseData, setCourseData] = useState<courseType | undefined>(undefined)
   const [d, setD] = useState(false)
-
+  const navigate = useNavigate()
 
   const [respSuccess, setResSuccess] = useState<string | undefined>(undefined);
   const [resError, setResError] = useState<string | undefined>(undefined);
@@ -81,7 +81,8 @@ function AddClass() {
       console.log('Course added successfully', response);
 
       // setResSuccess(response.data)
-      // navigate('/listOfCourses');
+      navigate('/listOfCourses');
+
       setResError(undefined)
       toast.success('🦄 class added successfully', {
         position: "top-center",
@@ -118,10 +119,10 @@ function AddClass() {
   const handleFileChange = ((e: React.ChangeEvent<HTMLInputElement>) => {
     const file:any = e.target.files?.[0]
 
-    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    const allowedTypes = ["video/mp4", "video/x-msvideo", "video/quicktime", "video/x-ms-wmv", "video/x-matroska", "video/x-flv", "video/webm"];
     if (!allowedTypes.includes(file?.type)) {
       // setIsError(true);
-      setError("Only JPEG, PNG, and GIF images are allowed.");
+      setError("Only mp4,webm videos are allowed.");
       return;
     }
 
@@ -197,27 +198,24 @@ function AddClass() {
 
   return (
 
-    <div className='ml-40'>
-      <div className='fixed z-30 ml-12 mt-3 rounded-2xl h-[250px] bg-[#22A78C] w-[1320px]'>
-        <div>
-          <h2 className="ml-36 text-3xl tracking-tight font-bold text-white dark:text-white pt-10">{courseData?.title}</h2>
-          <p className="ml-36 mt-3 w-[730px] font-light text-white sm:text-lg dark:text-gray-400">{courseData?.description}</p>
-         <p className="ml-36 mb-1 text-sm font-normal text-white">
-            {courseData?.duration}{" "}
-            <span className=" text-sm font-normal text-white">
-              <span> .</span> {courseData?.level}
-            </span>
-          </p>
-          <p className="ml-36 text-sm font-semibold text-white">
-            ₹{courseData?.courseFee}
-          </p>
-        </div>
-      </div>
-
-      <div className='flex'>
-
-        <div className='ml-40 mt-20'>
-          <div className='h-screen top-0 flex items-center justify-center '>
+  <>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div className='fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-50'>
+            <div className='bg-white rounded shadow-md '>
+            <div className=''>
+          <div className=' flex items-center justify-center '>
             {/* <section className='signUp '> */}
             <div className='container_login '>
               <div className='signUp-content'>
@@ -282,10 +280,10 @@ function AddClass() {
                                   <div className='text-center'>
                                     <label>
                                       <input type="file" accept="video/*" name="video" className="hidden" multiple onChange={handleFileChange} />
-                                      <div className="flex flex-auto ml-32 w-[280px] mx-auto -mt-10">
-                                        <img className="has-mask ml-8 object-center" src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg" alt="video" />
+                                      <div className="flex flex-auto w-[280px] mx-auto -mt-10">
+                                        <img className="has-mask ml-20 object-center" src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg" alt="video" />
                                       </div>
-                                      <p className="ml-44 pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your computer</p>
+                                      {/* <p className="ml-44 pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your computer</p> */}
 
                                     </label>
                                   </div>
@@ -329,13 +327,11 @@ function AddClass() {
           {/* ... */}
           </div>
         </div>
-      </div>
-     
-
-
-
-
-    </div>
+              </div>
+              </div>
+  
+  
+  </>
 
 
 

@@ -15,7 +15,7 @@ import AddClass from "../../Components/designer/Course/AddClass";
             <NavBar/>
     <Routes>
         {/* <Route path="/login" element={IsAuth?<DesignerHome/>:<Login/>}/> */}
-        <Route path='/verifyEmail/:id' element={<VerifyMail/>}/>
+   
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/dashboard" element={<DesignerHome/>}/>
         <Route path="/addCourse" element={<AddCourse/>}/>

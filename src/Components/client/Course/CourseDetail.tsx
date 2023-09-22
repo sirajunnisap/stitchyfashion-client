@@ -104,7 +104,7 @@ console.log(designerData,"designerData in state");
                 </p>
 
                 <div className="flex flex-col ml-20 space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">{user?.accessToken?(
-                                    <Link to={'/pricing'} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
+                                    <Link to={`/pricing/${courseData?._id}`} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
                                     Entroll Now
                                 </Link>
                                 ):(
