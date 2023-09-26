@@ -4,10 +4,11 @@ import DesignerHome from "../../Pages/designer/DesignerHome";
 import Profile from "../../Pages/designer/Profile/Profile";
 import ListOfCourses from "../../Pages/designer/Course/ListOfCourses";
 import ListOfCategories from "../../Pages/designer/ListOfCategories";
-import VerifyMail from "../../Pages/designer/VerifyMail";
 import DetailsCourse from "../../Pages/designer/Course/DetailsCourse";
 import NavBar from "../../Components/designer/Home/Home";
 import AddClass from "../../Components/designer/Course/AddClass";
+import PaymentUser from "../../Components/designer/Users/PaymentUser";
+import UsersList from "../../Components/designer/Users/UsersList";
  const DesignerRoute:React.FC = ()=>{
 
     return(
@@ -24,6 +25,8 @@ import AddClass from "../../Components/designer/Course/AddClass";
         <Route path="/courseDetails/:id" element={<DetailsCourse/>}/>
         <Route path="/unlistCourse"/>
         <Route path="/categoryList" element={<ListOfCategories/>}/>
+        <Route path="/getPaymentedUsers" element={<PaymentUser/>}/>
+        <Route path="/paymentedUsersList/:id" element={<UsersList/>}/>
     </Routes>
     </div>
     )

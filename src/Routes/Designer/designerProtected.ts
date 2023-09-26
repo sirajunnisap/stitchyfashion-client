@@ -6,6 +6,7 @@ interface DesignerProtectedProps{
 }
 
 const DesignerProtected:React.FC<DesignerProtectedProps>=({children})=>{
+    
     const DesignerToken = UseAppSelector(state=>state.Designer.accessToken)
     console.log(DesignerToken,"designer token in reduxstate");
     

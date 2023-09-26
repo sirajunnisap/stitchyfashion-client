@@ -81,7 +81,7 @@ function AddClass() {
       console.log('Course added successfully', response);
 
       // setResSuccess(response.data)
-      navigate('/listOfCourses');
+      navigate(`/designer/courseDetails/${id}`);
 
       setResError(undefined)
       toast.success('🦄 class added successfully', {

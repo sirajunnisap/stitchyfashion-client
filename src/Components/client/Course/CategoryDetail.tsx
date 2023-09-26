@@ -83,10 +83,10 @@ function CategoryDetail() {
 
 
 
-            <div className="mt-36">
+            <div className="mt-36 ">
       {courseData?.map((classData) => (
-        <div className="flex flex-col justify-center -ml-28 mb-4">
-          <div className=" flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white " onClick={()=>navigate(`/courseDetails/${classData._id}`)}>
+        <div className="flex flex-col justify-center -ml-28 mb-4 ">
+          <div className=" flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white motion-safe:hover:scale-110 transition-[2s] cursor-pointer" onClick={()=>navigate(`/courseDetails/${classData._id}`)}>
             <div className="w-full md:w-1/3 bg-white grid place-items-center">
               <img
                 src={classData.image}

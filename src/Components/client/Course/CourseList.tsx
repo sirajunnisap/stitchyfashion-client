@@ -55,11 +55,11 @@ function CourseList() {
             <div>
                 <p>"To cultivate exceptionally talented fashion designers through comprehensive <br />creative training and personalized mentorship."</p>
             </div>
-            <div className='flex flex-wrap items-center mt-10 ml-48'>
+            <div className='flex flex-wrap items-center mt-10 ml-48 cursor-pointer'>
         {
             categoryData?.map((category: categoryType, index) => {
                 return (
-                    <div className='flex flex-wrap items-center mt-10' onClick={()=> navigate(`/courseDetails/${category._id}`)}>
+                    <div className='flex flex-wrap items-center mt-10 motion-safe:hover:scale-110 transition-[2s]' onClick={()=> navigate(`/courseDetails/${category._id}`)}>
                     <div className="max-w-sm m-7 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
                         <a href="#">
                             <img className="rounded-t-lg w-full h-[170px] object-cover" src={category?.image} alt="" />

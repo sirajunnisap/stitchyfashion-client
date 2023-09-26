@@ -72,3 +72,9 @@ export type categoryType = {
     description:string,
     image:string
 }
+
+export type paymentType = {
+    _id : string,
+    selectedCourse:courseType,
+    user : UserType
+}

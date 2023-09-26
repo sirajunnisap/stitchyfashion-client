@@ -22,19 +22,11 @@ export const getAllUserData = async():Promise<any>=>{
 export const profile = async():Promise<UserType>=>{
 
 
-    const userCredentials: any = localStorage.getItem('persist:User')
 
-    const userCredentialsObject = JSON.parse(userCredentials)
-
-    const userToken = userCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
-
-    console.log(userToken,"usertoken");
     
-    const res = await userAxios.get('profile',{
-        headers:{
-            Authorization:`Bearer ${userToken}`
-        }
-    })
+    const res = await userAxios.get('profile'
+      
+    )
     console.log(res,"resfrombackend");
     
     const data = res.data
@@ -45,20 +37,7 @@ export const profile = async():Promise<UserType>=>{
 
 export const updateProfile = async(userData:any):Promise<any>=>{
 
-
-    const userCredentials: any = localStorage.getItem('persist:User')
-
-    const userCredentialsObject = JSON.parse(userCredentials)
-
-    const userToken = userCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
-
-    console.log(userToken,"usertoken");
-
-    const res = await userAxios.put(`updateProfile`,userData,{
-        headers:{
-            Authorization:`Bearer ${userToken}`
-        }
-    } )
+    const res = await userAxios.put(`updateProfile`,userData )
 
     console.log(res,"response");
     

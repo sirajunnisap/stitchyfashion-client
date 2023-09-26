@@ -35,6 +35,8 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setUser,us
 
   const handleFileChange=((e:React.ChangeEvent<HTMLInputElement>)=>{
       const file=e.target.files?.[0]
+      console.log(file,"filelllllllllllllll");
+      
       if(file){
          generateUrl(file)
       }else{
@@ -53,7 +55,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setUser,us
             datas.append('file',img)
             datas.append('upload_preset','stitchy')
             datas.append('cloud_name','doottwqrx')
-            console.log("hereeee????");
+            console.log(datas,"hereeee????");
             
             
             const {data}=await axios.post(
@@ -113,10 +115,11 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setUser,us
         return true; 
       }
   
-      if (/^0+$/.test(digits)) {
-        return false;
+   
+      const firstDigit = digits[0];
+      if (digits.split('').every((digit) => digit === firstDigit)) {
+        return false; 
       }
-  
       return true;
     }),
   });

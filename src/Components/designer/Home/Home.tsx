@@ -14,7 +14,6 @@ const NavBar = () => {
   const dispatch = useAppDispatch()
 
   const designer:any = UseAppSelector(state=>state.Designer)
-  console.log(designer,"designer data in dashboard");
   const handleSignOut = () => {
     // ...
     dispatch(logoutDesigner({}))
@@ -48,18 +47,12 @@ const NavBar = () => {
           <span className="title">Profile</span>
         </Link>
       </li>
-      {/* <li>
-        <Link to={"/admin/getUsers">
+      <li>
+        <Link to={"/designer/getPaymentedUsers"}>
           <span className="icon"><i className="fa-solid fa-users"></i></span>
           <span className="title">Users</span>
         </Link>
       </li>
-      <li>
-        <Link to={"/admin/getDesigners">
-          <span className="icon"><i className="fa-solid fa-chalkboard-teacher"></i></span>
-          <span className="title">Designers</span>
-        </Link>
-      </li> */}
       <li>
         <Link to={"/designer/categoryList"}>
           <span className="icon"><i className="fa-solid fa-book-open"></i></span>

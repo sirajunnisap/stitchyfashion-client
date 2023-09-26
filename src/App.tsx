@@ -30,7 +30,9 @@ const App:React.FC<RoutesProps> = () =>  {
         <Router>
           <Routes>
             <Route path="/*" element={<UserRoute/>}/>
-            <Route path='/login' element={IsAuthUser?<Home/>:<Login/>}/>
+
+            <Route path='/login' element={!IsAuthUser&&<Login/>}/>
+
             <Route path="/admin/*" element={<AdminProtected><AdminRoute/></AdminProtected>}/>
             <Route path="/admin/login" element={IsAuthAdmin?<AdminDashboard/>:<AdminLoginPage/>}/>
             <Route path="/designer/*" element={<DesignerProtected><DesignerRoute/></DesignerProtected>}/>

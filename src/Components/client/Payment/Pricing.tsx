@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { courseType } from '../../Models/Models'
-import userAxios from '../../Axios/userAxios'
+import { courseType } from '../../../Models/Models'
+import userAxios from '../../../Axios/userAxios'
 import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Pricing = () => {
   const { id } = useParams()
@@ -112,7 +113,7 @@ const Pricing = () => {
                   </ul>
                 </div>
                 <div className="w-full">
-                  <button className="w-full whitespace-nowrap rounded-md bg-gray-500 px-10 py-2 font-bold text-white transition-colors hover:bg-gray-700">Continue & Upgrade</button>
+                  <Link to={`/checkout/${courseData?._id}`} className="w-full whitespace-nowrap rounded-md bg-gray-500 px-10 py-2 font-bold text-white transition-colors hover:bg-gray-700">Continue & Upgrade </Link>
                 </div>
               </div>
             </div>
