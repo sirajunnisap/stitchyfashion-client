@@ -38,11 +38,6 @@ const UserRoute:React.FC = () => {
   const isLoginRoute = location.pathname === '/login';
 
 
-  // useEffect(() => {
-  //   if (IsAuthUser) {
-  //     navigate('/', { replace: true }); // Replace the current URL with the home page URL
-  //   }
-  // }, [IsAuthUser, navigate]);
 
   return (
     <div>
@@ -51,8 +46,7 @@ const UserRoute:React.FC = () => {
        <Route path='/login' element={IsAuthUser?<Home/>:<Login/>}/>
         <Route path='/logo' element={<LogoText/>}/>
         <Route path='/' element={<UserHome/> } />
-        {/* <Route path='/otpVerification' element={<ForgotPassword/>}/> */}
-        {/* <Route path='/changePassword/:id' element={<ChangePassword/>}/> */}
+
         <Route path='/home' element={<LoginedHome/>}/>
         
         <Route path='/verifyEmail/:id' element={<VerifyMail/>}/>

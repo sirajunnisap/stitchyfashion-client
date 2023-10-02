@@ -3,10 +3,12 @@ import { getAllUserData } from '../../../Services/client/userData'
 import { UserType } from '../../../Models/Models'
 import Home from '../Home/Home'
 import { blockUser } from '../../../Services/admin/adminData'
+import SearchBar from './SearchBar'
 
 const GetAllUsers = () => {
 
   const [usersData, setUsersData] = useState<UserType[] | undefined>(undefined)
+  const [searchResults,setSearchResults] = useState<UserType[]>([]);
 
   useEffect(() => {
 
@@ -26,59 +28,52 @@ const GetAllUsers = () => {
 
   console.log("users", usersData);
 
-  const userBlockingHandle = async (user:UserType) => {
-    try {
-     
-        const userId = user._id;
-        const action = user.isBlocked ? 'unblock' : 'block';
 
-        
-        try {
-          const blockedUser = await blockUser(userId, action);
-          if (blockedUser) {
-            const updatedUsersData = usersData?.map((u) => (u._id === userId ? { ...u, isBlocked: !u.isBlocked } : u));
-            setUsersData(updatedUsersData);
-          }
+
+  const userBlockingHandle = async (user: UserType) => {
+    try {
+      const userId = user._id;
+      const action = user.isBlocked ? 'unblock' : 'block';
+
+      try {
+        const blockedUser = await blockUser(userId, action);
+        if (blockedUser) {
+          const updatedUsersData = usersData?.map((u) =>
+            u._id === userId ? { ...u, isBlocked: !u.isBlocked } : u
+          );
+          setUsersData(updatedUsersData);
           return blockedUser;
-        } catch (error) {
-          console.error(`Error ${action === 'block' ? 'blocking' : 'unblocking'} user with ID ${userId}:`, error);
-          return null;
         }
-      
-   } catch (error) {
+      } catch (error) {
+        console.error(`Error ${action === 'block' ? 'blocking' : 'unblocking'} user with ID ${userId}:`, error);
+        return null;
+      }
+    } catch (error) {
       console.error('Error handling blocking/unblocking:', error);
-     }
+    }
+  };
+
+  const updateSearchResults = (results: UserType[]) => {
+    setUsersData(results);
   };
 
   return (
-    <div className='flex'>
+    <div >
+      <div className='mt-5 pr-40 pb-10'>
+      <SearchBar updateSearchResults={updateSearchResults} />
 
-     
-     
-      <div className="ml-60 w-4/5 pr-16">
+      
+      </div>
+    
+     <div className='flex'>
+      <div className="ml-60 w-4/5 ">
         <div className="mx-auto max-w-screen-lg  sm:px-8">
-          <div className="flex items-center justify-between pb-6">
-            {/* <div>
-              <p className="font-bold text-[23px] text-teal-800">User Accounts</p>
-              <span className="text-xs text-gray-500">View accounts of registered users</span>
-            </div> */}
-            <div className="flex items-center justify-between">
-              <div className="ml-10 space-x-8 lg:ml-40">
-                {/* <button className="flex items-center gap-2 rounded-md bg-green-700 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="h-4 w-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
-          </svg>
-
-          Add User
-        </button> */}
-              </div>
-            </div>
-          </div>
+          
           <div className="overflow-y-hidden rounded-lg border  ">
             <div className="overflow-x-auto ">
               <table className="w-full ">
                 <thead>
-                  <tr className="bg-[#22A78C] text-left text-xs font-semibold uppercase tracking-widest text-white">
+                  <tr className="bg-[#0F5762] text-left text-xs font-semibold uppercase tracking-widest text-white">
                     <th className="px-5 py-3">ID</th>
                     <th className="px-1 py-3">Full Name</th>
                     <th className="px-1 py-3">Email</th>
@@ -87,6 +82,9 @@ const GetAllUsers = () => {
 
                   </tr>
                 </thead>
+
+
+              
                 <tbody className="text-gray-500">
                   {
                     usersData?.map((user: UserType, index) => {
@@ -97,9 +95,7 @@ const GetAllUsers = () => {
                           </td>
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
                             <div className="flex items-center">
-                              <div className="h-10 w-10 flex-shrink-0">
-                                <img className="h-full w-full rounded-full" src="/profileimage.jpg" alt="" />
-                              </div>
+                            
                               <div className="ml-3">
                                 <p className="whitespace-no-wrap">{user.name}</p>
                               </div>
@@ -113,15 +109,10 @@ const GetAllUsers = () => {
                           </td>
                           
 
-                          {/* <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">{(user.isBlocked===false)?
-                          <button className="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900" onClick={()=>userBlockingHandle()}>UnBlock</button>:
-                          <button className="rounded-full bg-red-300 px-5 py-1 text-xs font-semibold text-red-900" onClick={()=>userBlockingHandle()}>Block</button>
-                          }
-                          </td>
-                        */}
+                        
 <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
   <button
-    className={`rounded-full ${user.isBlocked ? 'bg-red-300' :'bg-green-200'} px-3 py-1 text-xs font-semibold ${user.isBlocked ? 'text-red-900' :'text-green-900' }`}
+    className={`rounded-full ${user.isBlocked ? 'bg-red-300' :'bg-[#44a0ae]'} px-3 py-1 text-xs font-semibold ${user.isBlocked ? 'text-red-900' :'text-green-900' }`}
     onClick={() => userBlockingHandle(user)}
   >
     {user.isBlocked ? 'Block' : 'Unblock'}
@@ -133,6 +124,7 @@ const GetAllUsers = () => {
                   }
                  
                 </tbody>
+           
               </table>
             </div>
             <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
@@ -145,7 +137,7 @@ const GetAllUsers = () => {
           </div>
         </div>
       </div>
-
+      </div>
 
     </div>
   )

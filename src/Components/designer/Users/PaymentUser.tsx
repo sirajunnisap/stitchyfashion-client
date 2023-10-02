@@ -108,7 +108,7 @@ console.log(selectedCourseId,"selected courseeid")
                         
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
   <Link to={`/designer/paymentedUsersList/${course._id}`}
-    className='rounded-full  px-3 py-1 text-xs font-semibold text-red-600'
+    className='rounded-full bg-green-400 px-3 py-1 text-xs font-semibold text-white'
     // onClick={() =>courseIdforUsers(course._id)}
   >
    users 

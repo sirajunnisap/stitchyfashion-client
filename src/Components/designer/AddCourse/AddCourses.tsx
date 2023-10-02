@@ -104,7 +104,11 @@ function AddCourses() {
       setTitleError("Title cannot start with spaces.");
       return;
     }
-    setTitleError(null);
+    // if (/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(formData.title)) {
+    //   setTitleError("invalid format");
+    //   return;
+    // }
+    // setTitleError(null);
     //description
     if (formData.description.trim() === '') {
       setDescriptionError("description cannot be empty or consist only of spaces.");
@@ -118,6 +122,10 @@ function AddCourses() {
 
     if (/^\s/.test(formData.description)) {
       setDescriptionError("description cannot start with spaces.");
+      return;
+    }
+    if (/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(formData.description)) {
+      setDescriptionError("invalid format");
       return;
     }
     setDescriptionError(null);
@@ -154,7 +162,12 @@ function AddCourses() {
     }
     setCourseFeeError(null);
 
-
+    if (!fileUrl) {
+      setImageError("Please select a image file.");
+      return;
+    }
+  
+    setImageError(null);
 
     const newCategory = {
       ...formData,
@@ -259,19 +272,20 @@ function AddCourses() {
   return (
     <div className='flex'>
 
-      <div className='m-32'>
+      <div className='ml-60'>
         <div className=' top-0 flex items-center justify-center'>
           <section className='signUp ml-40 mt-20'>
             <div className='container_login'>
               
-                <div className='signUp-form '>
+                <div className='mx-20'>
                   <h2 className='form-title text-lavender'>Add Course</h2>
 
 
-                  <div>
-                    <form onSubmit={handleSubmit} className='register-form ' id='register-form'>
+                  <div >
+                    <form onSubmit={handleSubmit} >
 
-                      <div className=''>
+                      <div className='w-full'>
+                        <div className='w-full'>
                         <div className='form-group'>
                           <label htmlFor='title'>
                             <i className='zmdi zmdi-account material-icons-name'></i>
@@ -373,13 +387,15 @@ function AddCourses() {
                             <p className="text-red-500 text-sm mt-1">{courseFeeError}</p>
                           )}
                         </div>
+                        </div>
+                       
 
 
 
 
 
-
-                        <div className='form-group'>
+<div>
+<div className='form-group'>
                           {fileUrl ? (
                             <div className='w-full  p-5 bg-cover flex justify-end' style={{ backgroundImage: `url(${fileUrl})` }}>
                               <div className='w-5 h-5 lg:w-7 lg:h-7 rounded-full bg-white '>
@@ -394,7 +410,7 @@ function AddCourses() {
                                   <div className='text-center'>
                                     <label>
                                       <input type="file" accept="image/*" name="image" className="hidden" multiple onChange={handleFileChange} />
-                                      <div className="flex flex-auto ml-32 mx-auto -mt-10">
+                                      <div className="flex flex-auto ml-36 mx-auto -mt-10">
                                         <img className="has-mask ml-8 object-center" src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg" alt="image" />
                                       </div>
                                       <p className="ml-40 pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your computer</p>
@@ -411,13 +427,16 @@ function AddCourses() {
                           }
 
                         </div>
-
                         {imageError && (
                             <p className="text-red-500 text-sm mt-1">{imageError}</p>
                           )}
 
                       </div>
 
+
+</div>
+                        
+                     
 
 
 

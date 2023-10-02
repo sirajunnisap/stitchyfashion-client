@@ -45,7 +45,7 @@ function AdminProfile() {
     <div className="signUp-content">
     <div className="signUp-image">
         <figure>
-          <img className='rounded-xl' src={adminData?.image} alt="profile image" />
+          <img className='rounded-xl' src={adminData?.image ? adminData?.image : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} alt="profile image" />
         </figure>
       </div>
       <div className="signUp-form">

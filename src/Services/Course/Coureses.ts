@@ -1,5 +1,6 @@
 import adminAxious from "../../Axios/adminAxios";
 import designerAxios from "../../Axios/designerAxios";
+import userAxios from "../../Axios/userAxios";
 import { classes, courseType } from "../../Models/Models";
 
 export const addCourse = async (courseData:any):Promise<any> => {
@@ -78,3 +79,12 @@ export const getAllCoursesForAdmin = async():Promise<any>=>{
     return data
     
 }  
+
+
+export const getPurchasedCourses= async():Promise<any>=>{
+    const res = await userAxios.get('/getPurchasedCourses')
+    const data = res.data
+    console.log(data,"res from backend purchased course");
+    
+    return data
+}

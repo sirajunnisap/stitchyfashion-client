@@ -9,19 +9,19 @@ import NavBar from "../../Components/designer/Home/Home";
 import AddClass from "../../Components/designer/Course/AddClass";
 import PaymentUser from "../../Components/designer/Users/PaymentUser";
 import UsersList from "../../Components/designer/Users/UsersList";
+import EditCourse from "../../Components/designer/Course/EditCourse";
  const DesignerRoute:React.FC = ()=>{
 
     return(
         <div>
             <NavBar/>
     <Routes>
-        {/* <Route path="/login" element={IsAuth?<DesignerHome/>:<Login/>}/> */}
-   
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/dashboard" element={<DesignerHome/>}/>
         <Route path="/addCourse" element={<AddCourse/>}/>
         <Route path="/courseList" element={<ListOfCourses/>}/>
         <Route path="/addClass/:id" element={<AddClass/>}/>
+        <Route path="/editCourse/:id" element={<EditCourse/>}/>
         <Route path="/courseDetails/:id" element={<DetailsCourse/>}/>
         <Route path="/unlistCourse"/>
         <Route path="/categoryList" element={<ListOfCategories/>}/>

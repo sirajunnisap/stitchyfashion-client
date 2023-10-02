@@ -45,7 +45,8 @@ const UserRegister: React.FC = () => {
     .matches(/^[A-Za-z]+(?: [A-Za-z]+)*$/, 'Invalid name format')
     .min(3, 'Name must be at least 3 characters')
     .required('Please enter your name'),
-    email: Yup.string().email('Invalid email format').required('Please enter your email'),
+    email: Yup.string().email('Invalid email format')
+    .required('Please enter your email'),
     phone:  Yup.string()
     .test('is-ten-digits', 'Phone number must have 10 digits', (value) => {
 

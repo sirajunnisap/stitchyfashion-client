@@ -162,7 +162,7 @@ function UserHome() {
 
 
 
-            <div className='flex mt-14 m-44'>
+            {/* <div className='flex mt-14 m-44'>
                 <div className='w-[50%] mt-20  m-16 '>
                     <img src="/formdesigner.jpg" alt="" /></div>
 
@@ -179,10 +179,10 @@ function UserHome() {
                                     <a href="#" className="inline-flex items-center justify-center px-16 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
                                         JOIN
                                     </a>
-                                    {/* <a href="#" className="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                                    <a href="#" className="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <svg className="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
                     View more
-                </a>   */}
+                </a>  
                                 </div>
                             </div>
                         </div>
@@ -191,7 +191,7 @@ function UserHome() {
                 </div>
 
 
-            </div>
+            </div> */}
 
 
 

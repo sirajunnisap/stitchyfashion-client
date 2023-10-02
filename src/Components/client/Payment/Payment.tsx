@@ -3,41 +3,39 @@ import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import SuccessPage from './PaymentSuccess';
 import userAxios from '../../../Axios/userAxios';
 import { useNavigate } from 'react-router-dom';
-// import PaymentSuccessPage from './PaymentSuccessPage'; // Import your PaymentSuccessPage component
 
 interface PaymentProps {
   selectedAmount: any;
-  selectedCourseId : any;
+  selectedCourseId: any;
 }
 
-function Payment({ selectedAmount,selectedCourseId }: PaymentProps) {
+function Payment({ selectedAmount, selectedCourseId }: PaymentProps) {
   const [{ isPending }] = usePayPalScriptReducer();
-  const [paymentCompleted, setPaymentCompleted] = useState<boolean|null>(false);
+  const [paymentCompleted, setPaymentCompleted] = useState<boolean | null>(false);
 
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
   const handlePaymentSuccess = (details: any) => {
-
-    console.log(details, "payment completed successfully");
     // Set paymentCompleted to true when payment is successful
     setPaymentCompleted(true);
 
     const paymentDetails = {
-      amount : selectedAmount,
-      selectedCourse : selectedCourseId 
-    } 
+      amount: selectedAmount,
+      selectedCourse: selectedCourseId,
+    };
 
-console.log(paymentDetails,"payment detailslllllllllll")
-    userAxios.post(`/paymentforCourse`,paymentDetails).then((res)=>[
-      console.log("payment request success",res.data)
-      
-    ]).catch((err)=>{
-      console.log("payment request failed ",err);
-      
-    })
+    userAxios.post(`/paymentforCourse`, paymentDetails)
+      .then((res) => {
+        console.log("payment request success", res.data);
+        // You can handle additional logic here if needed
+      })
+      .catch((err) => {
+        console.log("payment request failed", err);
+        // Handle the error, display an error message, etc.
+      });
 
-    navigate('/payment-success')
-  }
+    navigate('/payment-success');
+  };
 
   return (
     <div>
@@ -54,7 +52,7 @@ console.log(paymentDetails,"payment detailslllllllllll")
             ],
           });
         }}
-        onApprove={(data, actions:any) => {
+        onApprove={(data, actions: any) => {
           return actions.order.capture().then(handlePaymentSuccess);
         }}
         style={{ layout: "horizontal" }}
@@ -65,4 +63,5 @@ console.log(paymentDetails,"payment detailslllllllllll")
     </div>
   );
 }
+
 export default Payment;

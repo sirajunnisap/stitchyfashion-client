@@ -7,6 +7,7 @@ import Modal from 'react-modal'
 import { updateProfile } from '../../../Services/admin/adminData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera, faPlus } from '@fortawesome/free-solid-svg-icons'
+
 import axios from 'axios'
 
 type initialValueType = {
@@ -28,9 +29,21 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setAdmin,a
     
   const [fileUrl,setUrl]=useState<any>("")
   const [showButton,setShowButton]=useState(false)
+  const [imageError, setImageError] = useState<string | null>(null);
 
+
+
+  
   const handleFileChange=((e:React.ChangeEvent<HTMLInputElement>)=>{
-    const file=e.target.files?.[0]
+    const file:any =e.target.files?.[0]
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (!allowedTypes.includes(file?.type)) {
+      // setIsError(true);
+      setImageError("Only JPEG, PNG, and GIF images are allowed.");
+      return;
+    }
+
     if(file){
        generateUrl(file)
     }else{
@@ -109,13 +122,16 @@ const EditProfile: React.FC<EditProfileProps> = ({ isOpen, closeModal,setAdmin,a
         return true; 
       }
   
-      if (/^0+$/.test(digits)) {
-        return false;
+      const firstDigit = digits[0];
+      if (digits.split('').every((digit) => digit === firstDigit)) {
+        return false; 
       }
-  
       return true;
     }),
   });
+
+  
+
 
   
   const onSubmit = async (values:initialValueType)=>{
@@ -247,7 +263,7 @@ onSubmit={onSubmit}
       </div>
                     <div className="flex -mx-3">
                         <div className="w-full px-3 mb-5">
-                            <button type='submit' className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold">Save Changes</button>
+                            <button type='submit' className="block w-full max-w-xs mx-auto bg-[#0F5762] hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold">Save Changes</button>
                         </div>
                     </div>
                     </Form>

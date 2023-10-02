@@ -24,9 +24,7 @@ export const profile = async():Promise<UserType>=>{
 
 
     
-    const res = await userAxios.get('profile'
-      
-    )
+    const res = await userAxios.get('profile')
     console.log(res,"resfrombackend");
     
     const data = res.data

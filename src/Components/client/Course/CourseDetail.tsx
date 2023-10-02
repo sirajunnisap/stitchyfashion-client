@@ -6,6 +6,9 @@ import { courseDetails, paymentedUser } from '../../../Services/Course/courseDat
 import { Link } from 'react-router-dom';
 import { designerById } from '../../../Services/designer/designerData';
 import { UseAppSelector } from '../../../Redux/hooks';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import Payment from '../Payment/Payment';
+
 
 // import { IonIcon } from 'react-ionicons';
 
@@ -14,6 +17,13 @@ function CourseDetail() {
   const [courseData, setCourseData] = useState<courseType | undefined>(undefined)
   const [designerData, setDesigner] = useState<designerType | undefined>(undefined)
   const [userPymnt, setUsrpymntd] = useState(undefined)
+
+  const [showPaymentButton,setPaymentButton] = useState<boolean|null>(false)
+  const initialOptions = {
+    clientId: "ASeIAY3hnI0CYhc623hzS2x7e_-If6INzcndb7wO4PtZi2oeNNkoHwxua_5oBulS_1YoJZ26eC7csXNO",
+    currency: "USD",
+    intent: "capture",
+  };
 
 
   const user = UseAppSelector(state => state.User)
@@ -46,7 +56,6 @@ function CourseDetail() {
 
 
         const userPaymted = await paymentedUser(Course._id);
-        console.log(userPaymted, 'hoiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
         setUsrpymntd(userPaymted)
       } catch (error: any) {
         console.log(error);
@@ -59,6 +68,57 @@ function CourseDetail() {
   }, [id])
   console.log(designerData, "designerData in state");
 
+  function PaymentButton (){
+    setPaymentButton(true)
+  }
+  const paymentAmount = courseData?.courseFee
+
+  const renderButton = () => {
+    if (!user.accessToken) {
+      return (
+        <Link
+          to={`/login`}
+         
+        ><button  className="w-full py-3 mt-5 text-base text-white font-semibold bg-teal-600 rounded-3xl">
+Enroll Now
+        </button>
+          
+        </Link>
+      );
+    }
+  
+    if (userPymnt) {
+      return (
+        <Link
+          to={`/entrolledCourse/${courseData?._id}`}
+        
+        >
+          <button   className="w-full py-3 mt-5 text-base text-white font-semibold bg-teal-600 rounded-3xl">
+          Go to course
+          </button>
+         
+        </Link>
+      );
+    }
+  
+    if (showPaymentButton) {
+      return (
+        <div className="px-7">
+          <PayPalScriptProvider options={initialOptions}>
+            <Payment
+              selectedAmount={paymentAmount}
+              selectedCourseId={courseData?._id}
+            />
+          </PayPalScriptProvider>
+        </div>
+      );
+    }
+  
+    // return (
+     
+    // );
+  };
+  
 
   return (
     <div>
@@ -82,10 +142,10 @@ function CourseDetail() {
           </p>
         </div>
 
-        <div className='fixed w-[450px]  top-28 right-20 bg-white border rounded-lg p-10 pt ' >
-          <h3 className='text-xl font-bold'>{courseData?.title}</h3>
+        <div className='fixed w-[450px]  top-28 right-20 bg-white border rounded-lg p-4' >
+         
 
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <svg className="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
             </svg>
@@ -102,38 +162,62 @@ function CourseDetail() {
               <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
             </svg>
             <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">4.95 out of 5</p>
-          </div>
-          <p className=" mb-1 mt-5 text-sm font-normal text-black">
-            {courseData?.duration}{" "}
+          </div> */}
+       
+          <img
+                src={courseData?.image}
+                alt=""
+                className="w-full rounded-lg mb-3 h-56 object-cover"/>
 
-          </p>
-          <p className=" mb-4 text-sm font-normal text-black">
-            {courseData?.level}
-          </p>
-
-          <div className="flex flex-col ml-20 space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">{user.accessToken ?
-            (!userPymnt ? (
-
-
-                <Link to={`/checkout/${courseData?._id}`} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
-                  Entroll Now
-                </Link>
              
-                                 ):(
+<h3 className='text-xl font-bold'>{courseData?.title}</h3>
 
-                                  <Link to={`/entrolledCourse/${courseData?._id}`} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
-                                  Go to course
-                                </Link>
-                                 )):(
-                                  
-<Link to={`/login`} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
-                               Entroll Now
-                                </Link>
-                                 )
-                                }
+<div className='flex mt-3'>
+<p className="mr-3 text-sm font-normal text-black">
+            {courseData?.duration}{" "} 
 
-        
-          </div>
+          </p>
+         
+          <p className="  text-sm font-normal text-black">
+            {courseData?.level} 
+          </p>
+</div>
+           
+             
+              <p className="text-sm font-semibold py-2 text-gray-600">
+                ₹{courseData?.courseFee}
+              </p>
+              <ul className="mb-8 text-sm">
+                    <li className="flex items-center leading-tight">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="text-black mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      Unlimited access to this course
+                    </li>
+                    <li className="flex items-center leading-tight">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="text-black mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      30-day money-back guarantee
+                    </li>
+                   
+                   
+                  </ul>
+
+            
+            <hr/>
+
+
+
+          
+  {renderButton()?renderButton():( <button
+         className="w-full py-3 mt-5 text-base text-white font-semibold bg-teal-600 rounded-3xl" // className='inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full'
+        onClick={PaymentButton}
+      >
+        Enroll Now
+      </button>)}
+
+
         </div>
 
 
@@ -146,15 +230,15 @@ function CourseDetail() {
 
           <div className="ml-10 cursor-pointer">
             {courseData?.classes.map((classData) => (
-              <div className="flex flex-col justify-center  mb-4 motion-safe:hover:scale-110 transition-[2s]">
-                <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white ">
-                  <div className="w-full md:w-1/3 bg-white grid place-items-center">
+              <div className="flex flex-col  justify-center  mb-4">
+                <div className="relative flex flex-col w-[800px] h-[100px] md:flex-row md:space-x-5  md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white ">
+                  {/* <div className="w-full md:w-1/3 bg-white grid place-items-center">
                     {classData.video && <video src={classData.video} className="rounded-xl" controls controlsList='nodownload' />}
-                  </div>
-                  <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
+                  </div> */}
+                  <div className="w-full  bg-white flex flex-col  p-3">
                     <div className="flex justify-between item-center"></div>
 
-                    <h3 className="font-black text-gray-800 md:text-lg text-lg">
+                    <h3 className="font-bold text-gray-800 md:text-lg text-lg">
                       {classData.title}
                     </h3>
                     <p className="md:text-sm text-gray-500 text-sm">
@@ -212,65 +296,3 @@ function CourseDetail() {
 
 export default CourseDetail
 
-
-// <div className="flex flex-col gap-3 mt-14 w-[50px]">
-// <div className="flex flex-col gap-4 bg-gray-700 p-4">
-
-//     <div className="flex justify justify-between">
-//         <div className="flex gap-2">
-//             <div className="w-7 h-7 text-center rounded-full bg-red-500">J</div>
-//             <span>Jess Hopkins</span>
-//         </div>
-//         <div className="flex p-1 gap-1 text-orange-300">
-//         <IonIcon icon={star} />
-// <IonIcon icon={star} />
-// <IonIcon icon={star} />
-// <IonIcon icon={star} />
-// <IonIcon icon={starHalf} />
-// </div>
-//     </div>
-
-//     <div>
-//         Gorgeous design! Even more responsive than the previous version. A pleasure to use!
-//     </div>
-
-//     <div className="flex justify-between">
-//         <span>Feb 13, 2021</span>
-//         <button className="p-1 px-2 bg-gray-900 hover:bg-gray-950 border border-gray-950 bg-opacity-60">
-//             <ion-icon name="share-outline"></ion-icon> Share</button>
-//     </div>
-// </div>
-
-// </div>
-{/* <div className="flex flex-col mt-10 ml-24  space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-                                    <a href="#" className="inline-flex items-center justify-center px-11 py-2 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
-                                        Get started
-                                    </a>
-                                    <a href="#" className="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-                    <svg className="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
-                    View more
-                </a>  
-                                </div>
-                                <div className="flex flex-wrap justify-center mt-10">
-
-  <div className=" sm:w-3/12 ">
-    <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" alt="..." className="shadow rounded-full max-w-full h-auto align-middle border-none" />
-  </div>
-  <p className='mt-14 ml-5 text-xl'></p>
-</div>
- <div className='ml-16 mb-4 mt-36 mr-32'>
-                    <h2 className="ml-20 text-3xl tracking-tight font-bold text-[#07778B] dark:text-white">{courseData?.title}</h2>
-                    <p className="my-10  font-light text-gray-500 sm:text-lg dark:text-gray-400">{courseData?.description}</p>
-                    Fashion designers work in a variety of different ways when designing their pieces and accessories such as rings, bracelets, necklaces and earrings
-                          <div className='flex flex-wrap '>
-
-                          <p className='text-base m-5 text-teal-600'>{courseData?.level} level</p>
-                    
-                    <p className='text-base m-5 text-teal-600'>Course Fee : ₹{courseData?.courseFee}</p>
-                    
-                          </div>
-                        
-                          
-                  
-                </div>
- */}

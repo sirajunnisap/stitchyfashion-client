@@ -1,5 +1,5 @@
 import adminAxious from "../../Axios/adminAxios";
-import { categoryType, classes } from "../../Models/Models";
+import { categoryType, classes, courseType } from "../../Models/Models";
 
 
 export const addCategory = async(name:string,description:string,image:string):Promise<any>=>{
@@ -20,7 +20,7 @@ export const getAllCategory = async():Promise<any>=>{
 }
 
 
-export const categoryDetails = async(categoryId:any):Promise<categoryType>=>{
+export const categoryDetails = async(categoryId:any):Promise<courseType[]>=>{
     const res = await adminAxious.get(`categoryDetails/${categoryId}`)
     console.log(res);
     

@@ -3,19 +3,8 @@ import { adminType } from "../../Models/Models";
 
 export const profile = async (): Promise<adminType> => {
   try {
-    const adminCredentials: any = localStorage.getItem('persist:Admin');
-
-    const adminCredentialsObject = JSON.parse(adminCredentials);
-
-    const adminToken = adminCredentialsObject?.accessToken.replace(/^"(.*)"$/, "$1");
-
-    console.log(adminToken, "admin token from local storage");
-
-    const res = await adminAxious.get('profile', {
-      headers: {
-        Authorization: `Bearer ${adminToken}`,
-      },
-    });
+    
+    const res = await adminAxious.get('profile');
 
     console.log(res, "response from backend");
 
@@ -29,20 +18,7 @@ export const profile = async (): Promise<adminType> => {
 };
 export const updateProfile = async(adminData:any):Promise<any>=>{
 
-
-  const adminCredentials: any = localStorage.getItem('persist:Admin');
-
-    const adminCredentialsObject = JSON.parse(adminCredentials);
-
-    const adminToken = adminCredentialsObject?.accessToken.replace(/^"(.*)"$/, "$1");
-
-    console.log(adminToken, "admin token from local storage");
-
-  const res = await adminAxious.put(`updateProfile`,adminData,{
-      headers:{
-          Authorization:`Bearer ${adminToken}`
-      }
-  } )
+  const res = await adminAxious.put(`updateProfile`,adminData)
 
   console.log(res,"response");
   
@@ -85,30 +61,3 @@ export const blockDesigner = async(designerId:string,action:any):Promise<any>=>{
     throw error;
   }
 }
-
-
-// adminAxious.interceptors.request.use(
-//   (config) => {
-//     const adminCredentials: any = localStorage.getItem("persist:Admin");
-//     const adminCredentialObject = JSON.parse(adminCredentials);
-//     const adminToken = JSON.parse(adminCredentialObject)?.accessToken;
-
-//     if (adminToken) {
-//       config.headers["Admin"] = `Bearer ${adminToken}`;
-//     }
-
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
-
-// adminAxious.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );

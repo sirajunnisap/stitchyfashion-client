@@ -19,7 +19,7 @@ function Checkout() {
   const [isModalOpen,setIsModalOpen] = useState(false)
   const [showPaymentButton,setPaymentButton] = useState<boolean|null>(false)
   const initialOptions = {
-    clientId: "AfxlLOag3yw7T8CcFSQyVUfLmlGbcw6S_tNDzDtzDPHYgJ1SSHu0cYXRPkhIe2f0UBNy6hPtdhthuzJv",
+    clientId: "ASeIAY3hnI0CYhc623hzS2x7e_-If6INzcndb7wO4PtZi2oeNNkoHwxua_5oBulS_1YoJZ26eC7csXNO",
     currency: "USD",
     intent: "capture",
   };

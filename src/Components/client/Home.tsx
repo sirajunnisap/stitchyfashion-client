@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, UseAppSelector } from '../../Redux/hooks';
@@ -6,15 +6,35 @@ import { logoutUser } from '../../Redux/client/userSlice';
 import { Link } from 'react-router-dom';
 import LogoText from '../Logo/LogoText';
 import './style.css'
+import { UserType } from '../../Models/Models';
+import { searchUsersAdmin } from '../../Services/search/search';
 function NavBar() {
-  const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const user = UseAppSelector(state => state.User)
 
   console.log(user, "userDAta in home page");
 
+  const [input, setInput] = useState<string>('');
+  const [searchResults,setSearchResults] = useState<UserType[]>([]);
 
+  const handleChange = async(value:string)=>{
+    setInput(value);
+    
+    try {
+      const result = await searchUsersAdmin(value);
+      setSearchResults(result);
+    } catch (error) {
+      console.log('error searching users:',error)
+    }
+  }
+
+  useEffect(()=>{
+    handleChange(input)
+  },[]);
+
+  
   return (
 
     <div className=''>
@@ -99,9 +119,9 @@ function NavBar() {
               {/* <li>
                             <Link to={"/listOfDesigners"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">DESIGNERS</Link>
                             </li> */}
-              <li>
+              {/* <li>
                 <Link to={"/pricing"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">PRICING</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to={"/"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">ABOUT</Link>
               </li>
@@ -112,13 +132,13 @@ function NavBar() {
 
             <div className='ml-[700px]'>
               <div className="search">
-                <form id="searchFormTop" action="" method="get">
+                {/* <form id="searchFormTop" action="" method="get"> */}
 
-                  <input type="text" className="searchbox text-sm text-#07778B " name="q" id="q" placeholder="Search..." />
+                  <input type="text" className="searchbox text-sm text-#07778B " placeholder="Search..." value={input} onChange={(e) => handleChange(e.target.value)}/>
                   <span className="search-btn-wrap ">
                     <button className="search-btn" type="submit"><i className="fa fa-search"></i></button>
                   </span>
-                </form>
+                {/* </form> */}
               </div>
 
 

@@ -28,7 +28,7 @@ import Payment from '../../Components/client/Payment/Payment';
 
 function PaymentPage() {
   const initialOptions = {
-    clientId: "AceAgNJeGnIkMYbdxYplnC17-7hGWkmNLqlAnIpKj_kTazSMTxnoowdbCbq3S0-3_6hEebAfN2JVWmqP",
+    clientId: "AfxlLOag3yw7T8CcFSQyVUfLmlGbcw6S_tNDzDtzDPHYgJ1SSHu0cYXRPkhIe2f0UBNy6hPtdhthuzJv",
     currency: "USD",
     intent: "capture",
   };

@@ -6,7 +6,7 @@
   position: fixed;
   width: 60px;
   height: 100%;
-  background-color: #22A78C;
+  background-color: #0f5762;
   overflow: hidden;
   transition: 0.5s;
 }
@@ -35,7 +35,7 @@
 }
 
 .navigation ul li:hover {
-  background: #288270;
+  background: #053d46;
 }
 
 .navigation ul li a {

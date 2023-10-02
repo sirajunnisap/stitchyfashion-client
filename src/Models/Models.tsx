@@ -75,6 +75,7 @@ export type categoryType = {
 
 export type paymentType = {
     _id : string,
+    amount:string,
     selectedCourse:courseType,
     user : UserType
 }

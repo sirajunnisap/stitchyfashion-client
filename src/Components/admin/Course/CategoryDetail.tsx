@@ -1,43 +1,45 @@
-import React,{useState,useEffect} from 'react'
-import Home from '../Home/Home'
-import { categoryType, courseType } from '../../../Models/Models'
-import {  getAllCoursesForAdmin } from '../../../Services/Course/Coureses'
-import { useNavigate } from 'react-router-dom'
-import { getAllCategory } from '../../../Services/admin/addCategory'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import { categoryType, courseType } from '../../../Models/Models';
+import { categoryDetails, getAllCategory } from '../../../Services/admin/addCategory';
 
-function CourseList() {
-    
-  const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
-  const [courseData, setCourseData] = useState<courseType[] | undefined>(undefined)
+function CategoryDetail() {
+    const { id } = useParams();
+    const [courseData, setCourseData] = useState<courseType[] | undefined>(undefined);
+    const [categoryData,setCategoryData] = useState<categoryType[] | undefined>(undefined)
 
-  const navigate = useNavigate()
-  useEffect(() => {
+    const navigate = useNavigate()
+    useEffect(() => {
+      const getCategory = async () => {
+        try {
+          const Category: courseType[] = await categoryDetails(id);
+          console.log(Category, "categoryDetails");
+          setCourseData(Category);
+        } catch (error) {
+          // Handle error here
+        }
+      };
+      getCategory();
+    }, [id]);
 
-    const getCourse = async () => {
-      try {
+    useEffect(() => {
 
-        const Category = await getAllCategory()
-        setCategoryData(Category)
+        const getCategory = async () => {
+            try {
+  
+                const Category = await getAllCategory()
+                setCategoryData(Category)
+  
+            } catch (error: any) {
+                console.log(error);
+            }
+        }
+        getCategory()
+    }, [])
 
-        const Courses = await getAllCoursesForAdmin()
-        setCourseData(Courses)
-
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
-    getCourse()
-  }, [])
+  return (
+    <div className='flex'>
  
-
-
-    return (
-        <div className='flex'>
-           
-    
-
-
-
      
            
                            <div className="mt-24 ml-40 ">
@@ -83,7 +85,7 @@ function CourseList() {
     </div>
 
     <div className='fixed right-20 mt-24 border border-white bg-white flex flex-col items-center justify-center mb-4 rounded-xl shadow-lg '>
-            
+           
               {categoryData?.map((category: categoryType, index) => {
       return (
         <ul className="px-10 font-medium lg:flex-row lg:space-x-8 lg:mt-0 items-center justify-center">
@@ -93,41 +95,12 @@ function CourseList() {
                             </ul>
                             )
                           })}
-                      
+                       
 </div>
-        </div>
-    )
+
+
+    </div>
+  )
 }
 
-export default CourseList
-
-
-
-
-
-
-{/* <div className='flex flex-wrap W-4/5 ml-20 m-10 '>
-
-{
-        courseData?.map((course: courseType, index) => {
-          return (
-            <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mr-5 mb-5">
-        <a href="#">
-        <img className="rounded-t-lg w-full h-[200px] object-cover" src={course?.image} alt="" />
-        </a>
-        <div className="p-5">
-            <a href="#">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{course?.title}</h5>
-            </a>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{course?.description}</p>
-            <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#22A78C] rounded-lg hover:bg-[#288270] ">
-                Read more
-                <svg className="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </a>
-        </div>
-    </div>
-          )})}
-    
-               </div> */}
+export default CategoryDetail

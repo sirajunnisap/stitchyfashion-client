@@ -24,6 +24,8 @@ const App:React.FC<RoutesProps> = () =>  {
   const IsAuthUser = UseAppSelector(state=>state.User.accessToken)
   
   const IsAuthAdmin = UseAppSelector(state=>state.Admin.accessToken)
+  console.log(IsAuthAdmin,"admin access token for adminprtected");
+  
  
   const IsAuthDesigner = UseAppSelector(state=>state.Designer.accessToken)
   return (
@@ -34,9 +36,9 @@ const App:React.FC<RoutesProps> = () =>  {
             <Route path='/login' element={!IsAuthUser&&<Login/>}/>
 
             <Route path="/admin/*" element={<AdminProtected><AdminRoute/></AdminProtected>}/>
-            <Route path="/admin/login" element={IsAuthAdmin?<AdminDashboard/>:<AdminLoginPage/>}/>
+            <Route path="/admin/login" element={!IsAuthAdmin&&<AdminLoginPage/>}/>
             <Route path="/designer/*" element={<DesignerProtected><DesignerRoute/></DesignerProtected>}/>
-            <Route path='/designer/login' element={IsAuthDesigner?<DesignerHome/>:<DesignerLoginPage/>}/>
+            <Route path='/designer/login' element={!IsAuthDesigner&&<DesignerLoginPage/>}/>
             <Route path='/otpVerification' element={<ForgotPassword/>}/>
             <Route path='/changePassword/:id' element={<ChangePassword/>}/>
             <Route path='/signup' element={<Register/>}/>

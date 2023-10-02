@@ -3,10 +3,13 @@ import Home from '../Home/Home'
 import { designerType } from '../../../Models/Models'
 import { getAllDesignerData } from '../../../Services/designer/designerData'
 import { blockDesigner } from '../../../Services/admin/adminData'
+import SearchBar from './SearchBar'
+
 
 function DesignersList() {
   
   const [designersData, setDesignersData] = useState<designerType[] | undefined>(undefined)
+  const [searchResults,setSearchResults] = useState<designerType[]>([]);
 
   useEffect(() => {
 
@@ -47,12 +50,20 @@ function DesignersList() {
      }
   };
 
-
+  const updateSearchResults = (results:designerType[])=>{
+    setDesignersData(results)
+  }
 
   return (
-    <div className='flex'>
-     
-<div className=" ml-60 w-4/5 pr-16">
+    <div >
+
+     <div className='mt-5 pr-40 pb-10'>
+      <SearchBar updateSearchResults={updateSearchResults} />
+
+      
+      </div>
+      <div className='flex'>
+      <div className=" ml-60 w-4/5 pr-16">
 <div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
   <div className="flex items-center justify-between pb-6">
     {/* <div>
@@ -75,7 +86,7 @@ function DesignersList() {
     <div className="overflow-x-auto">
       <table className="w-full ">
         <thead>
-          <tr className="bg-green-700 text-left text-xs font-semibold uppercase tracking-widest text-white">
+          <tr className="bg-[#0F5762] text-left text-xs font-semibold uppercase tracking-widest text-white">
             <th className="px-5 py-3">ID</th>
             <th className="px-1 py-3">Name</th>
             <th className="px-1 py-3">Email</th>
@@ -86,53 +97,57 @@ function DesignersList() {
             <th className="px-1 py-3">Status</th>
           </tr>
         </thead>
-        <tbody className="text-gray-500">
-        {
-                    designersData?.map((designer: designerType, index) => {
-                      return (
-                        <tr>
-                          <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                            <p key={designer._id} className="whitespace-no-wrap">{index + 1}</p>
-                          </td>
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                            <div className="flex items-center">
-                              <div className="h-10 w-10 flex-shrink-0">
-                                <img className="h-full w-full rounded-full" src="/profileimage.jpg" alt="" />
+
+      
+          <tbody className="text-gray-500">
+          {
+                      designersData?.map((designer: designerType, index) => {
+                        return (
+                          <tr>
+                            <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                              <p key={designer._id} className="whitespace-no-wrap">{index + 1}</p>
+                            </td>
+                            <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+                              <div className="flex items-center">
+                                {/* <div className="h-10 w-10 flex-shrink-0">
+                                  <img className="h-full w-full rounded-full" src="/profileimage.jpg" alt="" />
+                                </div> */}
+                                <div className="ml-3">
+                                  <p className="whitespace-no-wrap">{designer.name}</p>
+                                </div>
                               </div>
-                              <div className="ml-3">
-                                <p className="whitespace-no-wrap">{designer.name}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                            <p className="whitespace-no-wrap">{designer.email}</p>
-                          </td>
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                            <p className="whitespace-no-wrap">{designer.phone}</p>
-                          </td>
-                          {/* <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                            <p className="whitespace-no-wrap">{designer.education.map((educationItem)=>educationItem.major)}</p>
-                          </td>
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                            <p className="whitespace-no-wrap">{designer.experience}</p>
-                          </td>
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                          <p className="whitespace-no-wrap">{designer.skill}</p>
-                        </td> */}
-                          <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-  <button
-    className={`rounded-full ${designer.isBlocked ? 'bg-red-300' :'bg-green-200'} px-3 py-1 text-xs font-semibold ${designer.isBlocked ? 'text-red-900' :'text-green-900' }`}
-    onClick={() => designerBlockingHandle(designer)}
-  >
-    {designer.isBlocked ? 'Block' : 'Unblock'}
-  </button>
-</td>
-                        </tr>
-                      )
-                    })
-                  }
-          
-        </tbody>
+                            </td>
+                            <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+                              <p className="whitespace-no-wrap">{designer.email}</p>
+                            </td>
+                            <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+                              <p className="whitespace-no-wrap">{designer.phone}</p>
+                            </td>
+                            {/* <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+                              <p className="whitespace-no-wrap">{designer.education.map((educationItem)=>educationItem.major)}</p>
+                            </td>
+                            <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+                              <p className="whitespace-no-wrap">{designer.experience}</p>
+                            </td>
+                            <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+                            <p className="whitespace-no-wrap">{designer.skill}</p>
+                          </td> */}
+                            <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+    <button
+      className={`rounded-full ${designer.isBlocked ? 'bg-red-300' :'bg-[#44a0ae]'} px-3 py-1 text-xs font-semibold ${designer.isBlocked ? 'text-red-900' :'text-green-900' }`}
+      onClick={() => designerBlockingHandle(designer)}
+    >
+      {designer.isBlocked ? 'Block' : 'Unblock'}
+    </button>
+  </td>
+                          </tr>
+                        )
+                      })
+                    }
+            
+          </tbody>
+      
+       
       </table>
     </div>
     <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
@@ -145,6 +160,8 @@ function DesignersList() {
   </div>
 </div>
 </div>
+
+      </div>
 
 
 

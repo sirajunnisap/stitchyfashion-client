@@ -52,7 +52,7 @@ function DesignerProfile() {
     <div className="ml-40 w-[400px]">
         <figure>
           {/* <img className='rounded-xl' src="https://i.pinimg.com/474x/a7/80/80/a7808059330f062de8a90e844d0558d1.jpg" alt="profile image" /> */}
-          <img className='rounded-xl' src={(designer?.image)?designer?.image : "	https://www.shareicon.net/data/128x128/2016/09/15/829452_user_512x512.png" } alt="Profile Image" />
+          <img className='rounded-xl' src={(designer?.image)?designer?.image : "	https://cdn-icons-png.flaticon.com/512/3135/3135715.png" } alt="Profile Image" />
         </figure>
       </div>
 

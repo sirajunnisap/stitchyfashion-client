@@ -1,8 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { UserType } from '../../../Models/Models';
+import { searchUsersAdmin } from '../../../Services/search/search';
 function Dashboard() {
+
+  const [input, setInput] = useState<string>('');
+  const [searchResults,setSearchResults] = useState<UserType[]>([]);
+
+  const handleChange = async(value:string)=>{
+    setInput(value);
+    
+    try {
+      const result = await searchUsersAdmin(value);
+      setSearchResults(result);
+    } catch (error) {
+      console.log('error searching users:',error)
+    }
+  }
+
+  useEffect(()=>{
+    handleChange(input)
+  },[]);
+
   return (
     
-    <div>
+    <div className=''>
+
+
+      <div className='ml-96'>
+              {/* <div className="search ">
+                
+                  <input type="text" className="searchbox text-sm text-#07778B " placeholder="Search..." value={input} onChange={(e) => handleChange(e.target.value)}/>
+                  <span className="search-btn-wrap ">
+                    <button className="search-btn" type="submit"><i className="fa fa-search"></i></button>
+                  </span>
+                
+              </div> */}
+
+              <div className="search-results">
+        {/* {searchResults.map((user) => (
+          <div key={user._id}>
+        
+            <p>{user.name}</p>
+          </div>
+        ))} */}
+
+        
+      </div>
+            </div>
+       
 
 {/*       
       <div className="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">

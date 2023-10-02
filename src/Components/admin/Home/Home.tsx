@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import GetAllUsers from '../User/GetAllUsers'
 import { Link, useNavigate } from 'react-router-dom'
 import './style.css'
@@ -7,6 +7,8 @@ import { toggleMenu } from '../Designer/cvFunctions';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { UseAppSelector, useAppDispatch } from '../../../Redux/hooks';
 import { logoutAdmin } from '../../../Redux/admin/adminSlice';
+import { UserType } from '../../../Models/Models';
+import { searchUsersAdmin } from '../../../Services/search/search';
 function AdminSidbar() {
 
   const navigate = useNavigate()
@@ -21,6 +23,9 @@ function AdminSidbar() {
     navigate('/admin/login');
   };
   
+  
+
+
   return (
    
 <div className='flex'>
@@ -36,6 +41,8 @@ function AdminSidbar() {
     </div>
     
     <ul>
+
+     
       <li>
         <Link to={"/admin/dashboard"}>
           <span className="icon"><i className="fa-solid fa-house"></i></span>
@@ -91,6 +98,7 @@ function AdminSidbar() {
           <span className="title">SignOut</span>
         </Link>
       </li>
+    
     </ul>
   </div>
 

@@ -23,8 +23,8 @@ const NavBar = () => {
   return (
    
 <div className='flex'>
-  <div className='w-1/5 '>
-  <div className="navigation active ">
+  <div className='w-1/5 ml-5 mt-5'>
+  <div className="navigation active rounded-2xl">
     <div >
     
           {/* <span className="navHead"><i className=""></i></span> */}
@@ -53,12 +53,12 @@ const NavBar = () => {
           <span className="title">Users</span>
         </Link>
       </li>
-      <li>
+      {/* <li>
         <Link to={"/designer/categoryList"}>
           <span className="icon"><i className="fa-solid fa-book-open"></i></span>
           <span className="title">Categories</span>
         </Link>
-      </li>
+      </li> */}
        <li>
         <Link to={"/designer/courseList"}>
           <span className="icon"><i className="fa-solid fa-book-open"></i></span>

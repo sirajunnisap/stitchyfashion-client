@@ -53,7 +53,7 @@ const CategoryList =()=> {
         {
             categoryData?.map((category: categoryType, index) => {
                 return (
-                    <div className='flex flex-wrap items-center mt-10' onClick={()=> navigate(`designer/categoryDetails/${category._id}`)}>
+                    <div className='flex flex-wrap items-center mt-10' onClick={()=> navigate(`/designer/categoryDetails/${category._id}`)}>
                     <div className="max-w-sm m-7 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
                         <a href="#">
                             <img className="rounded-t-lg w-full h-[170px] object-cover" src={category?.image} alt="" />

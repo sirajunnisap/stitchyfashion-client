@@ -12,21 +12,21 @@ export default userAxios ;
 userAxios.interceptors.request.use(
      (config) => {
          const userCredentialsString = localStorage.getItem("persist:User") 
-         console.log(userCredentialsString,'user credential tring hiis fsdihnfdfgtrguj');
+        //  console.log(userCredentialsString,'user credential tring hiis fsdihnfdfgtrguj');
          
          if(userCredentialsString){
  
              const userCredentialObject = JSON.parse(userCredentialsString)
-             console.log(userCredentialObject,'user credentials ');
+            //  console.log(userCredentialObject,'user credentials ');
              
              const accessTokenString = userCredentialObject.accessToken; 
-             console.log(accessTokenString,'access token string is here');
+            //  console.log(accessTokenString,'access token string is here');
              
              const accessToken = JSON.parse(accessTokenString);
              
              
             //  const userToken = accessTokenObject?.token?.replace(/^"(.*)"$/, "$1");
-             console.log(accessToken,'user token is ok interceptors');
+            //  console.log(accessToken,'user token is ok interceptors');
              
              config.headers["User"] = `Bearer ${accessToken}`;
          }

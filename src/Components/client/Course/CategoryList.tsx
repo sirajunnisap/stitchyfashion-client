@@ -50,26 +50,7 @@ function CategoryList() {
                 <p>"To cultivate exceptionally talented fashion designers through comprehensive <br />creative training and personalized mentorship."</p>
             </div>
 
-            <div className='  w-full p-10 flex justify-center  items-center gap-6 first-letter '>
-            {/* <div className='w-[50px] h-[50px] bg-green-700 rounded-full  shadow-md shadow-black '>
-
-</div><div className='w-[50px] h-[50px] bg-green-700 rounded-full  shadow-md shadow-black '>
-
-</div><div className='w-[50px] h-[50px] bg-green-700 rounded-full  shadow-md shadow-black '>
-
-</div><div className='w-[50px] h-[50px] bg-green-700 rounded-full  shadow-md shadow-black '>
-
-</div> */}
-
-<ul>
-    <li>
-
-    </li>
-    
-
-</ul>
-               
-            </div>
+           
 
             <div className='flex flex-wrap items-center mt-10 ml-48 cursor-pointer'>
         {

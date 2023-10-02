@@ -3,9 +3,15 @@ import { courseType } from '../../../Models/Models'
 import { getAllCourses } from '../../../Services/Course/Coureses'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import EditCourse from './EditCourse'
 function CourseList() {
 
     const [courseData, setCourseData] = useState<courseType[] | undefined>(undefined)
+    const [editCourse, setEditCourse] = useState<courseType|undefined>(undefined)
+    const [isModalOpen,setIsModalOpen] = useState(false)
+    const [editCourseIndex,setEditCourseIndex] = useState<number|undefined>(undefined)
+
+
     const navigate = useNavigate()
     useEffect(() => {
 
@@ -22,9 +28,23 @@ function CourseList() {
         getCourse()
     }, [])
 
+    function openModal(courseData:courseType,index:number){
+        setEditCourse(courseData)
+        setEditCourseIndex(index);
+        setIsModalOpen(true)
+      }
+      function closeModal(){
+
+        
+        setIsModalOpen(false)
+      }
+      
+
 
     return (
-        <div className=''>
+        
+        <div >
+        
         
             {/* <div className=''>
       <div className="search">
@@ -97,7 +117,17 @@ function CourseList() {
                     </div>
             </div>
         </div>
+       
+        
     )
 }
 
 export default CourseList
+
+ {/* <EditCourse
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+        setCourseData={setCourseData}
+        CourseData={editCourse}
+        editCourseIndex={editCourseIndex}
+      /> */}
