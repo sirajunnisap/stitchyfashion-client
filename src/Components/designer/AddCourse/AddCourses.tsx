@@ -104,12 +104,7 @@ function AddCourses() {
       setTitleError("Title cannot start with spaces.");
       return;
     }
-    // if (/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(formData.title)) {
-    //   setTitleError("invalid format");
-    //   return;
-    // }
-    // setTitleError(null);
-    //description
+   
     if (formData.description.trim() === '') {
       setDescriptionError("description cannot be empty or consist only of spaces.");
       return;

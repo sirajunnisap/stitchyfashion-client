@@ -21,6 +21,7 @@ import { UseAppSelector } from '../../Redux/hooks';
 import Home from '../../Pages/client/Home/Home';
 import Login from '../../Pages/client/Login/Login';
 import EntrolledCoursePage from '../../Pages/client/Course/EntrolledCoursePage';
+import ChatPage from '../../Pages/client/Chat/ChatPage';
 
 
 const UserRoute:React.FC = () => {
@@ -66,6 +67,7 @@ const UserRoute:React.FC = () => {
         <Route path='/checkout/:id' element={<Checkout/>}/>
         <Route path='/payment-success' element={<SuccessPage/>}/>
         <Route path='/entrolledCourse/:id' element={<EntrolledCoursePage/>}/>
+        <Route path='/chatWithDesigner/:id' element={<ChatPage/>}/>
       </Routes>
     </div>
   )

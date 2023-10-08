@@ -10,6 +10,7 @@ import AddClass from "../../Components/designer/Course/AddClass";
 import PaymentUser from "../../Components/designer/Users/PaymentUser";
 import UsersList from "../../Components/designer/Users/UsersList";
 import EditCourse from "../../Components/designer/Course/EditCourse";
+import ChatWithUser from "../../Components/client/Chat/ChatWithUser";
  const DesignerRoute:React.FC = ()=>{
 
     return(
@@ -27,6 +28,7 @@ import EditCourse from "../../Components/designer/Course/EditCourse";
         <Route path="/categoryList" element={<ListOfCategories/>}/>
         <Route path="/getPaymentedUsers" element={<PaymentUser/>}/>
         <Route path="/paymentedUsersList/:id" element={<UsersList/>}/>
+        <Route path="/chatWithUser/:id" element={<ChatWithUser/>}/>
     </Routes>
     </div>
     )

@@ -79,3 +79,23 @@ export type paymentType = {
     selectedCourse:courseType,
     user : UserType
 }
+
+export type latest= {
+    chat: string,
+    content: string
+}
+export type Chats ={
+    _id: string,
+    chatName: string,
+    user: UserType,
+    designer: designerType,
+    latestMessage: latest
+}
+export type Message= {
+    _id: string,
+    user: UserType,
+    designer: designerType,
+    content: string,
+    chat: Chats,
+    createdAt: string
+}

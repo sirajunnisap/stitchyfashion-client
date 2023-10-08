@@ -6,6 +6,9 @@ import { categoryType } from '../../Models/Models'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, UseAppSelector } from '../../Redux/hooks';
 import NavBar from './Home'
+import Typewriter from 'typewriter-effect';
+import Categorycard from './Cards/Categorycard'
+
 function UserHome() {
     const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
     const navigate = useNavigate()
@@ -36,7 +39,16 @@ function UserHome() {
                     <section className="bg-white dark:bg-gray-900">
                         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                             <div className="max-w-screen-md">
-                                <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Let's find more that brings us together.</h2>
+                                <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                                <Typewriter 
+  options={{
+    strings: [` Let's find more that brings us together.`],
+    autoStart: true,
+    loop: true,
+  }}
+/>
+                                   
+                                    </h2>
                                 <p className="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Flowbite helps you connect with friends, family and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups, Watch and Marketplace.</p>
                                 <div className="flex flex-col  space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">{user?.accessToken?(
                                     <Link to={'/listOfCategories'} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
@@ -87,27 +99,9 @@ function UserHome() {
                 </div>
                 <div className='flex flex-wrap items-center mt-10 ml-56'>
                     {
-                        categoryData?.slice(0, 6).map((category: categoryType, index) => {
-                            return (
-                                <div className='flex flex-wrap items-center mt-10' >
-                                    <div className="max-w-sm m-7 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5" onClick={()=> navigate(`/categoryDetails/${category._id}`)}>
-                                      
-                                            <img className="rounded-t-lg w-full h-[170px] object-cover" src={category?.image} alt="" />
-                                        
-
-                                        <div className="p-4 pt-2 w-[300px] h-[180px]">
-                                           
-                                                <h2 className="mb-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{category?.name}</h2>
-                                         
-                                            <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">{category?.description}</p>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            )
-                        })}
+                        categoryData?.slice(0, 6).map((category, index) => (
+                                <Categorycard category={category}/>
+                        ))}
 
 
 

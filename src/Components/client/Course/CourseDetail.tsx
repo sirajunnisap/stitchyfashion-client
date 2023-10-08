@@ -8,7 +8,8 @@ import { designerById } from '../../../Services/designer/designerData';
 import { UseAppSelector } from '../../../Redux/hooks';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import Payment from '../Payment/Payment';
-
+import Classcard from '../Cards/Classcard';
+import DesignerDetails from '../Cards/DesignerDetails';
 
 // import { IonIcon } from 'react-ionicons';
 
@@ -230,32 +231,8 @@ Enroll Now
 
           <div className="ml-10 cursor-pointer">
             {courseData?.classes.map((classData) => (
-              <div className="flex flex-col  justify-center  mb-4">
-                <div className="relative flex flex-col w-[800px] h-[100px] md:flex-row md:space-x-5  md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white ">
-                  {/* <div className="w-full md:w-1/3 bg-white grid place-items-center">
-                    {classData.video && <video src={classData.video} className="rounded-xl" controls controlsList='nodownload' />}
-                  </div> */}
-                  <div className="w-full  bg-white flex flex-col  p-3">
-                    <div className="flex justify-between item-center"></div>
-
-                    <h3 className="font-bold text-gray-800 md:text-lg text-lg">
-                      {classData.title}
-                    </h3>
-                    <p className="md:text-sm text-gray-500 text-sm">
-                      {classData.description}
-                    </p>
-                    {/* <p className="text-xs font-normal text-gray-600">
-                {classData.duration}{" "}
-                <span className="text-xs font-normal text-gray-700">
-                  <span> .</span> {classData.level}
-                </span>
-              </p>
-              <p className="text-sm font-semibold text-gray-600">
-                ₹{classData.courseFee}
-              </p> */}
-                  </div>
-                </div>
-              </div>
+< Classcard classData={classData} />
+             
             ))}
           </div>
 
@@ -271,7 +248,7 @@ Enroll Now
 
       <div className='my-40 ml-36'>
         <div className='w-[600px]'>
-          <h4 className='text-lg font-semibold mb-5'>Instructor</h4>
+          {/* <h4 className='text-lg font-semibold mb-5'>Instructor</h4>
           <h1 className='text-xl text-teal-600 font-bold'><Link className='border-b-2  border-black pb-0 -mb-1' to={`/getDesignerById/${designerData?._id}`}>{designerData?.name}</Link></h1>
           <h6 className='text-base font-medium mt-3 text-gray-500'>{designerData?.field}</h6>
           <div className=" relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
@@ -285,8 +262,9 @@ Enroll Now
 
           </div>
 
-          {/* <h3 className='text-lg font-semibold mt-40'>About Me</h3> */}
-          <p className='mt-40 text-sm '>{designerData?.aboutMe}</p>
+         
+          <p className='mt-40 text-sm '>{designerData?.aboutMe}</p> */}
+          <DesignerDetails designerData={designerData}/>
         </div>
       </div>
 

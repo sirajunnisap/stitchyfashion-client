@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { courseDetails, getpaymenteUsers } from '../../../Services/Course/courseData';
 import { useParams } from 'react-router-dom';
 import { UserType, courseType, paymentType } from '../../../Models/Models';
+import { Link } from 'react-router-dom';
 
 function UsersList() {
     const { id } = useParams();
@@ -91,7 +92,9 @@ function UsersList() {
                             <p className="whitespace-no-wrap">{user.amount}</p>
                           </td>
                         
-                       
+                       <td>
+                       <Link className=' bg-teal-600 rounded-xl px-10 py-2 ml-2  text-white font-bold' to={`/designer/chatWithUser/${user.user?._id}`}>Connect</Link>
+                       </td>
                         </tr>
                        ))}
           

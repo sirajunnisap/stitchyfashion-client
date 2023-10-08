@@ -1,22 +1,34 @@
 import React ,{ useEffect, useState }from 'react'
 import { useParams } from 'react-router-dom'
-import { courseType } from '../../../Models/Models'
+import { courseType, designerType } from '../../../Models/Models'
 import { courseDetails } from '../../../Services/Course/courseData'
-
+import Classesonplaylist from '../Cards/Classesonplaylist'
+import { designerById } from '../../../Services/designer/designerData'
+import { Link } from 'react-router-dom'
 function EntrolledCourse() {
 
     const courseid =  useParams()
     const [courseState,SetCourseState] = useState<courseType>()
     const [selected,setSelected] = useState<string|undefined>(undefined)
-
+    const [designerData, setDesigner] = useState<designerType | undefined>(undefined)
 
     const id :string|undefined= courseid.id
     useEffect(()=>{
        const getcourse = async()=>{
            try {
             const Course = await courseDetails(id);
+
+            if(Course){
+              const designerId = Course.designer
+
+            }
                console.log(Course,'get course by id');
                SetCourseState(Course)
+
+            const designerId = Course.designer
+            const designerDetails = await designerById(designerId)
+            setDesigner(designerDetails)
+
            } catch (error) {
                
            }
@@ -60,6 +72,28 @@ function EntrolledCourse() {
       </div>
     </p>
   </div>
+
+
+ 
+    
+            <div className="flex items-center justify-center ">
+              <div className="w-2/3 flex">
+
+                <img alt="..." src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" className="rounded-full w-20 h-20 shadow-md border-2 border-white transition duration-200 transform hover:scale-110" />
+              
+             <h2 className='text-xl text-teal-600 font-bold mt-6 ml-3'> {designerData?.name}</h2>
+            
+              </div>
+           
+
+            
+                     <Link className=' bg-teal-600 rounded-xl px-10 py-2 ml-2  text-white font-bold' to={`/chatWithDesigner/${designerData?._id}`}>Connect</Link>
+             <Link className='bg-teal-600 rounded-xl px-10 py-2  ml-6 text-white font-bold' to={`/getDesignerById/${designerData?._id}`}>View</Link>
+
+             
+            </div>
+
+        
     </div>
  
 </div>
@@ -69,16 +103,7 @@ function EntrolledCourse() {
    
    {courseState && Array.isArray(courseState.classes) && courseState.classes.length > 0 ? (
      courseState.classes.map((classItem:any, index) => (
-     <div className=" flex  items-center shadow-md justify-center  bg-white p-1 rounded-lg motion-safe:hover:scale-110 transition-[2s]"onClick={()=>setSelected(classItem.video)}>
-       <div className="w-full md:w-1/3 bg-white grid place-items-center  ">
-        <video src={classItem.video} controls className='rounded-s '></video>
-       </div>
-       <div className="w-full flex flex-col items-center justify-center   bg-white p-2 ">
-        
-         <h3 className="font-black text-gray-800 ">{classItem.title}</h3>
-         <p className="md:text-xs text-gray-500 text-base">{classItem.description}</p>
-       </div>
-     </div>
+     < Classesonplaylist classItem={classItem} setSelected={setSelected}/>
    ))
    )  : (
      <p>No classes available</p>

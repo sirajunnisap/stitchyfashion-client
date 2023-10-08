@@ -1,5 +1,4 @@
 import React,{useEffect, useState} from 'react'
-import { motion } from 'framer-motion'
 import { UserType } from '../../../Models/Models'
 import { updateProfile } from '../../../Services/client/userData'
 import { useParams } from 'react-router-dom'
