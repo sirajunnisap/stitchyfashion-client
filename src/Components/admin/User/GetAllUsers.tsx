@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { getAllUserData } from '../../../Services/client/userData'
+import { getAllUserData, userMoreInfo } from '../../../Services/client/userData'
 import { UserType } from '../../../Models/Models'
 import Home from '../Home/Home'
 import { blockUser } from '../../../Services/admin/adminData'
 import SearchBar from './SearchBar'
+import { Link } from 'react-router-dom'
+import Swal from "sweetalert2";
 
 const GetAllUsers = () => {
 
   const [usersData, setUsersData] = useState<UserType[] | undefined>(undefined)
   const [searchResults,setSearchResults] = useState<UserType[]>([]);
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-right",
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+});
 
   useEffect(() => {
 
@@ -26,28 +40,38 @@ const GetAllUsers = () => {
   }, [])
 
 
-  console.log("users", usersData);
-
+  // console.log("users", usersData);
 
 
   const userBlockingHandle = async (user: UserType) => {
     try {
       const userId = user._id;
       const action = user.isBlocked ? 'unblock' : 'block';
-
-      try {
-        const blockedUser = await blockUser(userId, action);
-        if (blockedUser) {
-          const updatedUsersData = usersData?.map((u) =>
-            u._id === userId ? { ...u, isBlocked: !u.isBlocked } : u
-          );
-          setUsersData(updatedUsersData);
-          return blockedUser;
+  
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it",
+      }).then(async (result) => { 
+        if (result.isConfirmed) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          try {
+            const blockedUser = await blockUser(userId, action);
+            if (blockedUser) {
+              const updatedUsersData = usersData?.map((u) =>
+                u._id === userId ? { ...u, isBlocked: !u.isBlocked } : u
+              );
+              setUsersData(updatedUsersData);
+            }
+          } catch (error) {
+            console.error(`Error ${action === 'block' ? 'blocking' : 'unblocking'} user with ID ${userId}:`, error);
+          }
         }
-      } catch (error) {
-        console.error(`Error ${action === 'block' ? 'blocking' : 'unblocking'} user with ID ${userId}:`, error);
-        return null;
-      }
+      });
     } catch (error) {
       console.error('Error handling blocking/unblocking:', error);
     }
@@ -56,6 +80,7 @@ const GetAllUsers = () => {
   const updateSearchResults = (results: UserType[]) => {
     setUsersData(results);
   };
+
 
   return (
     <div >
@@ -79,7 +104,7 @@ const GetAllUsers = () => {
                     <th className="px-1 py-3">Email</th>
                     <th className="px-2 py-3">Phone</th>
                     <th className="px-2 py-3">Status</th>
-
+                    <th className="px-2 py-3">More Info</th>
                   </tr>
                 </thead>
 
@@ -118,6 +143,15 @@ const GetAllUsers = () => {
     {user.isBlocked ? 'Block' : 'Unblock'}
   </button>
 </td>
+                        
+<td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+  <Link
+    className='rounded-full px-6 py-1 text-xs font-semibold bg-[#3b929f] text-green-900'
+ to={`/admin/getUserMoreInfo/${user?._id}`}
+  >
+    View
+  </Link>
+</td>
                         </tr>
                       )
                     })
@@ -127,13 +161,7 @@ const GetAllUsers = () => {
            
               </table>
             </div>
-            <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
-              <span className="text-xs text-gray-600 sm:text-sm"> Showing 1 to 5 of 12 Entries </span>
-              <div className="mt-2 inline-flex sm:mt-0">
-                <button className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Prev</button>
-                <button className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Next</button>
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>

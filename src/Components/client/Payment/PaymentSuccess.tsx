@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom"; 
+import { paymentType } from "../../../Models/Models";
+type Props = {
+  courseData:paymentType|undefined
+}
+const SuccessPage:React.FC<Props> = ({courseData})=> {
+  const [purshasedCourse,setPurchasedCourse] = useState<paymentType|null>(null)
 
-function SuccessPage() {
+  // console.log(courseData,"courseDAtaaaaaa in props ")
+  // setPurchasedCourse(courseData?.selectedCourse?._id)
+
+
+ const courseId = courseData?.selectedCourse?._id
+
+ 
+
+
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+
+    <div className='fixed top-10 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-50 rounded-xl'>
+    <div className='bg-white rounded shadow-md  '>
+    <div className="bg-gray-100 flex flex-col justify-center items-center w-[1000px] h-[450px] ">
       <div className="text-center">
         <motion.div
           initial={{ scale: 0 }}
@@ -36,12 +53,14 @@ function SuccessPage() {
         </p>
 
         {/* Use the Link component to navigate back to the home page */}
-        <Link to="/">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-            Back to Home
+        <Link to={`/entrolledCourse/${courseId}`}>
+          <button className="bg-teal-700 text-white font-bold py-2 px-4 rounded mt-4">
+            Back to your course
           </button>
         </Link>
       </div>
+    </div>
+    </div>
     </div>
   );
 }

@@ -18,6 +18,7 @@ import ForgotPassword from './Components/client/ChangePassword/OtpVerification';
 import ChangePassword from './Components/client/ChangePassword/ChangePassword';
 import Register from './Pages/client/Login/Register';
 import VerifyMail from './Pages/designer/VerifyMail';
+import Error404 from './Components/404Error/Error404';
 
 type RoutesProps = {};
 const App:React.FC<RoutesProps> = () =>  {
@@ -43,6 +44,9 @@ const App:React.FC<RoutesProps> = () =>  {
             <Route path='/changePassword/:id' element={<ChangePassword/>}/>
             <Route path='/signup' element={<Register/>}/>
             <Route path='/designer/verifyEmail/:id' element={<VerifyMail/>}/>
+            {/* <Route path='/notFound' element={<Error404/>}/> */}
+            {/* <Route path="*" element={<Error404/>} /> */}
+
           </Routes>
         </Router>
   );

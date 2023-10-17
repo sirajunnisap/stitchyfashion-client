@@ -35,17 +35,17 @@ function AdminProfile() {
   return (
     <>
     <div className={isModalOpen ? 'blur' : ''}>
-    <div className='flex'>
+    <div className='flex ml-80'>
 
         
        <div className=''>
       
-       <section className="signUp ml-80">
+       <section className="signUp">
   <div className="container_login" style={{ marginTop: "30px" }}>
     <div className="signUp-content">
     <div className="signUp-image">
         <figure>
-          <img className='rounded-xl' src={adminData?.image ? adminData?.image : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} alt="profile image" />
+          <img className='rounded-xl h-96 ml-12' src={adminData?.image ? adminData?.image : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} alt="profile image" />
         </figure>
       </div>
       <div className="signUp-form">

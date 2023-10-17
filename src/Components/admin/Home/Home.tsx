@@ -15,7 +15,7 @@ function AdminSidbar() {
   const dispatch = useAppDispatch()
 
   const designer:any = UseAppSelector(state=>state.Admin)
-  console.log(designer,"designer data in dashboard");
+  // console.log(designer,"designer data in dashboard");
   const handleSignOut = () => {
     // ...
     dispatch(logoutAdmin({}))

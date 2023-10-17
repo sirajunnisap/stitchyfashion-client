@@ -132,14 +132,14 @@ onSubmit={onSubmit}
                 <h2 className="form-title text-lavender">Add Designer</h2>
                 <Form method="POST" className="register-form" id="register-form">
                     <div className="form-group">
-                        <label htmlFor="name">
-                            <i className="zmdi zmdi-account material-icons-name"></i>
-                        </label>
+                    <label htmlFor="pass" className='pl-1'>
+                                <i className="fa-sharp fa-solid fa-user"></i>
+                            </label>
                         <Field
                             type="text"
                             name="name"
                             id="name"
-
+                            className="pl-5"
                             placeholder="Name"
                         />
                         <ErrorMessage  name='name'>
@@ -149,14 +149,14 @@ onSubmit={onSubmit}
                         </ErrorMessage>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">
-                            <i className="zmdi zmdi-email"></i>
-                        </label>
+                    <label htmlFor="pass" className='pl-1'>
+                                <i className="fa-sharp fa-solid fa-envelope"></i>
+                            </label>
                         <Field
                             type="email"
                             name="email"
                             id="email"
-
+                            className="pl-5"
                             placeholder="Email"
                         />
                         <ErrorMessage name='email'>
@@ -166,14 +166,14 @@ onSubmit={onSubmit}
                         </ErrorMessage>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="pass">
+                        <label htmlFor="pass" className='pl-1'>
                             <i className="fa-sharp fa-solid fa-address-book"></i>
                         </label>
                         <Field
                             type="tel"
                             name="phone"
                             id="phone"
-
+                            className="pl-5"
                             placeholder="Phone No:"
                         />
                         <ErrorMessage name='phone'>

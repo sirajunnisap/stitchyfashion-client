@@ -48,10 +48,10 @@ export type courseType = {
     _id : string
     title : string,
     description : string,
-    designer : string,
+    designer : any,
     duration : number,   
     level:string,
-    category:string,
+    category:any,
     classes:classes[],         
     courseFee:number,
     image:string,

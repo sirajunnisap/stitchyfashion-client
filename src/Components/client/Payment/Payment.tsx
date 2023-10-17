@@ -12,8 +12,9 @@ interface PaymentProps {
 function Payment({ selectedAmount, selectedCourseId }: PaymentProps) {
   const [{ isPending }] = usePayPalScriptReducer();
   const [paymentCompleted, setPaymentCompleted] = useState<boolean | null>(false);
-
-  const navigate = useNavigate();
+const [paymentedData,setPaymentedData] = useState<any>()
+const [isModalOpen,setIsModalOpen] =useState(false)
+   const navigate = useNavigate();
 
   const handlePaymentSuccess = (details: any) => {
     // Set paymentCompleted to true when payment is successful
@@ -26,7 +27,10 @@ function Payment({ selectedAmount, selectedCourseId }: PaymentProps) {
 
     userAxios.post(`/paymentforCourse`, paymentDetails)
       .then((res) => {
-        console.log("payment request success", res.data);
+        console.log("payment request success",res);
+           
+setPaymentedData(res?.data)
+setIsModalOpen(true)
         // You can handle additional logic here if needed
       })
       .catch((err) => {
@@ -34,10 +38,14 @@ function Payment({ selectedAmount, selectedCourseId }: PaymentProps) {
         // Handle the error, display an error message, etc.
       });
 
-    navigate('/payment-success');
+      
+    // navigate(`/payment-success/${}`);
   };
+console.log(paymentedData,"paymented daaaaaata");
 
   return (
+    <>
+    <div className={isModalOpen ? 'blur' : ''}>
     <div>
       <PayPalButtons
         createOrder={(data, actions) => {
@@ -59,8 +67,13 @@ function Payment({ selectedAmount, selectedCourseId }: PaymentProps) {
         disabled={isPending}
       />
 
-      {paymentCompleted && <SuccessPage />}
+      
     </div>
+</div>
+{paymentCompleted && <SuccessPage courseData={paymentedData}/>} 
+
+</>
+
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Message, UserType, designerType } from '../../../Models/Models'
 import { designerById, profile } from '../../../Services/designer/designerData'
@@ -7,6 +7,7 @@ import { chatsWithDesigner, chatsWithUser, getAllMessages, getAllMessagesDsgr, s
 import ScrollableFeed from 'react-scrollable-feed'
 import { UseAppSelector } from '../../../Redux/hooks';
 import io from 'socket.io-client';
+import { userDataforDesigner } from '../../../Services/client/userData';
 
 
 function ChatWithUser() {
@@ -16,25 +17,27 @@ function ChatWithUser() {
     socket = io(ENDPOINT)
 
     const { id } = useParams()
-    // const [userData, setUserData] = useState<UserType | undefined>(undefined)
+    const [userData, setUserData] = useState<UserType | undefined>(undefined)
     // const [loading,setLoading] = useState(false);
     const [messages,setMessages] = useState<Message[]>([])
     const [newMessage,setNewMessage] = useState<string>('')
     // const [chats,setChats] = useState('');
     const [chatId,setChatId] = useState('');
     const [designer,setdesigner] = useState<designerType|undefined>()
-    // useEffect(() => {
-    //     const getDesigner = async () => {
-    //         try {
-    //             const designer = await userById(id)
-    //             console.log(designer, "designerdatas");
-    //             setUserData(designer)
-    //         } catch (error) {
+    const [typing,setTyping] = useState<boolean>(false)
+    const containerRef = useRef<HTMLDivElement | null>(null)
+    useEffect(() => {
+        const getDesigner = async () => {
+            try {
+                const designer = await userDataforDesigner(id)
+                console.log(designer, "designerdatas");
+                setUserData(designer)
+            } catch (error) {
 
-    //         }
-    //     }
-    //     getDesigner()
-    // }, [id])
+            }
+        }
+        getDesigner()
+    }, [id])
 
     useEffect(()=>{
         const designerData = async()=>{
@@ -67,6 +70,19 @@ function ChatWithUser() {
         })
     }, [socket, messages])
 
+    useEffect(()=>{
+        socket.emit("typing",currentUserId)
+      },[newMessage])
+
+      socket.on("typing",()=>setTyping(true))
+      socket.on("stoptyping",()=>setTyping(false))
+
+
+      useEffect(()=>{
+        if(containerRef.current){
+            containerRef.current.scrollTo(0,containerRef.current.scrollHeight)  
+        }
+    },[messages])
 
     useEffect(()=>{
         const fetch = async()=>{
@@ -104,10 +120,11 @@ function ChatWithUser() {
             setNewMessage("");
             console.log(res.content,"res msg");
             
+            socket.emit("stoptyping",currentUserId) 
             socket?.emit('new message', res);
             console.log("messageeeeeeeee", res);
 
-            setMessages([...messages, res.msg])
+            setMessages([...messages, res])
 
         }
     }

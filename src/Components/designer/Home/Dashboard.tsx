@@ -1,103 +1,20 @@
-
-
-import React, { useEffect, useState } from 'react'
-import Chart from 'chart.js/auto';
+import React from 'react'
 import { PieChart,Cell, Pie, Tooltip,BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend,Label} from 'recharts';
-import { UserType, categoryType, courseType, designerType, paymentType } from '../../../Models/Models';
-import { getAllPaymentedUsers, getAllUserData } from '../../../Services/client/userData';
-import { getAllDesignerData } from '../../../Services/designer/designerData';
-import { getAllCoursesForAdmin } from '../../../Services/Course/Coureses';
-import { getAllCategory } from '../../../Services/admin/addCategory';
-
 function Dashboard() {
 
 
-  const [paymentedUser, setPaymentedUser] = useState<paymentType[] | undefined>(undefined)
-  const [User, setUser] = useState<UserType[] | undefined>(undefined)
-  const [Designer, setDesigner] = useState<designerType[] | undefined>(undefined)
-  const [courseData, setCourseData] = useState<courseType[] | undefined>(undefined)
-  const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
-  const [searchResults,setSearchResults] = useState<UserType[]>([]);
-
-  useEffect(() => {
-
-    const getUsers = async () => {
-      try {
-
-        const PaymentedUsers = await getAllPaymentedUsers()
-        const Users = await getAllPaymentedUsers()
-        setPaymentedUser(PaymentedUsers)
-
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
-    getUsers()
-  }, [])
-
-  useEffect(() => {
-
-    const getUsers = async () => {
-      try {
-
-        const Users = await getAllUserData()
-        setUser(Users)
-
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
-    getUsers()
-  }, [])
-  useEffect(() => {
-
-    const getDesigners = async () => {
-      try {
-
-        const Designers = await getAllDesignerData()
-        setDesigner(Designers)
-
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
-    getDesigners()
-  }, [])
-
-  useEffect(()=>{
-    const getCourses = async()=>{
-      try {
-        const Category = await getAllCategory()
-        setCategoryData(Category)
-
-        const Courses = await getAllCoursesForAdmin()
-        setCourseData(Courses)
-      } catch (error) {
-        
-      }
-    }
-    getCourses()
-  },[])
-
-  const allUserlength = User?.length
-  const allDesignerLength = Designer?.length
-  const PaymentedUserslength = paymentedUser?.length
- const allCoursesLength = courseData?.length
- const allCategorylength = categoryData?.length 
- 
-const data = [
-  { name: 'Users', value: allUserlength },
-  { name: 'Designers', value: allDesignerLength },
-  { name: 'PaymentedUsers', value: PaymentedUserslength },
-  { name: 'Courses', value: allCoursesLength },
-  { name: 'Categories', value: allCategorylength },
-];
-
-const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
-
+    const data = [
+        { name: 'Users', value: 123457890 },
+        { name: 'Designers', value: 1234567 },
+        { name: 'PaymentedUsers', value: 1234567890 },
+        { name: 'Courses', value: 2345000 },
+        { name: 'Categories', value: 12300000 },
+      ];
+      
+      const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
+      
   return (
-    
-      <div className="p-4 ml-60 mt-10 ">
+    <div className="p-4 ml-60 mt-10 ">
             <div className=" ">
                  <div className=" ">
                   <div className='flex gap-6'>
@@ -110,7 +27,7 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
               </div> 
               <div className="flex flex-col flex-grow ml-4">
                 <div className="text-sm  font-bold text-grey">Courses</div>
-                <div className="font-bold text-lg">{courseData?.length}</div>  
+                {/* <div className="font-bold text-lg">{courseData?.length}</div>   */}
               </div>
             </div>
             <div className="flex flex-row bg-[#00879b] shadow-sm rounded-xl p-4 h-32 w-72  mb-5">
@@ -121,7 +38,7 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
               </div>
               <div className="flex flex-col flex-grow ml-4">
                 <div className="text-sm  font-bold text-grey">Users</div>
-                <div className="font-bold text-lg">{User?.length}</div>
+                {/* <div className="font-bold text-lg">{User?.length}</div> */}
               </div>
             </div>
             <div className="flex flex-row  bg-[#0f9690] shadow-sm rounded-xl p-4 h-32 w-72  mb-5">
@@ -132,7 +49,7 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
               </div>
               <div className="flex flex-col flex-grow ml-4">
                 <div className="text-sm  font-bold text-grey">Designers</div>
-                <div className="font-bold text-lg">{Designer?.length}</div>
+                {/* <div className="font-bold text-lg">{Designer?.length}</div> */}
               </div>
             </div>
             <div className="flex flex-row bg-[#6DA5C0]  shadow-sm rounded-xl p-4  w-72  h-32">
@@ -145,7 +62,7 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
               </div>
               <div className="flex flex-col flex-grow ml-4">
                 <div className="text-sm  font-bold text-grey">Paymented Users</div>
-                <div className="font-bold text-lg">{paymentedUser?.length}</div>
+                {/* <div className="font-bold text-lg">{paymentedUser?.length}</div> */}
               </div>
             </div>
                   </div>
@@ -184,33 +101,27 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
 
 
 <PieChart width={400} height={400}>
-  <Pie
-    data={data}
-    cx={200}
-    cy={200}
-    outerRadius={100}
-    fill="#0F5762"
-    dataKey="value"
-  >
-    {data.map((entry, index) => (
-      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-    ))}
-    {/* <Label
-      value="Course Length"
-      position="center"
-      fill="#000" // Change the label color
-    /> */}
-  </Pie>
-  <Tooltip />
-  <Legend />
-</PieChart>
-
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                fill="#0F5762"
+                dataKey="value"
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
 
    
 
 </div>
 </div>
-<div className='flex mr-10 mt-16'>
+{/* <div className='flex mr-10 mt-16'>
       <div className="w-full ">
         <div className="">
           
@@ -265,7 +176,7 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
 <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
   <button
     className={`rounded-full ${paymented?.user?.isBlocked ? 'bg-red-300' :'bg-[#44a0ae]'} px-3 py-1 text-xs font-semibold ${paymented?.user?.isBlocked ? 'text-red-900' :'text-green-900' }`}
-    // onClick={() => userBlockingHandle(user)}
+    onClick={() => userBlockingHandle(user)}
   >
     {paymented?.user?.isBlocked ? 'Block' : 'Unblock'} 
   </button>
@@ -279,24 +190,17 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
            
               </table>
             </div>
-            {/* <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
-              <span className="text-xs text-gray-600 sm:text-sm"> Showing 1 to 5 of 12 Entries </span>
-              <div className="mt-2 inline-flex sm:mt-0">
-                <button className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Prev</button>
-                <button className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Next</button>
-              </div>
-            </div> */}
+          
           </div>
         </div>
       </div>
-      </div>
+      </div> */}
 
 
           
       
           </div>
           
-  
   )
 }
 

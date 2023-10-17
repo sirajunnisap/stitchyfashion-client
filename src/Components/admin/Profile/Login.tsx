@@ -77,15 +77,15 @@ const onSubmit = async (values:initialValueType)=>{
                       <h2 className="form-title text-lavender">LOGIN</h2>
                       <Form method="POST" className="register-form" id="register-form">
                           <div className="form-group">
-                              <label htmlFor="name">
-                                  <i className="zmdi zmdi-account material-icons-name"></i>
-                              </label>
+                          <label htmlFor="pass" className="pl-1">
+                                <i className="fa-sharp fa-solid fa-envelope"></i>
+                            </label>
                              
                               <Field
                                   type="email"
                                   name="email"
                                   id="email"
-      
+                                  className="pl-5"
                                   placeholder="Your Email"
                               />
                               <ErrorMessage name='email'>
@@ -95,15 +95,15 @@ const onSubmit = async (values:initialValueType)=>{
                               </ErrorMessage>
                           </div>
                           <div className="form-group">
-                              <label htmlFor="pass">
-                                  <i className="fa-sharp fa-solid fa-address-book"></i>
+                              <label htmlFor="pass" className="pl-1">
+                                  <i className="fa-sharp fa-solid fa-lock"></i>
                               </label>
                               <Field
                             
                                   type="password"
                                   name="password"
                                   id="password"
-      
+                                  className="pl-5"
                                   placeholder="Enter your Password"
                               />
                               <ErrorMessage name='password'>

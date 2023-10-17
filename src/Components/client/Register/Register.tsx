@@ -151,14 +151,14 @@ onSubmit={onSubmit}
                 <h2 className="form-title text-lavender">Sign up</h2>
                 <Form method="POST" className="register-form" id="register-form">
                     <div className="form-group">
-                        <label htmlFor="name">
-                            <i className="zmdi zmdi-account material-icons-name"></i>
+                    <label htmlFor="name" className='pl-1'>
+                            <i className="fa-sharp fa-solid fa-user"></i>
                         </label>
                         <Field
                             type="text"
                             name="name"
                             id="name"
-
+                            className="pl-5"
                             placeholder="Your Name"
                         />
                         <ErrorMessage  name='name'>
@@ -167,15 +167,15 @@ onSubmit={onSubmit}
                                    }              
                         </ErrorMessage>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="email">
-                            <i className="zmdi zmdi-email"></i>
+                    <div className="form-group" >
+                    <label htmlFor="email" className='pl-1' >
+                            <i className="fa-sharp fa-solid fa-envelope "></i>
                         </label>
                         <Field
                             type="email"
                             name="email"
                             id="email"
-
+                            className="pl-5"
                             placeholder="Your Email"
                         />
                         <ErrorMessage name='email'>
@@ -185,14 +185,14 @@ onSubmit={onSubmit}
                         </ErrorMessage>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="pass">
+                        <label htmlFor="num" className='pl-1'>
                             <i className="fa-sharp fa-solid fa-address-book"></i>
                         </label>
                         <Field
                             type="number"
                             name="phone"
                             id="phone"
-
+                            className="pl-5"
                             placeholder="Your Dial number"
                         />
                         <ErrorMessage name='phone'>
@@ -201,15 +201,15 @@ onSubmit={onSubmit}
                            }    
                         </ErrorMessage>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="re-pass">
-                            <i className="zmdi zmdi-lock-outline"></i>
+                    <div className="form-group" >
+                    <label htmlFor="pass"className='pl-1'>
+                            <i className="fa-sharp fa-solid fa-lock"></i>
                         </label>
                         <Field
                             type="password"
                             name="password"
                             id="password"
-
+                            className="pl-5"
                             placeholder="Enter your Password"
                         />
                         <ErrorMessage name='password'>
@@ -219,14 +219,14 @@ onSubmit={onSubmit}
                         </ErrorMessage>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="re-pass">
-                            <i className="zmdi zmdi-lock-outline"></i>
+                    <label htmlFor="re-pass" className='pl-1'>
+                            <i className="fa-sharp fa-solid fa-key"></i>
                         </label>
                         <Field
                             type="password"
                             name="confirmPassword"
                             id="confirmPassword"
-
+                            className="pl-5"
                             placeholder="Confirm your Password"
                         />
                         <ErrorMessage name='confirmPassword'>

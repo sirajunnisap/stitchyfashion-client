@@ -22,6 +22,8 @@ import Home from '../../Pages/client/Home/Home';
 import Login from '../../Pages/client/Login/Login';
 import EntrolledCoursePage from '../../Pages/client/Course/EntrolledCoursePage';
 import ChatPage from '../../Pages/client/Chat/ChatPage';
+import Error404 from '../../Components/404Error/Error404';
+import About from '../../Components/client/About';
 
 
 const UserRoute:React.FC = () => {
@@ -65,9 +67,11 @@ const UserRoute:React.FC = () => {
         <Route path='/getDesignerById/:id' element={<DesignerDetail/>}/>
         <Route path='/pricing/:id' element={<Pricing/>}/>
         <Route path='/checkout/:id' element={<Checkout/>}/>
-        <Route path='/payment-success' element={<SuccessPage/>}/>
+        {/* <Route path='/payment-success' element={<SuccessPage/>}/> */}
         <Route path='/entrolledCourse/:id' element={<EntrolledCoursePage/>}/>
         <Route path='/chatWithDesigner/:id' element={<ChatPage/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/404' element={<Error404/>}/>
       </Routes>
     </div>
   )

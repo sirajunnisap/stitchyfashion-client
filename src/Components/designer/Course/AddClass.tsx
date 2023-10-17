@@ -337,7 +337,7 @@ function AddClass() {
                         <div className='form-group form-button mt-5'>
                           <button
                             type='submit'
-                            className='w-full text-white bg-[#22A78C] hover:bg-[#306c60] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+                            className='w-full text-white bg-[#0F5762] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center'
                           >
                             SAVE
                           </button>

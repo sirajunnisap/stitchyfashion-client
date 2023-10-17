@@ -11,6 +11,8 @@ import CourseDetail from '../../Components/admin/Course/CourseDetail'
 import AdminSidbar from '../../Components/admin/Home/Home'
 import AdminDashboard from '../../Pages/admin/SideBar'
 import CategoryDetail from '../../Components/admin/Course/CategoryDetail'
+import Error404 from '../../Components/404Error/Error404'
+import UserMoreInfo from '../../Components/admin/User/UserMoreInfo'
 
 const AdminRoute = ()=> {
 
@@ -30,6 +32,8 @@ const AdminRoute = ()=> {
         <Route path='/addCategory' element={<AddCategory/>}/>
         <Route path='/listOfCategories' element={<ListofCategories/>}/>
         <Route path='/categoryDetails/:id' element={<CategoryDetail/>}/>
+        <Route path='/getUserMoreInfo/:id' element={<UserMoreInfo/>}/>
+        <Route path='/notFound' element={<Error404/>}/>
       </Routes>
     </div>
   )

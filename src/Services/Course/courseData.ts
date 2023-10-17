@@ -54,3 +54,14 @@ export const getpaymenteUsers = async(courseId:any):Promise<any>=>{
     
     return data
 }
+
+export const getAllDesignerCourses = async(designerId:any):Promise<any>=>{
+
+    console.log(designerId,"designeridddddd");
+    
+    const res = await userAxios.get(`getAllDesignerCourses/${designerId}`)
+console.log(res,"resssssssssss");
+
+    const data = res.data
+    return data
+}

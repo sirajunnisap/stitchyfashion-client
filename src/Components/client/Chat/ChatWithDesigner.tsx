@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Message, UserType, designerType } from '../../../Models/Models'
 import { designerById } from '../../../Services/designer/designerData'
@@ -23,8 +23,10 @@ function ChatWithDesigner() {
     const [newMessage, setNewMessage] = useState<string>('')
     // const [chats,setChats] = useState('');
     const [chatId, setChatId] = useState('');
-
+    const [typing,setTyping] = useState<boolean>(false)
     const [userData, setUser] = useState<UserType | undefined>()
+    const containerRef = useRef<HTMLDivElement | null>(null)
+    const [loading, setLoading] = useState(false);
     //     const { userid } = UseAppSelector((state: any) => state.User);
     //     console.log(userid,"userid in stae");
 
@@ -63,10 +65,19 @@ function ChatWithDesigner() {
             }
         })
     }, [socket, messages])
-    // useEffect(()=>{
-    //     socket.emit("typing",currentUserId)
-    //   },[newMessage])
+    useEffect(()=>{
+        socket.emit("typing",userId)
+      },[newMessage])
 
+      socket.on("typing",()=>setTyping(true))
+      socket.on("stoptyping",()=>setTyping(false))
+
+
+      useEffect(()=>{
+        if(containerRef.current){
+            containerRef.current.scrollTo(0,containerRef.current.scrollHeight)  
+        }
+    },[messages])
 
 
     useEffect(() => {
@@ -93,10 +104,11 @@ function ChatWithDesigner() {
 
             socket.emit("join chat", chats?._id);
 
+            setLoading(true)
             const allmessages = await getAllMessages(chats?._id)
             console.log(allmessages, "all messages in a chatid");
             setMessages(allmessages)
-
+            setLoading(false)
 
         }
         fetch()
@@ -121,11 +133,11 @@ function ChatWithDesigner() {
             console.log(res, "got the message respons");
             setNewMessage("");
             console.log(res.content,"res msg");
-            
+            socket.emit("stoptyping",userId) 
             socket?.emit('new message', res);
             console.log("messageeeeeeeee", res);
 
-            setMessages([...messages, res.msg])
+            setMessages([...messages, res])
 
         }
     }

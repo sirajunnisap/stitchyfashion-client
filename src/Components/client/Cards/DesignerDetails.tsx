@@ -13,7 +13,7 @@ const DesignerDetails:React.FC<designerData>=({designerData})=> {
        <h4 className='text-lg font-semibold mb-5'>Instructor</h4>
           <h1 className='text-xl text-teal-600 font-bold'><Link className='border-b-2  border-black pb-0 -mb-1' to={`/getDesignerById/${designerData?._id}`}>{designerData?.name}</Link></h1>
           <h6 className='text-base font-medium mt-3 text-gray-500'>{designerData?.field}</h6>
-          <div className=" relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
+          <div className=" shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
             <div className="">
               <div className="">
 

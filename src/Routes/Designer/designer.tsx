@@ -11,6 +11,7 @@ import PaymentUser from "../../Components/designer/Users/PaymentUser";
 import UsersList from "../../Components/designer/Users/UsersList";
 import EditCourse from "../../Components/designer/Course/EditCourse";
 import ChatWithUser from "../../Components/client/Chat/ChatWithUser";
+import Error404 from "../../Components/404Error/Error404";
  const DesignerRoute:React.FC = ()=>{
 
     return(
@@ -29,6 +30,7 @@ import ChatWithUser from "../../Components/client/Chat/ChatWithUser";
         <Route path="/getPaymentedUsers" element={<PaymentUser/>}/>
         <Route path="/paymentedUsersList/:id" element={<UsersList/>}/>
         <Route path="/chatWithUser/:id" element={<ChatWithUser/>}/>
+        <Route path='/notFound' element={<Error404/>}/>
     </Routes>
     </div>
     )

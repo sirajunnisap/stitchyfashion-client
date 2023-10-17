@@ -120,7 +120,7 @@ const UserLogin: React.FC = () => {
                           </div>
                           <div className="form-group">
                               <label htmlFor="pass" className='pl-1'>
-                                  <i className="fa-sharp fa-solid fa-address-book"></i>
+                                  <i className="fa-sharp fa-solid fa-lock"></i>
                               </label>
                               <Field
                             
