@@ -43,7 +43,7 @@ function Profile() {
             <div className="signUp-content">
               <div className="signUp-image">
                 <figure>
-                  <img className='rounded-xl' src={user?.image ?user?.image:'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'} alt="profile image" />
+                  <img className='rounded-xl' src={user?.image ? user?.image:'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'} alt="profile image" />
                 </figure>
               </div>
               <div className="signUp-form">
@@ -88,7 +88,7 @@ function Profile() {
                       <div key={courseItem._id} className='flex flex-wrap items-center justify-center mt-4 mr-3 motion-safe:hover:scale-110 transition-[2s] '>
                         <div className="w-[200px] h-[300px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "  onClick={()=> navigate(`/entrolledCourse/${courseItem.selectedCourse._id}`)}>
                           <a href="#">
-                            <img className="rounded-t-lg w-full h-[170px] object-cover" src={courseItem.selectedCourse.image} alt="" />
+                            <img className="rounded-t-lg w-full h-[170px] object-cover" src={courseItem?.selectedCourse?.image} alt="" />
                           </a>
                           <div className="p-4 pt-2">
                             <a href="#">
