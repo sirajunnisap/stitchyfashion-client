@@ -85,17 +85,17 @@ function Profile() {
                 <div className='flex flex-wrap items-center justify-center mt-10  cursor-pointer mb-20'>
                   {course && course.length > 0 ? (
                     course?.map((courseItem: paymentType) => (
-                      <div key={courseItem._id} className='flex flex-wrap items-center justify-center mt-4 mr-3 motion-safe:hover:scale-110 transition-[2s] '>
+                      <div key={courseItem?._id} className='flex flex-wrap items-center justify-center mt-4 mr-3 motion-safe:hover:scale-110 transition-[2s] '>
                         <div className="w-[200px] h-[300px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "  onClick={()=> navigate(`/entrolledCourse/${courseItem.selectedCourse._id}`)}>
                           <a href="#">
                             <img className="rounded-t-lg w-full h-[170px] object-cover" src={courseItem?.selectedCourse?.image} alt="" />
                           </a>
                           <div className="p-4 pt-2">
                             <a href="#">
-                              <h2 className="mb-1 text-sm font-bold tracking-tight text-gray-900 dark:text-white">{courseItem.selectedCourse.title}</h2>
+                              <h2 className="mb-1 text-sm font-bold tracking-tight text-gray-900 dark:text-white">{courseItem?.selectedCourse?.title}</h2>
                             </a>
                             {/* <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">{courseItem.selectedCourse.description}</p> */}
-                            <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">Amount: {courseItem.amount}</p>
+                            <p className="mb-1 text-sm font-sans  text-gray-700 dark:text-gray-400">Amount: {courseItem?.amount}</p>
                             {/* Add more course details here */}
                           </div>
                         </div>
