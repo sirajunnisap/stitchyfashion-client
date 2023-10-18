@@ -12,7 +12,7 @@ import { profile } from '../../../Services/client/userData';
 
 function ChatWithDesigner() {
 
-    const ENDPOINT = "https://stitchy-inky.vercel.app"
+    const ENDPOINT = "https://greendoor.website"
     let socket: any
     socket = io(ENDPOINT)
 
@@ -161,7 +161,7 @@ function ChatWithDesigner() {
                                     }}
                                 >
                                     {
-                                        messages &&
+                                        // messages &&
                                         messages?.map((msg,index) => {
                                             // Check if the message is from the current user or the designer
                                             const isUserMessage = msg?.user?._id === userId;
