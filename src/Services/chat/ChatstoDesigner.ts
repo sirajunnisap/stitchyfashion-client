@@ -48,7 +48,8 @@ export const getAllMessages = async(chatId:string)=>{
     console.log('kghsdfhgdkghdkhgdkhgdkhg');
     
     const res = await userAxios.get(`/getMsgByChatId/${chatId}`)
-    console.log(res.data, "get all message in a perticular chatId using user and designe r");
+
+    console.log(res, "get all message in a perticular chatId using user and designe r");
     
     return res.data
 }
@@ -58,7 +59,7 @@ export const getAllMessagesDsgr = async(chatId:string)=>{
 
     console.log('kghsdfhgdkghdkhgdkhgdkhg');
     
-    const res = await designerAxios.get(`/getMsgByChatId/${chatId}`)
+ const res = await userAxios.get(`/getMsgByChatId/${chatId}`);
     console.log(res.data, "get all message in a perticular chatId using user and designe r");
     
     return res.data

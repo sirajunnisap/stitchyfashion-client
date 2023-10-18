@@ -12,14 +12,14 @@ import { profile } from '../../../Services/client/userData';
 
 function ChatWithDesigner() {
 
-    const ENDPOINT = "http://localhost:4000"
+    const ENDPOINT = "https://greendoor.website/"
     let socket: any
     socket = io(ENDPOINT)
 
     const { id } = useParams()
     const [designerData, setDesigner] = useState<designerType | undefined>(undefined)
     // const [loading,setLoading] = useState(false);
-    const [messages, setMessages] = useState<Message[]>([])
+    const [messages,setMessages] = useState<Message[]>([])
     const [newMessage, setNewMessage] = useState<string>('')
     // const [chats,setChats] = useState('');
     const [chatId, setChatId] = useState('');
@@ -100,23 +100,24 @@ function ChatWithDesigner() {
 
             setChatId(chats?._id)
 
-            //socket
+            // //socket
 
-            socket.emit("join chat", chats?._id);
+            // socket.emit("join chat", chats?._id);
 
-            setLoading(true)
+            // setLoading(true)
             const allmessages = await getAllMessages(chats?._id)
             console.log(allmessages, "all messages in a chatid");
             setMessages(allmessages)
-            setLoading(false)
+            // setLoading(false)
 
         }
         fetch()
     }, [id])
 
-    messages.map((message) => {
-        return message; 
-      });
+    // messages.map((message:any) => {
+    //     return message; 
+    //   });
+
 
     const setMessageFn = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e, "eventttttt");
@@ -161,7 +162,7 @@ function ChatWithDesigner() {
                                 >
                                     {
                                         messages &&
-                                        messages.map((msg, index) => {
+                                        messages?.map((msg:any, index:any) => {
                                             // Check if the message is from the current user or the designer
                                             const isUserMessage = msg?.user?._id === userId;
 

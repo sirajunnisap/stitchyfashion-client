@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, UseAppSelector } from '../../Redux/hooks';
 import { logoutUser } from '../../Redux/client/userSlice';
 import { Link } from 'react-router-dom';
-import LogoText from '../Logo/LogoText';
+
 import './style.css'
 import { UserType } from '../../Models/Models';
 import { searchUsersAdmin } from '../../Services/search/search';
@@ -34,6 +34,8 @@ function NavBar() {
     handleChange(input)
   },[]);
 
+  console.log(searchResults,"search resultsssssssssssss");
+  
   
   return (
 
@@ -123,7 +125,7 @@ function NavBar() {
                 <Link to={"/pricing"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">PRICING</Link>
               </li> */}
               <li>
-                <Link to={"/"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">ABOUT</Link>
+                <Link to={"/about"} className="block py-2 pr-4 pl-3 text-[#07778B] border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-teal-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">ABOUT</Link>
               </li>
 
             </ul>
