@@ -162,7 +162,7 @@ function ChatWithDesigner() {
                                 >
                                     {
                                         messages &&
-                                        messages?.map((msg, index) => {
+                                        messages?.map((msg,index) => {
                                             // Check if the message is from the current user or the designer
                                             const isUserMessage = msg?.user?._id === userId;
 
@@ -193,7 +193,7 @@ function ChatWithDesigner() {
                         <div className='relative w-full bg-gray-200 h-10 rounded-full mx-2 '>
                             {/* <Input className='ml-5 mt-1 font-medium text-gray-400'  Message . . ./> */}
 
-                            <input type="text" className='border-0 rounded-full bg-gray-200 font-medium text-gray-400 outline-none'
+                            <input type="text" className='border-0 rounded-full bg-gray-200 font-medium text-gray-300 outline-none'
                                 placeholder='Message . . .'
                                 name='message'
                                 onChange={(e) => setMessageFn(e)}
