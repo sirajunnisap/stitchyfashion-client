@@ -12,7 +12,7 @@ import { profile } from '../../../Services/client/userData';
 
 function ChatWithDesigner() {
 
-    const ENDPOINT = "https://greendoor.website/"
+    const ENDPOINT = "https://greendoor.website"
     let socket: any
     socket = io(ENDPOINT)
 
@@ -53,6 +53,7 @@ function ChatWithDesigner() {
     useEffect(() => {
         socket.on('message recieved', (newMessage: Message) => {
             console.log('got new message',newMessage.chat._id,chatId);
+            console.log(messages, "hey");
             
 
             if (chatId !== newMessage.chat._id) {
@@ -105,6 +106,8 @@ function ChatWithDesigner() {
             // socket.emit("join chat", chats?._id);
 
             // setLoading(true)
+            console.log(chats?._id, "here id");
+            
             const allmessages = await getAllMessages(chats?._id)
             console.log(allmessages, "all messages in a chatid");
             setMessages(allmessages)
@@ -161,7 +164,7 @@ function ChatWithDesigner() {
                                     }}
                                 >
                                     {
-                                        messages &&
+                                        messages.length>0 &&
                                         messages?.map((msg,index) => {
                                             // Check if the message is from the current user or the designer
                                             const isUserMessage = msg?.user?._id === userId;
