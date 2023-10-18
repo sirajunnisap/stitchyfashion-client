@@ -12,7 +12,7 @@ import { profile } from '../../../Services/client/userData';
 
 function ChatWithDesigner() {
 
-    const ENDPOINT = "https://greendoor.website"
+    const ENDPOINT = "https://greendoor.website/"
     let socket: any
     socket = io(ENDPOINT)
 
