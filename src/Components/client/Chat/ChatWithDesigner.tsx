@@ -161,7 +161,7 @@ function ChatWithDesigner() {
                                     }}
                                 >
                                     {
-                                        // messages &&
+                                        messages &&
                                         messages?.map((msg,index) => {
                                             // Check if the message is from the current user or the designer
                                             const isUserMessage = msg?.user?._id === userId;
