@@ -8,7 +8,8 @@ import { useAppDispatch, UseAppSelector } from '../../Redux/hooks';
 import NavBar from './Home'
 import Typewriter from 'typewriter-effect';
 import Categorycard from './Cards/Categorycard'
-
+import { Container } from 'react-bootstrap/lib/Tab'
+import './userHome.css'
 function UserHome() {
     const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
     const navigate = useNavigate()
@@ -30,12 +31,13 @@ function UserHome() {
     }, [])
 
     return (
-        <div className='w-full mx-14 '>
+        <div className='min-w-full container '>
             <div>
                 <NavBar />
             </div>
-            <div className='flex mt-14 m-16'>
-                <div className=' mt-20 ml- w-1/2'>
+            <div className='flex mt-14 mx-10'>
+               
+                <div className=' mt-20 w-1/2'>
                     <section className="bg-white dark:bg-gray-900">
                         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                             <div className="max-w-screen-md">
@@ -97,7 +99,7 @@ function UserHome() {
                 <div>
                     <p>"To cultivate exceptionally talented fashion designers through comprehensive <br />creative training and personalized mentorship."</p>
                 </div>
-                <div className='flex flex-wrap items-center mt-10 ml-56'>
+                <div className='posters flex  items-center mt-10  motion-safe:hover:scale-110 transition-[2s]  cursor-pointer' style={{ maxWidth:'1400px', overflowY: 'auto' }}>
                     {
                         categoryData?.slice(0, 6).map((category, index) => (
                                 <Categorycard category={category}/>

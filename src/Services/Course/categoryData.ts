@@ -9,7 +9,8 @@ export const getAllCategory = async():Promise<any>=>{
 }
 
 
-export const categoryDetails = async(categoryId:any):Promise<courseType[]>=>{
+export const categoryDetails = async(category:any):Promise<any>=>{
+    const categoryId = category?._id
     const res = await userAxios.get(`categoryDetails/${categoryId}`)
 
     console.log(res,"categorydetail in ress");
