@@ -12,7 +12,7 @@ import { userDataforDesigner } from '../../../Services/client/userData';
 
 function ChatWithUser() {
 
-    const ENDPOINT = "http://localhost:4000"
+    const ENDPOINT = "https://greendoor.website"
     let socket: any
     socket = io(ENDPOINT)
 
