@@ -15,7 +15,7 @@ const Categorycard:React.FC<categoryData>=({category})=> {
                                             <img className="rounded-t-lg w-full h-[170px] object-cover" src={category?.image} alt="" />
                                         
 
-                                        <div className="p-4 pt-2 w-[300px] h-[180px]">
+                                        <div className="p-4 pt-2 w-[200px] h-[150px]">
                                            
                                                 <h2 className="mb-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{category?.name}</h2>
                                          
