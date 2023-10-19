@@ -23,6 +23,8 @@ export const courseDetails = async (courseId:any): Promise<courseType> => {
 export const getAllCategory = async():Promise<any>=>{
     const res = await userAxios.get('getCategories')
 
+    console.log(res,"response of the category detailsssssss");
+    
     const data = res.data
     return data
 }
