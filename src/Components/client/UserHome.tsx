@@ -99,7 +99,7 @@ function UserHome() {
                 <div>
                     <p>"To cultivate exceptionally talented fashion designers through comprehensive <br />creative training and personalized mentorship."</p>
                 </div>
-                <div className='posters flex  items-center mt-10  motion-safe:hover:scale-110 transition-[2s]  cursor-pointer' style={{ maxWidth:'1400px', overflowY: 'auto' }}>
+                <div className='posters flex  items-center mt-10  motion-safe:hover:scale-105 transition-[2s]  cursor-pointer' style={{ maxWidth:'1400px', overflowY: 'auto' }}>
                     {
                         categoryData?.slice(0, 6).map((category, index) => (
                                 <Categorycard category={category}/>

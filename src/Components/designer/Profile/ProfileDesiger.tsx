@@ -2,13 +2,14 @@ import React ,{useEffect, useState}from 'react'
 import { designerType } from '../../../Models/Models'
 import { profile} from '../../../Services/designer/designerData'
 import EditProfile from './EditProfile'
+// import ImagaCropDialog from '../ImagaCropDialog'
 
 
 function DesignerProfile() {
 
   const [designer,setDesigner] = useState<designerType|undefined>()
   const [isModalOpen,setIsModalOpen] = useState(false)
-  
+  const [selectedProfile,setSelectedProfile] = useState<any|null>(null)
 
 
 
@@ -42,7 +43,12 @@ function DesignerProfile() {
   return (
     <>
     <div className={isModalOpen ? 'blur' : ''}>
-
+{/* {selectedProfile? <ImagaCropDialog  id={selectedProfile.Id}
+imageUrl={selectedProfile.imageUrl}
+cropInit={selectedProfile.crop} 
+zoomInit={selectedProfile.zoom}
+aspectInit={selectedProfile.aspect}
+/>:null} */}
     <div className='flex'>
      
       <div className='ml-80 '>
@@ -52,7 +58,7 @@ function DesignerProfile() {
     <div className="ml-40 w-[400px]">
         <figure>
           {/* <img className='rounded-xl' src="https://i.pinimg.com/474x/a7/80/80/a7808059330f062de8a90e844d0558d1.jpg" alt="profile image" /> */}
-          <img className='rounded-xl' src={(designer?.image)?designer?.image : "	https://cdn-icons-png.flaticon.com/512/3135/3135715.png" } alt="Profile Image" />
+          <img className='rounded-xl' src={(designer?.image)?designer?.image : "	https://cdn-icons-png.flaticon.com/512/3135/3135715.png" } alt="Profile Image"  onClick={()=>setSelectedProfile(designer)}/>
         </figure>
       </div>
 
@@ -94,17 +100,7 @@ function DesignerProfile() {
                   {/* <p className='text-xl font-extrabold'>{designer?.field}</p> */}
                   <p>
                     {designer?.aboutMe}
-                    {/* My passion is to inspire and empower you to live your best version.  Using fashion as a vehicle to educate, inspire and transform your life -- ultimately, strive for excellence.
-
-~~ A fashion industry expert --  from concept to completion: from Vision Boards to Pattern Drafting, to Tech Packs, to Social Media. 
-
-~~ An FIT (Fashion Institute of Technology, NYC) graduate, and as a former Instructor and Curriculum Development Coordinator of the Fashion Design program at FIDM (Fashion Institute of Design & Merchandising, LA) all my fashion design skills and experience are put into practice and into my Courses. 
-
-~~ As a Consultant for SAMSUNG C&T America, I have the opportunity to introduce new Brands to Samsung's infinite available resources to elevate Brands to global visibility.
-
-~~ Born and raised in ROME (Italy), speaking Italian was an asset while working at RALPH LAUREN, when responsibilities included supervising samples manufactured in Italy.
- */}
-
+               
                   </p>
                   </div>
 
@@ -135,3 +131,15 @@ function DesignerProfile() {
 }
 
 export default DesignerProfile
+
+
+     {/* My passion is to inspire and empower you to live your best version.  Using fashion as a vehicle to educate, inspire and transform your life -- ultimately, strive for excellence.
+
+~~ A fashion industry expert --  from concept to completion: from Vision Boards to Pattern Drafting, to Tech Packs, to Social Media. 
+
+~~ An FIT (Fashion Institute of Technology, NYC) graduate, and as a former Instructor and Curriculum Development Coordinator of the Fashion Design program at FIDM (Fashion Institute of Design & Merchandising, LA) all my fashion design skills and experience are put into practice and into my Courses. 
+
+~~ As a Consultant for SAMSUNG C&T America, I have the opportunity to introduce new Brands to Samsung's infinite available resources to elevate Brands to global visibility.
+
+~~ Born and raised in ROME (Italy), speaking Italian was an asset while working at RALPH LAUREN, when responsibilities included supervising samples manufactured in Italy.
+ */}

@@ -16,7 +16,7 @@ function CategoryList() {
     const { id } = useParams();
     const [courseData, setCourseData] = useState<courseType[] | undefined>(undefined);
   
-  
+
     useEffect(() => {
       const getCategory = async () => {
         try {

@@ -66,7 +66,20 @@ function CategoryDetail() {
 
       </div>
 
-
+{/* <div>
+  <form action="">
+    <label htmlFor="sort"></label>
+    <select name="sort" id="sort" className='sort-selection--style'>
+      <option value="lowest">Price(lowest)</option>
+      <option value="#" disabled></option>
+      <option value="lowest">Price(highest)</option>
+      <option value="#" disabled></option>
+      <option value="lowest">Price(a-z)</option>
+      <option value="#" disabled></option>
+      <option value="lowest">Price(z-a)</option>
+    </select>
+  </form>
+</div> */}
 
       <div className='flex flex-wrap items-center justify-center mt-40  cursor-pointer'>
         {courseData?.map((classData) => (
