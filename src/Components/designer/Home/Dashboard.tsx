@@ -84,9 +84,9 @@ const [totalrevenue,setTotal] = useState<any|undefined>(undefined)
       const dataCourse = [
         { name: 'Courses', value: allCoursesLength },
         { name: 'PaymentedUsers', value: allpaymentedUsers },
-        { name: 'PaymentedUsers', value: 1234567890 },
-        { name: 'Courses', value: 2345000 },
-        { name: 'Categories', value: 12300000 },
+        // { name: 'PaymentedUsers', value: 1234567890 },
+        // { name: 'Courses', value: 2345000 },
+        // { name: 'Categories', value: 12300000 },
       ];
   return (
     <div className="p-4 ml-60 mt-10 ">
@@ -137,7 +137,7 @@ const [totalrevenue,setTotal] = useState<any|undefined>(undefined)
               </div>
               <div className="flex flex-col flex-grow ml-4">
                 <div className="text-sm  font-bold text-grey">Paymented Users</div>
-                {/* <div className="font-bold text-lg">{paymentedUser?.length}</div> */}
+                <div className="font-bold text-lg">{paymentedUser?.length}</div>
               </div>
             </div>
                   </div>
