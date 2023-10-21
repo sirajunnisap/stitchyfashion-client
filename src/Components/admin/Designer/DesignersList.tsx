@@ -4,6 +4,7 @@ import { designerType } from '../../../Models/Models'
 import { getAllDesignerData } from '../../../Services/designer/designerData'
 import { blockDesigner } from '../../../Services/admin/adminData'
 import SearchBar from './SearchBar'
+import { Link } from 'react-router-dom'
 
 
 function DesignersList() {
@@ -95,6 +96,7 @@ function DesignersList() {
             <th className="px-1 py-3">Experience</th>
             <th className="px-1 py-3">skill</th> */}
             <th className="px-1 py-3">Status</th>
+            <th className="px-1 py-3">More Info</th>
           </tr>
         </thead>
 
@@ -140,6 +142,15 @@ function DesignersList() {
       {designer.isBlocked ? 'Block' : 'Unblock'}
     </button>
   </td>
+
+  <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
+  <Link
+    className='rounded-full px-6 py-1 text-xs font-semibold bg-[#3b929f] text-green-900'
+ to={`/admin/getDesignerMoreInfo/${designer?._id}`}
+  >
+    View
+  </Link>
+</td>
                           </tr>
                         )
                       })

@@ -36,3 +36,4 @@ export const editCategory = async(categoryData:any, categoryId:any):Promise<any>
     return data
     
 }
+

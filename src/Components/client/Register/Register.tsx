@@ -144,8 +144,8 @@ validationSchema={validationSchema}
 onSubmit={onSubmit}
 >
 <div className='h-screen w-fulltop-0 flex items-center justify-center' >
-<section className="signUp "  >
-    <div className="container_login ">
+<section className=""  >
+    <div className="">
         <div className="signUp-content  ">
             <div className="signUp-form ">
                 <h2 className="form-title text-lavender">Sign up</h2>
@@ -239,7 +239,7 @@ onSubmit={onSubmit}
                     <div className="form-group form-button">
                     <button
                      type="submit"
-                    className="w-full text-white bg-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#0F5762]"
                       >
                     Sign Up
                    </button>
@@ -255,7 +255,7 @@ onSubmit={onSubmit}
             </div>
             <div className="signUp-image">
                 <figure>
-                    <img src='https://i.pinimg.com/564x/0d/30/9b/0d309bbc802545f9ef289357a3179b89.jpg' alt="sing up image" />
+                    <img src='https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7862.jpg?size=626&ext=jpg&ga=GA1.1.589938631.1675981701&semt=ais' alt="sing up image" />
                 </figure>
                  <ToastContainer/>
             </div>

@@ -109,6 +109,7 @@ Enroll Now
             <Payment
               selectedAmount={paymentAmount}
               selectedCourseId={courseData?._id}
+              designerId={designerData?._id}
             />
           </PayPalScriptProvider>
         </div>

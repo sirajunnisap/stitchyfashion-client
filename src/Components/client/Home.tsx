@@ -6,8 +6,10 @@ import { logoutUser } from '../../Redux/client/userSlice';
 import { Link } from 'react-router-dom';
 
 import './style.css'
-import { UserType } from '../../Models/Models';
-import { searchUsersAdmin } from '../../Services/search/search';
+import { courseType } from '../../Models/Models';
+import SearchBar from './SearchBar';
+
+
 function NavBar() {
 
   const navigate = useNavigate()
@@ -16,26 +18,6 @@ function NavBar() {
 
   console.log(user, "userDAta in home page");
 
-  const [input, setInput] = useState<string>('');
-  const [searchResults,setSearchResults] = useState<UserType[]>([]);
-
-  const handleChange = async(value:string)=>{
-    setInput(value);
-    
-    try {
-      const result = await searchUsersAdmin(value);
-      setSearchResults(result);
-    } catch (error) {
-      console.log('error searching users:',error)
-    }
-  }
-
-  useEffect(()=>{
-    handleChange(input)
-  },[]);
-
-  console.log(searchResults,"search resultsssssssssssss");
-  
   
   return (
 
@@ -132,16 +114,8 @@ function NavBar() {
           </div>
           <div>
 
-            <div className='ml-[700px]'>
-              <div className="search">
-                {/* <form id="searchFormTop" action="" method="get"> */}
-
-                  <input type="text" className="searchbox text-sm text-#07778B " placeholder="Search..." value={input} onChange={(e) => handleChange(e.target.value)}/>
-                  <span className="search-btn-wrap ">
-                    <button className="search-btn" type="submit"><i className="fa fa-search"></i></button>
-                  </span>
-                {/* </form> */}
-              </div>
+            <div className='ml-[200px]'>
+              <SearchBar />
 
 
             </div>

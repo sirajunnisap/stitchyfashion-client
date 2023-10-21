@@ -47,6 +47,8 @@ export const searchDesignersUser = async(searchQ?:string,sort?:string):Promise<d
 export const searchCoursesUser = async(searchQ?:string,sort?:string):Promise<courseType[]>=>{
     const res = await userAxios.get(`/courses?q=${searchQ}&sort${sort}`);
     const data :courseType[] = await res.data
+    console.log(data,"dddddddddddddddddddddddddddddddd");
+    
     return data
 }
 

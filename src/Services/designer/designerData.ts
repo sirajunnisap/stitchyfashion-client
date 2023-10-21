@@ -45,3 +45,10 @@ export const designerById = async(designerId:any):Promise<any>=>{
     return data
 }
 
+
+export const userMoreInfo  = async(designerID:any):Promise<any>=>{
+
+    const res = await adminAxious.get(`getDesignerMoreInfo/${designerID?._id}`)
+    const data = res.data
+    return data
+}

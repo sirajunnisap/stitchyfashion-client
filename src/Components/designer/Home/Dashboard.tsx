@@ -1,18 +1,93 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { PieChart,Cell, Pie, Tooltip,BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend,Label} from 'recharts';
+import { courseType, paymentType } from '../../../Models/Models';
+import { getAllCourses, getPaymentedUsers } from '../../../Services/Course/Coureses';
+
 function Dashboard() {
 
+  const [paymentedUser, setPaymentedUser] = useState<paymentType[] | undefined>(undefined)
+  const [courseData, setCourseData] = useState<courseType[] | undefined>(undefined)
+const [totalrevenue,setTotal] = useState<any|undefined>(undefined)
+
+  useEffect(()=>{
+    const getCourses = async()=>{
+      try {
+        const course = await getAllCourses()
+        setCourseData(course)
+      } catch (error) {
+        
+      }
+    }
+    getCourses()
+  },[])
+
+  console.log(courseData,"courseDAdddddddddddd");
+  
+  
+  useEffect(() => {
+
+    const getUsers = async () => {
+      try {
+
+        const PaymentedUsers = await getPaymentedUsers()
+  
+        setPaymentedUser(PaymentedUsers)
+
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
+    getUsers()
+  }, [])
+
+  const allCoursesLength = courseData?.length
+  const allpaymentedUsers = paymentedUser?.length
+  const payment = paymentedUser
+ 
+  useEffect(() => {
+    if (payment) {
+      const amounts = payment.map((item) => parseFloat(item.amount) || 0);
+      console.log(amounts);
+      
+      setTotal(amounts);
+    }
+  }, [payment]);
+
+  useEffect(() => {
+    if (totalrevenue) {
+      const totalSum = totalrevenue.reduce((sum:any,item:any)=>sum+item )
+
+      console.log(totalSum,"toalrevenueeeeeeeee");
+
+    }
+
+     
+  }, [totalrevenue]);
+  
+
+
+
+
+ console.log(totalrevenue,"totallllllrevenueeee");
+ 
 
     const data = [
-        { name: 'Users', value: 123457890 },
-        { name: 'Designers', value: 1234567 },
-        { name: 'PaymentedUsers', value: 1234567890 },
-        { name: 'Courses', value: 2345000 },
-        { name: 'Categories', value: 12300000 },
+      { name: 'Courses', value: allCoursesLength },
+      { name: 'PaymentedUsers', value: allpaymentedUsers },
+        // { name: 'PaymentedUsers', value: 1234567890 },
+        // { name: 'Courses', value: 2345000 },
+        // { name: 'Categories', value: 12300000 },
       ];
       
       const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
       
+      const dataCourse = [
+        { name: 'Courses', value: allCoursesLength },
+        { name: 'PaymentedUsers', value: allpaymentedUsers },
+        { name: 'PaymentedUsers', value: 1234567890 },
+        { name: 'Courses', value: 2345000 },
+        { name: 'Categories', value: 12300000 },
+      ];
   return (
     <div className="p-4 ml-60 mt-10 ">
             <div className=" ">
@@ -27,7 +102,7 @@ function Dashboard() {
               </div> 
               <div className="flex flex-col flex-grow ml-4">
                 <div className="text-sm  font-bold text-grey">Courses</div>
-                {/* <div className="font-bold text-lg">{courseData?.length}</div>   */}
+                <div className="font-bold text-lg">{courseData?.length}</div>  
               </div>
             </div>
             <div className="flex flex-row bg-[#00879b] shadow-sm rounded-xl p-4 h-32 w-72  mb-5">
@@ -102,14 +177,14 @@ function Dashboard() {
 
 <PieChart width={400} height={400}>
               <Pie
-                data={data}
+                data={dataCourse}
                 cx="50%"
                 cy="50%"
                 outerRadius={100}
                 fill="#0F5762"
                 dataKey="value"
               >
-                {data.map((entry, index) => (
+                {dataCourse.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>

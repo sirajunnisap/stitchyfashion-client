@@ -59,7 +59,7 @@ function Checkout() {
     }
     const paymentAmount = courseData?.courseFee
   
-  //  setPaymentAmount(courseData?.courseFee)
+  
   return (
 
    
@@ -137,13 +137,13 @@ Complete Checkout
 {showPaymentButton&& 
 
 <div className="col-span-1 mt-4 p-5">
-<PayPalScriptProvider options={initialOptions}>
+{/* <PayPalScriptProvider options={initialOptions}>
 <Payment
   selectedAmount={paymentAmount}
-  // selectedDuration={selectedPayment}
+  designerId={designerData?._id}
   selectedCourseId={courseData?._id}
 />
-</PayPalScriptProvider>
+</PayPalScriptProvider> */}
 </div>
 }
 

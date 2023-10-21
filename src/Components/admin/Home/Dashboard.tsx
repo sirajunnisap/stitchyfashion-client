@@ -6,8 +6,9 @@ import { PieChart,Cell, Pie, Tooltip,BarChart, Bar, XAxis, YAxis, CartesianGrid,
 import { UserType, categoryType, courseType, designerType, paymentType } from '../../../Models/Models';
 import { getAllPaymentedUsers, getAllUserData } from '../../../Services/client/userData';
 import { getAllDesignerData } from '../../../Services/designer/designerData';
-import { getAllCoursesForAdmin } from '../../../Services/Course/Coureses';
+import { getAllCoursesForAdmin, getCourseByCategory } from '../../../Services/Course/Coureses';
 import { getAllCategory } from '../../../Services/admin/addCategory';
+import PaymentUser from '../../designer/Users/PaymentUser';
 
 function Dashboard() {
 
@@ -18,6 +19,9 @@ function Dashboard() {
   const [courseData, setCourseData] = useState<courseType[] | undefined>(undefined)
   const [categoryData, setCategoryData] = useState<categoryType[] | undefined>(undefined)
   const [searchResults,setSearchResults] = useState<UserType[]>([]);
+  const [totalrevenue,setTotal] = useState<any|undefined>(undefined)
+  const [totalAmount,setTotalAmount] = useState<any|undefined>(undefined)
+ const [categoryCourseData,setCategoryCourseData] = useState<any|undefined>(undefined)
 
   useEffect(() => {
 
@@ -25,7 +29,7 @@ function Dashboard() {
       try {
 
         const PaymentedUsers = await getAllPaymentedUsers()
-        const Users = await getAllPaymentedUsers()
+  
         setPaymentedUser(PaymentedUsers)
 
       } catch (error: any) {
@@ -72,6 +76,9 @@ function Dashboard() {
 
         const Courses = await getAllCoursesForAdmin()
         setCourseData(Courses)
+
+        const courseByCategory = await  getCourseByCategory()
+        setCategoryCourseData(courseByCategory)
       } catch (error) {
         
       }
@@ -84,7 +91,36 @@ function Dashboard() {
   const PaymentedUserslength = paymentedUser?.length
  const allCoursesLength = courseData?.length
  const allCategorylength = categoryData?.length 
+
+
+ console.log(paymentedUser,"paaaa");
  
+ useEffect(() => {
+  if (paymentedUser) {
+    const amounts = paymentedUser.map((item) => parseFloat(item.amount) || 0);
+    console.log(amounts,"amountssssssss");
+    
+    setTotal(amounts);
+  }
+},[paymentedUser]);
+
+useEffect(() => {
+  if (totalrevenue) {
+    const totalSum = totalrevenue.reduce((sum:any,item:any)=>sum+item )
+   console.log(totalSum,"ttttttooooooooooooooo");
+   setTotalAmount(totalSum)
+
+  }
+
+   
+},[totalrevenue]);
+
+
+
+console.log(totalAmount,"totalamount");
+
+
+
 const data = [
   { name: 'Users', value: allUserlength },
   { name: 'Designers', value: allDesignerLength },
@@ -93,8 +129,22 @@ const data = [
   { name: 'Categories', value: allCategorylength },
 ];
 
-const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
 
+categoryCourseData?.map((items:any)=>{
+  console.log(items);
+  console.log(items?.courses?.length)
+})
+const dataCategory = categoryCourseData?.map((category:any) => {
+  return {
+    name: category._id, 
+    value: category.courses.length,
+  };
+});
+
+
+
+const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
+const COLORSFORCATEGORY = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b","#BFD7EA","#BE95C4","#BEB8EB",];
   return (
     
       <div className="p-4 ml-60 mt-10 ">
@@ -144,8 +194,8 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
   </svg>
               </div>
               <div className="flex flex-col flex-grow ml-4">
-                <div className="text-sm  font-bold text-grey">Paymented Users</div>
-                <div className="font-bold text-lg">{paymentedUser?.length}</div>
+                <div className="text-sm  font-bold text-grey">Total Revenue</div>
+                <div className="font-bold text-lg">{totalAmount}</div>
               </div>
             </div>
                   </div>
@@ -179,21 +229,21 @@ const COLORS = ["#b46c88","#d98e9f","#ffb0b8","#6DA5C0","#00879b"];
         </BarChart>
 
 </div>
-<div className='px-10 shadow-sm rounded-xl bg-gray-100 '>
+<div className='px-10 py-5 shadow-sm rounded-xl bg-gray-100 '>
 
-
+<p className='text-[#0C7075] font-bold text-2xl pl-16 '>Category Seperated</p>
 
 <PieChart width={400} height={400}>
   <Pie
-    data={data}
+    data={dataCategory}
     cx={200}
     cy={200}
     outerRadius={100}
     fill="#0F5762"
     dataKey="value"
   >
-    {data.map((entry, index) => (
-      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+    {dataCategory?.map((entry:any, index:any) => (
+      <Cell key={`cell-${index}`} fill={COLORSFORCATEGORY[index % COLORSFORCATEGORY.length]} />
     ))}
     {/* <Label
       value="Course Length"

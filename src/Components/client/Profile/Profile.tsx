@@ -101,7 +101,11 @@ function Profile() {
           </div>
         ))
       ) : (
-        <p>No purchased courses found.</p>
+        <div>
+  <p>No purchased courses found.</p>
+        <img src="https://www.signupgenius.com/cms/images/3-Common-Pitfalls-When-Creating-a-Sign-Up.png" alt="" />
+        </div>
+      
       )}
     </div>
   </div>

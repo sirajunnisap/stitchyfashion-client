@@ -24,6 +24,7 @@ import EntrolledCoursePage from '../../Pages/client/Course/EntrolledCoursePage';
 import ChatPage from '../../Pages/client/Chat/ChatPage';
 import Error404 from '../../Components/404Error/Error404';
 import About from '../../Components/client/About';
+import FooterHome from '../../Components/client/FooterHome';
 
 
 const UserRoute:React.FC = () => {
@@ -73,6 +74,7 @@ const UserRoute:React.FC = () => {
         <Route path='/about' element={<About/>}/>
         <Route path='/404' element={<Error404/>}/>
       </Routes>
+      {!isLoginRoute && <FooterHome/>}
     </div>
   )
 }

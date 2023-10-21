@@ -54,6 +54,24 @@ export const getAllCourses = async (): Promise<any> => {
     const data = res.data
     return data
 }
+export const getPaymentedUsers = async (): Promise<any> => {
+
+    const designerCredentials: any = localStorage.getItem('persist:Designer')
+
+    const designerCredentialsObject = JSON.parse(designerCredentials)
+
+    const designerToken = designerCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
+
+    console.log(designerToken,"designerToken");
+
+    const res = await designerAxios.get('getPaymentedUsers',
+    {headers:{
+        Authorization:`Bearer ${designerToken}`
+    }});
+
+    const data = res.data
+    return data
+}
 
 export const courseDetails = async (courseId:any): Promise<courseType> => {
     const res = await designerAxios.get(`courseDetails/${courseId}`)
@@ -87,4 +105,10 @@ export const getPurchasedCourses= async():Promise<any>=>{
     console.log(data,"res from backend purchased course");
     
     return data
+}
+
+export const getCourseByCategory = async():Promise<any>=>{
+    const res = await adminAxious.get('/getCourseByCategory')
+    console.log(res.data,"course data for admin dashboardddd");
+    return res.data
 }

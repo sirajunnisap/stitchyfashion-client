@@ -70,7 +70,7 @@ function UsersList() {
                     <th className="px-1 py-3">Image</th>
                     <th className="px-1 py-3">Name</th>
                     <th className="px-1 py-3">email</th>
-                    <th className="px-1 py-3">Amount</th>
+                    <th className="px-1 py-3">Chat</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -81,22 +81,20 @@ function UsersList() {
                         <p key={user._id} className="whitespace-no-wrap">{index + 1}</p>
                       </td>
                       <td className="border-b border-gray-200 bg-white py-5 text-sm">
-                        <img className="rounded-full h-[60px] object-cover" src={user.user.image ? user.user.image : 'https://media.istockphoto.com/id/1316947194/vector/messenger-profile-icon-on-white-isolated-background-vector-illustration.jpg?s=612x612&w=0&k=20&c=1iQ926GXQTJkopoZAdYXgU17NCDJIRUzx6bhzgLm9ps='} alt="" />
+                        <img className="rounded-full h-[60px] object-cover" src={user?.user?.image ? user?.user?.image : 'https://media.istockphoto.com/id/1316947194/vector/messenger-profile-icon-on-white-isolated-background-vector-illustration.jpg?s=612x612&w=0&k=20&c=1iQ926GXQTJkopoZAdYXgU17NCDJIRUzx6bhzgLm9ps='} alt="" />
                       </td>
                       <td className="border-b border-gray-200 bg-white py-5 text-sm">
-                        <p className="whitespace-no-wrap">{user.user.name}</p>
+                        <p className="whitespace-no-wrap">{user?.user?.name}</p>
 
                       </td>
                       <td className="border-b border-gray-200 bg-white py-5 text-sm">
-                        <p className="whitespace-no-wrap">{user.user.email}</p> 
+                        <p className="whitespace-no-wrap">{user?.user?.email}</p> 
                       </td>
 
-                      <td className="border-b border-gray-200 bg-white py-5 text-sm">
-                        <p className="whitespace-no-wrap">{user.amount}</p>
-                      </td>
+                      
 
                       <td>
-                        <Link className=' bg-teal-600 rounded-xl px-10 py-2 ml-2  text-white font-bold' to={`/designer/chatWithUser/${user.user?._id}`}>Connect</Link>
+                        <Link className=' bg-[#0F5762] rounded-xl px-10 py-2  text-white font-bold' to={`/designer/chatWithUser/${user?.user?._id}`}>Connect</Link>
                       </td>
                     </tr>
                   ))}

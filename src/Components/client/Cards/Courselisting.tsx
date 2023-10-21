@@ -32,7 +32,7 @@ const Courselisting:React.FC<classdetails>=({classData})=> {
               </div>
               <div className='mb-3 flex items-center justify-center'>
 
-              <button className='bg-teal-600 rounded-xl px-20 py-2   text-white font-bold'>View</button>
+              <button className='bg-teal-600 rounded-lg px-28 py-2   text-white font-bold'>View</button>
            
               </div> </div>
 

@@ -49,7 +49,7 @@ function CategoryDetail() {
       <div className="w-1/5 pr-10">
         <Home />
       </div>
-      <div className='fixed top-20 bg-white border-y-2 border-gray-200 h-[45px] w-full '>
+      <div className='fixed top-16 bg-white border-y-2 border-gray-200 h-[45px] w-full mt-3'>
         <ul className=" flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0 items-center justify-center">
           {categoryData?.map((category: categoryType, index) => {
             return (
@@ -125,6 +125,8 @@ function CategoryDetail() {
           </div>
         ))}
       </div> */}
+
+
 
     </div>
   )

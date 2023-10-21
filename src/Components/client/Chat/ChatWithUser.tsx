@@ -39,6 +39,8 @@ function ChatWithUser() {
         getDesigner()
     }, [id])
 
+    console.log(userData,"userdata in chat ");
+    
     useEffect(()=>{
         const designerData = async()=>{
             const data = await profile()
@@ -209,20 +211,22 @@ function ChatWithUser() {
                 </div>
                 <div className='w-1/4 h-full bg-gray-100 rounded-r-2xl items-center justify-center'>
 
-                    {/* <div className='ml-24 items-center justify-center'>
-                        <img alt="..." src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" className="rounded-full ml-5  mt-10  w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+<div className='ml-10 items-center justify-center'>
+    <img alt="..." src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" className="rounded-full ml-8  mt-10  w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
 
 
 
 
 
-                        <h3 className='text-2xl mt-6 font-bold'>{userData?.name}</h3>
-                        <h6 className='text-base ml-2 font-semibold mt-3'>purchased coursesssssss</h6>
+    <h3 className='text-2xl ml-5 mt-6 font-bold'>{userData?.name}</h3>
+    <h6 className='text-base font-semibold mt-3'>{userData?.email}</h6>
 
-                    </div> */}
+</div>
 
 
-                </div>
+</div>
+
+
 
             </div>
         </div >

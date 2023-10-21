@@ -7,9 +7,10 @@ import { useNavigate } from 'react-router-dom';
 interface PaymentProps {
   selectedAmount: any;
   selectedCourseId: any;
+  designerId:any
 }
 
-function Payment({ selectedAmount, selectedCourseId }: PaymentProps) {
+function Payment({ selectedAmount, selectedCourseId, designerId }: PaymentProps) {
   const [{ isPending }] = usePayPalScriptReducer();
   const [paymentCompleted, setPaymentCompleted] = useState<boolean | null>(false);
 const [paymentedData,setPaymentedData] = useState<any>()
@@ -23,6 +24,7 @@ const [isModalOpen,setIsModalOpen] =useState(false)
     const paymentDetails = {
       amount: selectedAmount,
       selectedCourse: selectedCourseId,
+      designer:designerId
     };
 
     userAxios.post(`/paymentforCourse`, paymentDetails)

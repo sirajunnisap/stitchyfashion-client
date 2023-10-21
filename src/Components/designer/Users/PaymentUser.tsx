@@ -77,7 +77,7 @@ console.log(selectedCourseId,"selected courseeid")
     <div className="overflow-x-auto">
       <table className="w-full ">
         <thead>
-          <tr className="bg-green-700 text-left text-xs font-semibold uppercase tracking-widest text-white">
+          <tr className="bg-[#0F5762] text-left text-xs font-semibold uppercase tracking-widest text-white">
             <th className="px-5 py-3">ID</th>
             <th className="px-1 py-3">Image</th>
             <th className="px-1 py-3">Course</th>
@@ -95,7 +95,7 @@ console.log(selectedCourseId,"selected courseeid")
                             <p key={course._id} className="whitespace-no-wrap">{index + 1}</p>
                           </td>
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
-                          <img className="rounded-full h-[70px] object-cover" src={course.image} alt="" />
+                          <img className="rounded-full h-[70px] w-[70px] object-cover" src={course.image} alt="" />
                           </td>
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
                            <p className="whitespace-no-wrap">{course.title}</p>
@@ -108,7 +108,7 @@ console.log(selectedCourseId,"selected courseeid")
                         
                           <td className="border-b border-gray-200 bg-white px-1 py-5 text-sm">
   <Link to={`/designer/paymentedUsersList/${course._id}`}
-    className='rounded-full bg-green-400 px-3 py-1 text-xs font-semibold text-white'
+    className='rounded-full bg-[#0F5762] px-3 py-1 text-xs font-semibold text-white'
     // onClick={() =>courseIdforUsers(course._id)}
   >
    users 
@@ -122,13 +122,13 @@ console.log(selectedCourseId,"selected courseeid")
         </tbody>
       </table>
     </div>
-    <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
+    {/* <div className="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
       <span className="text-xs text-gray-600 sm:text-sm"> Showing 1 to 5 of 12 Entries </span>
       <div className="mt-2 inline-flex sm:mt-0">
         <button className="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Prev</button>
         <button className="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Next</button>
       </div>
-    </div>
+    </div> */}
   </div>
 </div>
 </div>

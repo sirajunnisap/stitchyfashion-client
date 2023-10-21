@@ -50,24 +50,24 @@ function CategoryList() {
                 <Home />
             </div>
            
-    <div className='flex flex-wrap W-4/5 ml-28 mt-28'>
+    <div className='flex flex-wrap W-4/5  mt-28'>
     <div className='flex flex-col items-center'>
             <div className=''>
-                <h2 className="mb-4  text-4xl tracking-tight font-extrabold text-[#07778B] dark:text-white relative">
+                <h2 className="mb-7  text-4xl tracking-tight font-extrabold text-[#07778B] dark:text-white relative">
                     Categories
                     {/* <span className="absolute bottom-0 left-1 transform  w-full h-0.5 bg-gray-400"></span> */}
                 </h2>
             </div>
-            <div>
+            <div className='mb-6'>
                 <p>"To cultivate exceptionally talented fashion designers through comprehensive <br />creative training and personalized mentorship."</p>
             </div>
   
-            <div className='flex flex-wrap items-center mt-10 ml-48 cursor-pointer'>
+            <div className='flex flex-wrap items-center justify-center mt-10  cursor-pointer'>
         {
             categoryData?.map((category, index) => (
 
 
-              <div className='flex flex-wrap items-center mt-10' >
+              <div className='flex flex-wrap items-center mt-1' >
               <div key={category?._id}  className="max-w-sm mx-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5 motion-safe:hover:scale-110 transition-[2s]  cursor-pointer" onClick={()=> navigate(`/categoryDetails/${category._id}`)}>
 
                       <img className="rounded-t-lg w-full h-[170px] object-cover" src={category?.image} alt="" />
@@ -129,6 +129,7 @@ function CategoryList() {
 
    
    
+
     </div>
   )
 }
