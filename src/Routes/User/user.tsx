@@ -73,6 +73,7 @@ const UserRoute:React.FC = () => {
         <Route path='/chatWithDesigner/:id' element={<ChatPage/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/404' element={<Error404/>}/>
+        <Route path='*' element={<Error404/>}/>
       </Routes>
       {!isLoginRoute && <FooterHome/>}
     </div>

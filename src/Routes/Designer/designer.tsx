@@ -31,6 +31,7 @@ import Error404 from "../../Components/404Error/Error404";
         <Route path="/paymentedUsersList/:id" element={<UsersList/>}/>
         <Route path="/chatWithUser/:id" element={<ChatWithUser/>}/>
         <Route path='/notFound' element={<Error404/>}/>
+        <Route path='*' element={<Error404/>}/>
     </Routes>
     </div>
     )

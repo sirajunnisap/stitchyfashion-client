@@ -31,6 +31,7 @@ const App:React.FC<RoutesProps> = () =>  {
   const IsAuthDesigner = UseAppSelector(state=>state.Designer.accessToken)
   return (
         <Router>
+          
           <Routes>
             <Route path="/*" element={<UserRoute/>}/>
 
@@ -44,8 +45,8 @@ const App:React.FC<RoutesProps> = () =>  {
             <Route path='/changePassword/:id' element={<ChangePassword/>}/>
             <Route path='/signup' element={<Register/>}/>
             <Route path='/designer/verifyEmail/:id' element={<VerifyMail/>}/>
-            {/* <Route path='/notFound' element={<Error404/>}/> */}
-            {/* <Route path="*" element={<Error404/>} /> */}
+            <Route path='*' element={<Error404/>}/>
+           
 
           </Routes>
         </Router>

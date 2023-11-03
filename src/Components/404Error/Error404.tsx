@@ -3,7 +3,7 @@ import "./css404.css"
 import { Link } from 'react-router-dom'
 function Error404() {
   return (
-    <div className='px-64 pt-16'>
+    <div className='px-64 py-10 '>
       <div className="wrapper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
   <title>404</title>
   <g id="Layer_12 yellow-back-fig" data-name="Layer 12">
@@ -133,8 +133,8 @@ function Error404() {
   
 </svg>
 
-<p style={{textAlign:"center"}}>
-              <Link to="/">Go to Home </Link>
+<p style={{textAlign:"center", paddingTop:"20px"}}>
+              <Link to="/" className='text-white font-bold text-base bg-[#07778B] px-10 py-4 rounded-lg'>Go to Home </Link>
             </p>
 </div>
 

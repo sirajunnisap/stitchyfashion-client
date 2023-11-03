@@ -38,7 +38,7 @@ function EntrolledCourse() {
 
     
   return (
-    <div>
+    <div className='pb-60'>
       <div className='flex mt-10 ml-10 mr-20'>
 
 

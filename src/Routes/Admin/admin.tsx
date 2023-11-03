@@ -34,6 +34,7 @@ const AdminRoute = ()=> {
         <Route path='/categoryDetails/:id' element={<CategoryDetail/>}/>
         <Route path='/getUserMoreInfo/:id' element={<UserMoreInfo/>}/>
         <Route path='/notFound' element={<Error404/>}/>
+        <Route path='*' element={<Error404/>}/>
       </Routes>
     </div>
   )

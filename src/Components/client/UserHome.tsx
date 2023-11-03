@@ -51,7 +51,7 @@ function UserHome() {
 />
                                    
                                     </h2>
-                                <p className="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Flowbite helps you connect with friends, family and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups, Watch and Marketplace.</p>
+                                <p className="mb-8 font-light text-gray-500 sm:text-xl dark:text-gray-400">Whether you want to brush up on illustration skills, master sewing, learn the basics of running a fashion business or take a full eight-week course on fashion buying, there are a number of ways to do so without ever setting foot in a physical classroom. </p>
                                 <div className="flex flex-col  space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">{user?.accessToken?(
                                     <Link to={'/listOfCategories'} className="inline-flex items-center justify-center px-14 py-2.5 text-base font-medium text-center text-white bg-[#07778B] rounded-full">
                                     Get started

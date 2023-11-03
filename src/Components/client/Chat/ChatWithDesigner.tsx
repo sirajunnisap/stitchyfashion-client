@@ -196,7 +196,7 @@ function ChatWithDesigner() {
                         <div className='relative w-full bg-gray-200 h-10 rounded-full mx-2 '>
                             {/* <Input className='ml-5 mt-1 font-medium text-gray-400'  Message . . ./> */}
 
-                            <input type="text" className='border-0 rounded-full bg-gray-200 font-medium text-gray-300 outline-none'
+                            <input type="text" className='border-0 rounded-full bg-gray-200 font-medium text-gray-500 outline-none'
                                 placeholder='Message . . .'
                                 name='message'
                                 onChange={(e) => setMessageFn(e)}
