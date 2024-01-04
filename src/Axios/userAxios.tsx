@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { userAPI } from '../Constants/API';
-import { log } from 'console';
+
 
 const userAxios = axios.create({
      baseURL : userAPI
@@ -29,6 +29,7 @@ userAxios.interceptors.request.use(
             //  console.log(accessToken,'user token is ok interceptors');
              
              config.headers["User"] = `Bearer ${accessToken}`;
+             
          }
          
          return config;

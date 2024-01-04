@@ -27,7 +27,7 @@ function SearchBar() {
 
   return (
     <div className="">
-      <div className="ml-96">
+      <div className="fixed right-80 top-6 lg:fixed lg:right-90 lg:top-6">
         <div className="search">
           <input
             type="text"

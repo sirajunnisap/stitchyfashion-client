@@ -148,7 +148,10 @@ onSubmit={onSubmit}
     <div className="">
         <div className="signUp-content  ">
             <div className="signUp-form ">
-                <h2 className="form-title text-lavender">Sign up</h2>
+            <div className='w-64 ml-10'>
+            <img src="/Stitchy.png" alt="" />
+          </div>
+                {/* <h2 className="form-title text-lavender">Sign up</h2> */}
                 <Form method="POST" className="register-form" id="register-form">
                     <div className="form-group">
                     <label htmlFor="name" className='pl-1'>
@@ -253,10 +256,10 @@ onSubmit={onSubmit}
                 </Form>
 
             </div>
-            <div className="signUp-image">
-                <figure>
-                    <img src='https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7862.jpg?size=626&ext=jpg&ga=GA1.1.589938631.1675981701&semt=ais' alt="sing up image" />
-                </figure>
+            <div className="signUp-image hidden md:block">
+            <figure>
+                          <img src='https://img.freepik.com/free-vector/sign-concept-illustration_114360-5267.jpg' alt="sing up image" />
+                      </figure>
                  <ToastContainer/>
             </div>
         </div>

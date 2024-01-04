@@ -98,9 +98,13 @@ const UserLogin: React.FC = () => {
           <div className="">
               <div className="signUp-content  ">
                   <div className="signUp-form ">
-                      <h2 className="form-title text-lavender">LOGIN</h2>
+                  <div className='w-64 ml-12'>
+            <img src="/Stitchy.png" alt="" />
+          </div>
+
+                      {/* <h2 className="form-title text-lavender">Sign In to Stitchy</h2> */}
                       <Form method="POST" className="register-form" id="register-form">
-                          <div className="form-group">
+                          <div className="form-group ">
                               <label htmlFor="name" className='pl-1'>
                                   <i className="fa-sharp fa-solid fa-envelope "></i>
                               </label>
@@ -154,11 +158,11 @@ const UserLogin: React.FC = () => {
                           </div>
 
                     
-                          <div className="inline-flex items-center justify-center ml-3">
-    <hr className="w-[270px] h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 "/>
+                          <div className="inline-flex items-center justify-center ">
+    <hr className="w-[370px] h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 "/>
     <span className="absolute px font-medium text-gray-900 -translate-x-1/2 bg-white  dark:text-white dark:bg-gray-900">or</span>
 </div>
-<div className='rounded-full border-gray-500 ml-32'>
+<div className='rounded-full border-gray-500 ml-40 pl-1'>
                           
             <UserLoginWithGoogle/>
           
@@ -166,13 +170,13 @@ const UserLogin: React.FC = () => {
         
                           </div>
 
-                          <div className="text-sm font-medium text-gray-500 dark:text-gray-300 ml-8 mt-6">
+                          <div className="text-sm font-medium text-gray-500 dark:text-gray-300 ml-16 mt-6">
            Not registered? <Link to={'/signup'} className="text-blue-700 hover:underline dark:text-blue-500">Create account</Link>
        </div>
                       </Form>
       
                   </div>
-                  <div className="signUp-image">
+                  <div className="signUp-image hidden md:block">
                       <figure>
                           <img src='https://img.freepik.com/free-vector/sign-concept-illustration_114360-5267.jpg' alt="sing up image" />
                       </figure>

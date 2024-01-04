@@ -365,7 +365,7 @@ body {
 .signUp-image,
 .signIn-form,
 .signIn-image {
-    width: 50%;
+    width: 30%;
     overflow: hidden;
 }
 
@@ -711,21 +711,10 @@ label.valid:after {
         padding: 0 30px;
     }
 
-    .signIn-image {
-        margin-left: 0px;
-        margin-right: 0px;
-        margin-top: 50px;
-        order: 2;
-        -moz-order: 2;
-        -webkit-order: 2;
-        -o-order: 2;
-        -ms-order: 2;
-    }
+    
 
     .signUp-form,
-    .signUp-image,
-    .signIn-form,
-    .signIn-image {
+    .signIn-form {
         width: auto;
     }
 
@@ -771,5 +760,11 @@ label.valid:after {
     }
 }
 
+
+@media (min-width: 768px) {
+    .signUp-image.md\:hidden {
+        display: none;
+    }
+}
 
 /*# sourceMappingURL=style.css.map */

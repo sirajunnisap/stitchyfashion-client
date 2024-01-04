@@ -97,7 +97,7 @@ function Dashboard() {
  
  useEffect(() => {
   if (paymentedUser) {
-    const amounts = paymentedUser.map((item) => parseFloat(item.amount) || 0);
+    const amounts = paymentedUser?.map((item) => parseFloat(item.amount) || 0);
     console.log(amounts,"amountssssssss");
     
     setTotal(amounts);
@@ -130,10 +130,10 @@ const data = [
 ];
 
 
-categoryCourseData?.map((items:any)=>{
-  console.log(items);
-  console.log(items?.courses?.length)
-})
+// categoryCourseData?.map((items:any)=>{
+//   console.log(items);
+//   console.log(items?.courses?.length)
+// })
 const dataCategory = categoryCourseData?.map((category:any) => {
   return {
     name: category._id, 

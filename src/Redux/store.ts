@@ -22,6 +22,8 @@ const designerPersistConfig ={
     storage,
     version:1
 }
+
+
 const persistedUserReducer = persistReducer(userPersistConfig,userReducer);
 
 const persistedAdminReducer = persistReducer(adminPersistConfig,adminReducer);
