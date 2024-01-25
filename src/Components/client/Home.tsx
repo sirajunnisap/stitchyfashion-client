@@ -22,7 +22,7 @@ function NavBar() {
   return (
 
     <div className=''>
-      <nav className="fixed top-0 left-0 w-full bg-white  border-gray-200 px-4 lg:px-6 dark:bg-gray-800 z-50">
+      <nav className="fixed top-0 left-0 w-full bg-white  border-gray-200 px-4 lg:px-6 dark:bg-gray-800 z-50 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
 
           <div className='w-36 p- '>
@@ -31,7 +31,7 @@ function NavBar() {
 
 
 
-          <div className="flex items-center lg:order-2 mr-5">  {user?.accessToken ? (
+          <div className="flex items-center lg:order-2 mr-10 md:mr-0 md:ml-48 lg:ml-0 lg:mr-24 ">  {user?.accessToken ? (
             <>
               <div
                 className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
@@ -101,7 +101,7 @@ function NavBar() {
           </div>
           <div>
 
-            <div className='md:flex hidden '>
+            <div className='md:flex  hidden'>
               <SearchBar />
 
 
